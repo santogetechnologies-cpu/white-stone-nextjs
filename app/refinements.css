@@ -1,0 +1,34 @@
+/* Three destinations stay visible even before the menu is opened. */
+@media(max-width:760px){
+ .header.ws-nav-header{display:grid;grid-template-columns:1fr auto;grid-template-rows:54px 36px;align-content:start;align-items:center;height:99px;gap:0}
+ .ws-nav-header>.brand{grid-column:1;grid-row:1}.ws-nav-header>.ws-nav-tools{grid-column:2;grid-row:1}
+ .ws-nav-header .ws-top-services{grid-column:1/-1;grid-row:2;display:flex;justify-content:space-between;width:100%;margin:0;padding:2px 5px;background:#f8fcfc;border-color:#d8e4e5}
+ .ws-nav-header .ws-top-services a{flex:1;min-height:31px;display:grid;place-items:center;padding:4px 3px;font-size:12px}
+}
+.ws-page-refined{--section-wash:#e6f4f7;--section-tint:#b7dee8}
+.ws-page-refined.retail{--section-wash:#e8f4ef;--section-tint:#8ed9c5}
+.ws-page-refined.household{--section-wash:#fcf5ec;--section-tint:#ddc5a3}
+.ws-page-refined.guides{--section-wash:#eef2fb;--section-tint:#c4cae5}
+.ws-page-refined .ws-page-intro{background:var(--section-wash)}
+.ws-page-refined .ws-page-intro:before{background:radial-gradient(ellipse at 88% 25%,var(--section-tint),transparent 48%),radial-gradient(ellipse at 22% 65%,#ffffffba,transparent 58%);background-size:135% 130%}
+.ws-page-refined .ws-intro-grid figure:before{content:'';position:absolute;inset:7px -8px -8px 8px;border-radius:22px 76px 22px 22px;border:1px solid #91bcd1a6}
+.ws-page-refined .ws-intro-grid figure img{position:relative;box-shadow:0 18px 35px -28px #123b5dc2}
+.ws-page-refined .ws-crumb a:hover,.ws-related-head a:hover{text-decoration:underline;text-underline-offset:4px}
+.ws-page-refined .ws-blocks{gap:15px}.ws-page-refined .ws-blocks article{padding:clamp(20px,2vw,33px);background:linear-gradient(140deg,#fcfefe,var(--section-wash));border:1px solid #cbdfe2;border-radius:19px}
+.ws-page-refined .ws-blocks h3{margin:0 0 11px;line-height:1.18}
+.ws-page-refined .ws-article article{padding-bottom:23px;border-bottom:1px solid #d9e5e7}.ws-page-refined .ws-article aside{background:var(--section-wash);border:1px solid #d9e3ea;border-radius:16px;padding:21px}
+.ws-page-refined .ws-legal{margin-block:clamp(24px,4vw,78px);padding:clamp(25px,4vw,68px);background:linear-gradient(140deg,#fff,#f2f7f9);border:1px solid #d9e6ea;border-radius:20px}
+.ws-page-refined .ws-service-list>a:hover{background:#f3f9fa}.ws-page-refined .ws-service-list>a{transition:background .2s}
+.ws-related{padding-block:clamp(38px,4.8vw,75px);background:var(--section-wash);border-block:1px solid #c2d9dd66}
+.ws-related-head{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin-bottom:20px}.ws-related-head h2{font-size:clamp(28px,2.9vw,44px)}.ws-related-head a{font-size:13px;color:#165d69;font-weight:650}
+.ws-related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:12px}
+.ws-related-grid>a{min-width:0;display:flex;align-items:center;gap:12px;border:1px solid #cfdee1;background:#fff;padding:10px;border-radius:15px}
+.ws-related-grid>a:hover{border-color:#83aeb6}.ws-related-grid img{width:62px;height:66px;object-fit:cover;border-radius:8px}.ws-related-grid span{font-weight:650;line-height:1.25;font-size:15px}.ws-related-grid b{margin-left:auto;color:#186578;align-self:start}
+.ws-company-section{background:#f0f7f6}.ws-company-section .ws-wrap{padding-block:clamp(36px,4.5vw,74px)}.ws-company-section h2{font-size:clamp(32px,3.9vw,56px);margin-bottom:24px}
+.ws-guide-tools{padding:clamp(17px,2.5vw,35px);border:1px solid #cfdee3;border-radius:20px;background:linear-gradient(115deg,#edf6f5,#edf2fb)}
+@media(min-width:880px){
+ .ws-areas{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,24px)}.ws-areas .area-03{grid-column:auto;display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr}.ws-areas .ws-area-img,.ws-areas .area-03 .ws-area-img{height:clamp(195px,18vw,285px);min-height:0}.ws-areas .ws-area-img img,.ws-areas .area-03 .ws-area-img img{position:static;height:100%;width:100%}
+ .ws-areas .ws-area-body{padding:clamp(20px,1.9vw,32px)}.ws-areas .ws-area-body .ws-more{margin-top:auto}.ws-areas .ws-area-body p{padding-bottom:15px}.ws-areas .ws-area-body h3{font-size:clamp(29px,2.95vw,46px)}
+}
+@media(max-width:760px){.ws-page-refined .ws-intro-grid figure:before{border-radius:15px 42px 15px 15px;inset:5px -4px -4px 5px}.ws-related-head{align-items:center}.ws-related-grid{grid-template-columns:1fr}.ws-page-refined .ws-blocks article{padding:18px}.ws-menu-screen .ws-menu-content .ws-menu-index h2{font-size:12px}}
+

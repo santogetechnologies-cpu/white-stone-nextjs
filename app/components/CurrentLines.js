@@ -1,0 +1,2 @@
+// An etched contour motif for the process and contact bands.
+export default function CurrentLines(){return <svg className="ws-current-lines" viewBox="0 0 420 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">{Array.from({length:14},(_,i)=><path key={i} d={`M-45 ${64+8*i} C80 ${-24+i*3} 137 ${224+i*5} 235 ${118+i*3} S360 ${5+i*4} 480 ${90+i*3}`} style={{'--delay':(-i*0.29)+'s'}}/>)}</svg>}
