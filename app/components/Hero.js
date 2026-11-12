@@ -36,21 +36,7 @@ export default function Hero({lang='de'} = {}) {
               </a>
             </div>
           </div>
-          <div className="hero-bottom container">
-            <nav className="service-tabs" aria-label={t("Unsere Bereiche")}>
-              <a href={url("/reinigung/glas-und-fensterreinigung")} className="active">
-                {t("Glasreinigung")}
-              </a>
-              <a href={url("/reinigung/buero-und-gebaeudereinigung")}>
-                {t("Gebäudereinigung")}
-              </a>
-              <a href={url("/regalservice")}>
-                {t("Regalservice")}
-              </a>
-              <a href={url("/haushalt")}>
-                {t("Haushalt")}
-              </a>
-            </nav>
+          <div className="hero-bottom container" style={{ justifyContent: 'flex-end' }}>
             <button className="animation-control" id="animation-control" aria-label={t("Wischanimation pausieren")} title={t("Animation pausieren")}>
               {"Ⅱ"}
             </button>
