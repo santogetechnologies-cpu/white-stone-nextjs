@@ -35,6 +35,11 @@ export default function Hero({ lang = 'de' } = {}) {
                     </span>
                 </a>
             </div>
-        </div>
-    </section>);
+          </div>
+          <div className="hero-bottom container" style={{ justifyContent: 'flex-end' }}>
+            <button className="animation-control" id="animation-control" aria-label={t("Wischanimation pausieren")} title={t("Animation pausieren")}>
+              {"Ⅱ"}
+            </button>
+          </div>
+        </section>);
 }
