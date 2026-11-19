@@ -1283,7 +1283,7 @@ body {
     font-size:11px
   }
 }
-@media(max-width:760px) {
+@media(max-width:767px) {
   .container {
     width:86%
   }
@@ -1736,7 +1736,7 @@ body {
     font-size:29px
   }
 }
-@media(max-width:760px) {
+@media(max-width:767px) {
   .wiper-rig {
     left:0;
     top:52%
@@ -1808,7 +1808,7 @@ body {
   background: #fff;
   opacity: 1;
 }
-@media (max-width: 760px)  {
+@media (max-width: 767px)  {
   .hero  {
     background: #f8fafb;
     height: 742px;
@@ -1995,7 +1995,7 @@ body {
     transform: translateY(-6px);
   }
 }
-@media (max-width: 760px)  {
+@media (max-width: 767px)  {
   .trust  {
     padding-block: 29px 35px;
   }

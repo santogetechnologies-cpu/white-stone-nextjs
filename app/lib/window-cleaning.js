@@ -5,7 +5,7 @@ export function initializeWindowCleaning(scene) {
   'use strict';
   const photo = scene.querySelector('.window-photo');
   const rig = scene.querySelector('#wiper');
-  const button = scene.closest('.hero').querySelector('#animation-control');
+  const button = scene.closest('.hero')?.querySelector('#animation-control');
   const canvas = scene.querySelector('#water');
   const surface = canvas.getContext('2d');
   const wetGlass = document.createElement('canvas');
@@ -254,6 +254,7 @@ export function initializeWindowCleaning(scene) {
     schedule();
   }
   function updateButton() {
+    if (!button) return;
     button.textContent = paused ? '▶' : 'Ⅱ';
     const english = document.documentElement.lang === 'en';
     button.title = paused ? (english ? 'Play window cleaning animation' : 'Wischanimation abspielen') : (english ? 'Pause window cleaning animation' : 'Wischanimation pausieren');
@@ -267,7 +268,7 @@ export function initializeWindowCleaning(scene) {
     updateButton();
     schedule();
   };
-  button.addEventListener('click', togglePlayback);
+  button?.addEventListener('click', togglePlayback);
   const changePreference = () => {
     paused = motionPreference.matches;
     lastFrame = null;
@@ -285,7 +286,7 @@ export function initializeWindowCleaning(scene) {
   const sizeObserver = new ResizeObserver(resize);
   sizeObserver.observe(scene);
   Promise.all([photo.decode(), water.ready]).then(() => { if (!disposed) { waterLoaded = true; resize(); } }).catch(() => {
-    if (!disposed) button.hidden = true;
+    if (!disposed && button) button.hidden = true;
   });
   document.addEventListener('visibilitychange', changeVisibility);
   return () => {
@@ -293,7 +294,7 @@ export function initializeWindowCleaning(scene) {
     cancelAnimationFrame(frameId);
     sizeObserver.disconnect();
     visibilityObserver.disconnect();
-    button.removeEventListener('click', togglePlayback);
+    button?.removeEventListener('click', togglePlayback);
     motionPreference.removeEventListener('change', changePreference);
     document.removeEventListener('visibilitychange', changeVisibility);
     water.destroy();

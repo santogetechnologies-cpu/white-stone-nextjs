@@ -1,7 +1,10 @@
 /* Three destinations stay visible even before the menu is opened. */
-@media(max-width:760px){
- .header.ws-nav-header{display:grid;grid-template-columns:1fr auto;grid-template-rows:54px 36px;align-content:start;align-items:center;height:99px;gap:0}
- .ws-nav-header>.brand{grid-column:1;grid-row:1}.ws-nav-header>.ws-nav-tools{grid-column:2;grid-row:1}
+@media(max-width:767px){
+ .header.ws-nav-header{display:grid;grid-template-columns:1fr auto auto;grid-template-rows:54px 36px;align-content:start;align-items:center;height:99px;gap:0}
+ .ws-nav-header>.brand{grid-column:1;grid-row:1}
+ .ws-nav-center{display:contents}
+ .ws-nav-center>.ws-locale{grid-column:2;grid-row:1;margin-right:6px}
+ .ws-nav-header>.ws-nav-tools{grid-column:3;grid-row:1;margin-left:0}
  .ws-nav-header .ws-top-services{grid-column:1/-1;grid-row:2;display:flex;justify-content:space-between;width:100%;margin:0;padding:2px 5px;background:#f8fcfc;border-color:#d8e4e5}
  .ws-nav-header .ws-top-services a{flex:1;min-height:31px;display:grid;place-items:center;padding:4px 3px;font-size:12px}
 }
@@ -26,9 +29,9 @@
 .ws-related-grid>a:hover{border-color:#83aeb6}.ws-related-grid img{width:62px;height:66px;object-fit:cover;border-radius:8px}.ws-related-grid span{font-weight:650;line-height:1.25;font-size:15px}.ws-related-grid b{margin-left:auto;color:#186578;align-self:start}
 .ws-company-section{background:#f0f7f6}.ws-company-section .ws-wrap{padding-block:clamp(36px,4.5vw,74px)}.ws-company-section h2{font-size:clamp(32px,3.9vw,56px);margin-bottom:24px}
 .ws-guide-tools{padding:clamp(17px,2.5vw,35px);border:1px solid #cfdee3;border-radius:20px;background:linear-gradient(115deg,#edf6f5,#edf2fb)}
-@media(min-width:880px){
+@media(min-width:1024px){
  .ws-areas{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,24px)}.ws-areas .area-03{grid-column:auto;display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr}.ws-areas .ws-area-img,.ws-areas .area-03 .ws-area-img{height:clamp(195px,18vw,285px);min-height:0}.ws-areas .ws-area-img img,.ws-areas .area-03 .ws-area-img img{position:static;height:100%;width:100%}
  .ws-areas .ws-area-body{padding:clamp(20px,1.9vw,32px)}.ws-areas .ws-area-body .ws-more{margin-top:auto}.ws-areas .ws-area-body p{padding-bottom:15px}.ws-areas .ws-area-body h3{font-size:clamp(29px,2.95vw,46px)}
 }
-@media(max-width:760px){.ws-page-refined .ws-intro-grid figure:before{border-radius:15px 42px 15px 15px;inset:5px -4px -4px 5px}.ws-related-head{align-items:center}.ws-related-grid{grid-template-columns:1fr}.ws-page-refined .ws-blocks article{padding:18px}.ws-menu-screen .ws-menu-content .ws-menu-index h2{font-size:12px}}
+@media(max-width:767px){.ws-page-refined .ws-intro-grid figure:before{border-radius:15px 42px 15px 15px;inset:5px -4px -4px 5px}.ws-related-head{align-items:center}.ws-related-grid{grid-template-columns:1fr}.ws-page-refined .ws-blocks article{padding:18px}.ws-menu-screen .ws-menu-content .ws-menu-index h2{font-size:12px}}
 

@@ -34,6 +34,9 @@ export default function IconDefs() { return (<svg className="svg-library" xmlns=
             <circle cx="12" cy="11" r="5" />
             <path d="m7 19-2 5 6-2m6-3 2 5-6-2" />
           </symbol>
+          <symbol id="i-star" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </symbol>
           <symbol id="i-heart" viewBox="0 0 24 24">
             <path d="M12 21 3 12C-3 5 6-2 12 5c6-7 15 0 9 7Z" />
           </symbol>

@@ -13,14 +13,126 @@ export function ServicesPage({lang='de'} = {}){
 export function CleaningPage({lang='de'} = {}){
   const {t, url} = language(lang);
   const {cleaningServices} = getCatalog(lang);
-  return <><PageIntro lang={lang} tag={t("Reinigung")} title={t("Sauberkeit für jeden Raum.")} lead={t("Glas, Arbeitsplätze, Gästezimmer oder Schulen: Jede Umgebung stellt andere Anforderungen. Wählen Sie Ihr Einsatzgebiet.")} photo="reinigung" crumb={[t("Leistungen"),'/leistungen']}><Go lang={lang} href="/kontakt?bereich=Reinigung">{t("Reinigung anfragen")}</Go></PageIntro><section className="ws-wrap ws-section"><Subhead tag={t("Leistungsspektrum")} title={t("Sieben Spezialgebiete.")}/><div className="ws-service-list">{cleaningServices.map((s,i)=><a href={url('/reinigung/'+s.slug)} key={s.slug}><div><Pic lang={lang} name={s.photoKey}/></div><section><small>{t("Reinigung / 0")}{i+1}</small><h2>{s.title}</h2><p>{s.summary}</p></section><b aria-hidden="true">↗</b></a>)}</div></section></>}
+  const isEn = lang === 'en';
+
+  return (
+    <>
+      <PageIntro
+        lang={lang}
+        tag={t("Reinigung")}
+        title={t("Sauberkeit für jeden Raum.")}
+        lead={t("Glas, Arbeitsplätze, Gästezimmer oder Schulen: Jede Umgebung stellt andere Anforderungen. Wählen Sie Ihr Einsatzgebiet.")}
+        photo="reinigung"
+        crumb={[t("Leistungen"), '/leistungen']}
+      >
+        <Go lang={lang} href="/kontakt?bereich=Reinigung">{t("Reinigung anfragen")}</Go>
+      </PageIntro>
+
+      <section className="ws-expertise-section" aria-label={isEn ? "Seven areas of expertise" : "Sieben Spezialgebiete"}>
+        <div className="ws-wrap ws-expertise-wrap">
+          <div className="ws-expertise-header">
+            <div className="ws-expertise-badge">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <rect x="1" y="1" width="5.5" height="5.5" rx="1.5" />
+                <rect x="9.5" y="1" width="5.5" height="5.5" rx="1.5" />
+                <rect x="1" y="9.5" width="5.5" height="5.5" rx="1.5" />
+                <rect x="9.5" y="9.5" width="5.5" height="5.5" rx="1.5" />
+              </svg>
+              <span>{isEn ? "CLEANING SERVICES" : "LEISTUNGSSPEKTRUM"}</span>
+            </div>
+            <h2 className="ws-expertise-title">
+              {isEn ? "Seven areas of " : "Sieben "}
+              <em>{isEn ? "expertise." : "Spezialgebiete."}</em>
+            </h2>
+          </div>
+
+          <div className="ws-expertise-list">
+            {cleaningServices.map((s, i) => (
+              <a href={url('/reinigung/' + s.slug)} key={s.slug} className="ws-expertise-card">
+                <div className="ws-expertise-img-wrap">
+                  <Pic lang={lang} name={s.photoKey} className={`ws-expertise-img ws-expertise-img-${s.photoKey}`} />
+                </div>
+                <div className="ws-expertise-content">
+                  <div className="ws-expertise-meta">
+                    <span className="ws-expertise-num">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="ws-expertise-dash" aria-hidden="true">—</span>
+                    <span className="ws-expertise-label">{isEn ? "CLEANING" : "REINIGUNG"}</span>
+                  </div>
+                  <h3 className="ws-expertise-card-title">{s.title}</h3>
+                  <p className="ws-expertise-card-desc">{s.summary}</p>
+                </div>
+                <div className="ws-expertise-action">
+                  <span className="ws-expertise-divider" aria-hidden="true" />
+                  <span className="ws-expertise-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
 function Blocks({items}){return <div className="ws-blocks">{items.map(p=><article key={p.title}><h3>{p.title}</h3><p>{p.text}</p></article>)}</div>}
 function Planning({lang='de', service}){
   const {t} = language(lang);
-  return <section className="ws-planning"><div className="ws-wrap ws-two"><Subhead tag={t("Einsatzplanung")} title={t("Was wir vorab klären.")}/><ol>{service.plan.map(s=><li key={s}>{s}</li>)}</ol></div></section>}
+  const isEn = lang === 'en';
+  return (
+    <section className="ws-planning">
+      <div className="ws-wrap ws-two ws-planning-two">
+        <div className="ws-planning-head">
+          <Subhead tag={t("Einsatzplanung")} title={t("Was wir vorab klären.")}/>
+          <div className="ws-planning-accent-bar" aria-hidden="true" />
+        </div>
+        <div className="ws-planning-flow">
+          <ol className="ws-planning-list">
+            {service.plan.map((s, idx) => (
+              <li key={s} className="ws-planning-card">
+                <div className="ws-step-col">
+                  <div className="ws-step-node">
+                    <span className="ws-step-num">{String(idx + 1).padStart(2, '0')}</span>
+                  </div>
+                  {idx < service.plan.length - 1 && <div className="ws-step-rail" aria-hidden="true" />}
+                </div>
+                <div className="ws-step-card">
+                  <div className="ws-step-top">
+                    <span className="ws-step-phase">{isEn ? `Phase 0${idx + 1}` : `Phase 0${idx + 1}`}</span>
+                    <span className="ws-step-arrow" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </span>
+                  </div>
+                  <p className="ws-step-desc">{s}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Questions({lang='de', items}){
   const {t} = language(lang);
-  return <section className="ws-wrap ws-section ws-two"><Subhead tag={t("Gut zu wissen")} title={t("Häufige Fragen.")}/><Faq items={items}/></section>}
+  return (
+    <section className="ws-section ws-faq-wrap">
+      <div className="ws-wrap ws-two ws-faq-two">
+        <div className="ws-faq-head">
+          <Subhead tag={t("Gut zu wissen")} title={t("Häufige Fragen.")}/>
+          <div className="ws-faq-accent-bar" aria-hidden="true" />
+        </div>
+        <Faq items={items}/>
+      </div>
+    </section>
+  );
+}
 export function ServiceDetail({lang='de', service,retail=false}){
   const {t} = language(lang);
   return <><PageIntro lang={lang} tag={retail?t("Regalservice"):service.shortTitle} title={retail?t("Regalservice für den Handel."):service.title+'.'} lead={service.summary} photo={service.photoKey} crumb={retail?[t("Leistungen"),'/leistungen']:[t("Reinigung"),'/reinigung']}><Go lang={lang} href={'/kontakt?bereich='+encodeURIComponent(service.shortTitle)}>{t("Einsatz anfragen")}</Go></PageIntro>

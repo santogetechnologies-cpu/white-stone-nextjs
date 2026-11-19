@@ -59,3 +59,89 @@ main::before { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .services::before, .contact-banner { animation: none; }
 }
+
+/* ========================================================
+   Logo Motion Page Transition Loader (Pure White Theme)
+   ======================================================== */
+:root {
+  --ws-logo-cycle: 3.6s;
+  --ws-logo-violet: #3923d1;
+  --ws-logo-green: #00c06c;
+}
+
+.ws-page-loader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 99999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.16s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  isolation: isolate;
+}
+
+.ws-page-loader.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.ws-page-loader.is-fading-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ws-page-loader-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ws-page-loader-svg {
+  position: relative;
+  display: block;
+  width: clamp(140px, 20vmin, 190px);
+  height: clamp(140px, 20vmin, 190px);
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.ws-page-loader-svg .violet { fill: var(--ws-logo-violet); }
+.ws-page-loader-svg .green { fill: var(--ws-logo-green); }
+
+.ws-page-loader-svg .orbit {
+  transform-origin: 790px 774px;
+  animation: ws-logo-orbit var(--ws-logo-cycle) cubic-bezier(.45,.09,.55,.91) infinite;
+}
+
+.ws-page-loader-svg .sheen {
+  animation: ws-logo-sweep var(--ws-logo-cycle) ease-in-out infinite;
+}
+
+@keyframes ws-logo-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ws-logo-sweep {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(670px); }
+  75% { transform: translateX(-670px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ws-page-loader-svg .orbit,
+  .ws-page-loader-svg .sheen {
+    animation: none;
+  }
+}

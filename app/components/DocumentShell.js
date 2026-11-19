@@ -7,6 +7,7 @@ import '../navigation.css';
 import '../refinements.css';
 import IconDefs from './IconDefs';
 import {Footer} from './Design';
+import PageTransitionLoader from './PageTransitionLoader';
 export default function DocumentShell({lang,children}) {
-  return <html lang={lang}><body><IconDefs/>{children}<Footer lang={lang}/></body></html>;
+  return <html lang={lang}><body><IconDefs/><PageTransitionLoader/>{children}<Footer lang={lang}/></body></html>;
 }
