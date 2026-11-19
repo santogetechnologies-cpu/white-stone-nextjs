@@ -14,13 +14,6 @@ export default function Hero({ lang = 'de' } = {}) {
                 <br />{' '}
                 {t("Sicht.")}
             </h1>
-            <p>
-                {t("Professionelle Glasreinigung und")}
-                <br />{' '}
-                {t("Gebäudeservices für Gewerbe,")}
-                <br />{' '}
-                {t("Privat und Industrie.")}
-            </p>
             <div className="hero-actions">
                 <a className="button" href={url("/kontakt")}>
                     {t("Angebot anfordern")}
@@ -35,11 +28,11 @@ export default function Hero({ lang = 'de' } = {}) {
                     </span>
                 </a>
             </div>
-          </div>
-          <div className="hero-bottom container" style={{ justifyContent: 'flex-end' }}>
+        </div>
+        <div className="hero-bottom container" style={{ justifyContent: 'flex-end' }}>
             <button className="animation-control" id="animation-control" aria-label={t("Wischanimation pausieren")} title={t("Animation pausieren")}>
-              {"Ⅱ"}
+                {"Ⅱ"}
             </button>
-          </div>
-        </section>);
+        </div>
+    </section>);
 }

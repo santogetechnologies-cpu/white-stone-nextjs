@@ -3264,3 +3264,10 @@ button[type="submit"]:active {
     padding-top: 14px;
   }
 }
+
+/* Homepage Hero Heading Alignment */
+@media (min-width: 1024px) {
+  .hero-content h1 {
+    transform: translateX(clamp(-26px, -1.6vw, -16px));
+  }
+}
