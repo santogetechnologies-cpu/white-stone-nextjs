@@ -105,7 +105,7 @@ function MenuGlyph({ close = false }) {
 }
 export default function Navigation({ home = false, lang = 'de' }) {
   const en = lang === 'en', path = usePathname() || '/', url = href => localizedPath(href, lang);
-  const [open, setOpen] = useState(false), [active, setActive] = useState(0), [suffix, setSuffix] = useState('');
+  const [open, setOpen] = useState(false), [active, setActive] = useState(2), [suffix, setSuffix] = useState('');
   const dialog = useRef(null), button = useRef(null), dismiss = useRef(null);
   const current = entries[active];
   useEffect(() => {
@@ -124,7 +124,7 @@ export default function Navigation({ home = false, lang = 'de' }) {
   }, [open]);
   function show() {
     const match = entries.findIndex(e => path === url(e.href) || path.startsWith(url(e.href) + '/'));
-    setActive(Math.max(0, match)); setOpen(true);
+    setActive(match >= 0 ? match : 2); setOpen(true);
   }
   const close = () => setOpen(false);
   return <header className={'header container ws-nav-header' + (home ? ' over-window' : '')}>
@@ -185,7 +185,7 @@ export default function Navigation({ home = false, lang = 'de' }) {
             <span className="ws-menu-tag">{en ? 'Explore Our Services' : 'Unsere Leistungen'}</span>
             <h2 className="ws-menu-title">
               <span>{en ? 'Find the right' : 'Finden Sie die'}</span><br />
-              <span className="ws-menu-title-accent">{en ? 'service for you.' : 'passende Leistung.'}</span>
+              <span className="ws-menu-title-accent">{en ? <>service for<br />you.</> : <>passende<br />Leistung.</>}</span>
             </h2>
             <p className="ws-menu-desc">
               {en
@@ -219,16 +219,8 @@ export default function Navigation({ home = false, lang = 'de' }) {
                     <div className="ws-card-badge" aria-hidden="true">
                       {serviceIcons[i]}
                     </div>
-                    <div className="ws-card-text">
-                      <h3 className="ws-card-title">{item[lang][0]}</h3>
-                      <p className="ws-card-subtitle">{item[lang][1]}</p>
-                    </div>
-                    <div className="ws-card-arrow" aria-hidden="true">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <polyline points="12 5 19 12 12 19" />
-                      </svg>
-                    </div>
+                    <h3 className="ws-card-title">{item[lang][0]}</h3>
+                    <p className="ws-card-subtitle">{item[lang][1]}</p>
                   </div>
                 </a>
               );
@@ -245,7 +237,6 @@ export default function Navigation({ home = false, lang = 'de' }) {
                   {shortcutIcons[idx]}
                 </div>
                 <span className="ws-bottom-label">{en ? eng : de}</span>
-                <span className="ws-bottom-arrow" aria-hidden="true">↗</span>
               </a>
             ))}
           </nav>
