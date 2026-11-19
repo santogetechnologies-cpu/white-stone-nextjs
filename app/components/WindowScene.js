@@ -6,7 +6,13 @@ import { initializeWindowCleaning } from '../lib/window-cleaning';
 export default function WindowScene() {
   const sceneRef = useRef(null);
 
-  useEffect(() => initializeWindowCleaning(sceneRef.current), []);
+  useEffect(() => {
+    try {
+      return initializeWindowCleaning(sceneRef.current);
+    } catch (e) {
+      console.warn('WindowCleaning animation disabled:', e);
+    }
+  }, []);
 
   return (
     <div className="window-scene" ref={sceneRef} aria-hidden="true">

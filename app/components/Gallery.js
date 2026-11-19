@@ -179,7 +179,7 @@ export default function Gallery({ lang = 'de' } = {}) {
               <img
                 src={photos[item.key].src}
                 alt={alt(item.key)}
-                className="ws-gallery-img"
+                className={`ws-gallery-img ws-gallery-img-${item.key}`}
                 loading="lazy"
                 decoding="async"
               />

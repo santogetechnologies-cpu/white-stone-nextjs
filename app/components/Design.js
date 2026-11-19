@@ -7,7 +7,7 @@ import Tide from './Tide';
 
 export const areaCards=[
   {n:'01',title:'Reinigung',sub:'Gebäude & Gewerbe',text:'Vom ersten Blick durch die Glasfront bis zum letzten Rundgang durchs Büro: Pflege, die zu Ihrem Gebäude passt.',pic:'reinigung_card',url:'/reinigung'},
-  {n:'02',title:'Regalservice',sub:'Handel & Verkaufsfläche',text:'Gut gefüllte Regale, richtige Preise und übersichtliche Aktionsflächen. Wir entlasten Ihr Team direkt im Markt.',pic:'regalservice',url:'/regalservice'},
+  {n:'02',title:'Regalservice',sub:'Handel & Verkaufsfläche',text:'Gut gefüllte Regale, richtige Preise und übersichtliche Aktionsflächen. Wir entlasten Ihr Team direkt im Markt.',pic:'regalservice_card',url:'/regalservice'},
   {n:'03',title:'Haushalt',sub:'Für Ihr Zuhause',text:'Unterstützung bei der Reinigung, der Wäsche und den Aufgaben, für die im Alltag die Zeit fehlt.',pic:'haushalt_kueche',url:'/haushalt'},
 ];
 export function Pic({lang='de', name,className='',eager=false}) {

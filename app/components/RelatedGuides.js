@@ -162,9 +162,136 @@ function CleaningRelatedGuides({lang = 'de'}) {
   );
 }
 
+function ShelfRelatedGuides({lang = 'de'}) {
+  const en = lang === 'en';
+  const link = (href) => localizedPath(href, lang);
+
+  const guides = [
+    {
+      slug: 'regalplan-lesen',
+      img: '/assets/shelf_guide_card1.webp',
+      alt: en ? 'How to read a shelf plan' : 'Einen Regalplan im Markt richtig lesen',
+      title: en ? 'How to read a shelf plan' : 'Einen Regalplan im Markt richtig lesen',
+      tint: 'blue',
+    },
+    {
+      slug: 'regalservice-beauftragen',
+      img: '/assets/shelf_guide_card2.webp',
+      alt: en ? 'Arranging shelf services for a store' : 'Regalservice für eine Filiale beauftragen',
+      title: en ? 'Arranging shelf services for a store' : 'Regalservice für eine Filiale beauftragen',
+      tint: 'lavender',
+    },
+    {
+      slug: 'aktionsflaeche-aufbauen',
+      img: '/assets/shelf_guide_card3.webp',
+      alt: en ? 'Setting up the next weekly promotion' : 'Eine Aktionsfläche für die nächste Woche aufbauen',
+      title: en ? 'Setting up the next weekly promotion' : 'Eine Aktionsfläche für die nächste Woche aufbauen',
+      tint: 'peach',
+    },
+  ];
+
+  return (
+    <section className="ws-shelf-guides-section" aria-label={en ? 'Related guides' : 'Passende Ratgeber'}>
+      <div className="ws-wrap ws-shelf-guides-wrap">
+        <div className="ws-shelf-guides-layout">
+          {/* Left Content Area */}
+          <div className="ws-shelf-guide-left">
+            <div className="ws-shelf-guide-badge">
+              <div className="ws-shelf-guide-badge-icon" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                  <path d="M6 6h10"/>
+                  <path d="M6 10h10"/>
+                </svg>
+              </div>
+              <span className="ws-shelf-guide-badge-text">{en ? 'GUIDE RESOURCES' : 'RATGEBER & WISSEN'}</span>
+              <span className="ws-shelf-guide-badge-line" aria-hidden="true" />
+            </div>
+
+            <h2 className="ws-shelf-guide-heading">
+              {en ? (
+                <>Related <em>guides</em></>
+              ) : (
+                <>Passende <em>Ratgeber</em></>
+              )}
+            </h2>
+
+            <p className="ws-shelf-guide-desc">
+              {en
+                ? 'Practical guides and tips to help you plan, arrange and run effective shelf services.'
+                : 'Praktische Anleitungen und Tipps, die Ihnen bei der Planung, Organisation und Durchführung von Regalservices helfen.'}
+            </p>
+
+            <div className="ws-shelf-guide-action">
+              <a href={link('/ratgeber')} className="ws-shelf-guide-all-btn">
+                <span>{en ? 'All guides' : 'Alle Beiträge'}</span>
+                <span className="ws-shelf-guide-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Right Guide Cards (3 Cards) */}
+          <div className="ws-shelf-guides-grid">
+            {guides.map((item, idx) => (
+              <a
+                key={item.slug}
+                href={link('/ratgeber/' + item.slug)}
+                className={`ws-shelf-guide-card ws-shelf-card-tint-${item.tint}`}
+                style={{ '--reveal-index': idx }}
+              >
+                <div className="ws-shelf-guide-img-frame">
+                  <div className="ws-shelf-guide-img-wrap">
+                    <img
+                      src={item.img}
+                      alt={item.alt}
+                      width="540"
+                      height="424"
+                      className="ws-shelf-guide-img"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+
+                <div className="ws-shelf-guide-body">
+                  <div className="ws-shelf-guide-tag">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                      <path d="M6 6h10"/>
+                      <path d="M6 10h10"/>
+                    </svg>
+                    <span>{en ? 'GUIDE' : 'RATGEBER'}</span>
+                  </div>
+
+                  <h3 className="ws-shelf-guide-title">{item.title}</h3>
+
+                  <div className="ws-shelf-guide-foot">
+                    <span className="ws-shelf-guide-circle-btn" aria-hidden="true">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </span>
+                  </div>
+
+                  {/* Subtle soft gradient accent at the card bottom */}
+                  <div className={`ws-shelf-card-wave ws-shelf-card-wave-${item.tint}`} aria-hidden="true" />
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function RelatedGuides({page, lang}) {
   if (page.key === '/reinigung') {
     return <CleaningRelatedGuides lang={lang} />;
+  }
+  if (page.key === '/regalservice') {
+    return <ShelfRelatedGuides lang={lang} />;
   }
 
   const {adviceArticles} = getCatalog(lang);

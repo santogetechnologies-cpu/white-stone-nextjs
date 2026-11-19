@@ -1,0 +1,513 @@
+/* ==========================================================================
+   White Stone GmbH - Premium Choreographed Scroll Reveal System
+   Noticeable, elegant, editorial deceleration, zero layout shift, accessibility-first
+   ========================================================================== */
+
+:root {
+  --ws-reveal-duration: 800ms;
+  --ws-reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ws-stagger-card: 110ms;
+  --ws-stagger-feature: 95ms;
+  --ws-stagger-gallery: 85ms;
+  --ws-stagger-item: 80ms;
+}
+
+/* Progressive enhancement: Only applied when JavaScript is active */
+.ws-reveal-ready .ws-reveal-hero,
+.ws-reveal-ready .ws-reveal-section,
+.ws-reveal-ready .ws-reveal-heading-block,
+.ws-reveal-ready .ws-reveal-heading,
+.ws-reveal-ready .ws-reveal-para,
+.ws-reveal-ready .ws-reveal-image,
+.ws-reveal-ready .ws-reveal-service-card,
+.ws-reveal-ready .ws-reveal-card,
+.ws-reveal-ready .ws-reveal-gallery,
+.ws-reveal-ready .ws-reveal-item,
+.ws-reveal-ready .ws-reveal-footer-col,
+.ws-reveal-ready .ws-reveal-footer-bar {
+  will-change: opacity, transform;
+}
+
+/* --------------------------------------------------------------------------
+   1. Homepage Hero Entrance: Smooth Upward Movement & Sequence
+   -------------------------------------------------------------------------- */
+.ws-reveal-ready .ws-reveal-hero {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 850ms var(--ws-reveal-ease),
+              transform 850ms var(--ws-reveal-ease);
+}
+
+.ws-reveal-ready .ws-reveal-hero.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-hero.reveal-complete {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Hero CTA action buttons delayed float-up */
+.ws-reveal-ready .ws-reveal-hero .hero-actions {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 750ms var(--ws-reveal-ease) 180ms,
+              transform 750ms var(--ws-reveal-ease) 180ms;
+}
+
+.ws-reveal-ready .ws-reveal-hero.is-revealed .hero-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-hero.reveal-complete .hero-actions {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   2. Section-by-Section Reveal
+   Container fades in with a gentle vertical glide
+   -------------------------------------------------------------------------- */
+.ws-reveal-ready .ws-reveal-section {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 800ms var(--ws-reveal-ease),
+              transform 800ms var(--ws-reveal-ease);
+}
+
+.ws-reveal-ready .ws-reveal-section.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-section.reveal-complete {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* --------------------------------------------------------------------------
+   3. Choreographed Heading & Typography Reveal
+   Staggered cascade: Eyebrow (0ms) -> Heading (90ms) -> Desc (180ms) -> CTA (270ms)
+   -------------------------------------------------------------------------- */
+.ws-reveal-ready .ws-reveal-heading-block {
+  opacity: 1; /* Children are individually animated */
+}
+
+/* Step 1: Eyebrows, Badges & Breadcrumbs */
+.ws-reveal-ready .ws-reveal-heading-block .ws-mark,
+.ws-reveal-ready .ws-reveal-heading-block .ws-crumb,
+.ws-reveal-ready .ws-reveal-heading-block .ws-expertise-badge,
+.ws-reveal-ready .ws-reveal-heading-block .ws-gallery-badge,
+.ws-reveal-ready .ws-reveal-heading-block .ws-shelf-guide-badge,
+.ws-reveal-ready .ws-reveal-heading-block small {
+  display: inline-flex;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms var(--ws-reveal-ease),
+              transform 700ms var(--ws-reveal-ease);
+  will-change: opacity, transform;
+}
+
+/* Step 2: Main Headings and Titles */
+.ws-reveal-ready .ws-reveal-heading-block h1,
+.ws-reveal-ready .ws-reveal-heading-block h2,
+.ws-reveal-ready .ws-reveal-heading-block h3,
+.ws-reveal-ready .ws-reveal-heading-block .ws-expertise-title,
+.ws-reveal-ready .ws-reveal-heading-block .ws-gallery-title,
+.ws-reveal-ready .ws-reveal-heading-block .ws-cta-title,
+.ws-reveal-ready .ws-reveal-heading-block .ws-planning-title,
+.ws-reveal-ready .ws-reveal-heading-block .ws-faq-title,
+.ws-reveal-ready .ws-reveal-heading-block .ws-shelf-guide-heading {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 750ms var(--ws-reveal-ease) 90ms,
+              transform 750ms var(--ws-reveal-ease) 90ms;
+  will-change: opacity, transform;
+}
+
+/* Step 3: Paragraphs, Descriptions and Accent Lines */
+.ws-reveal-ready .ws-reveal-heading-block p,
+.ws-reveal-ready .ws-reveal-heading-block .ws-cta-desc,
+.ws-reveal-ready .ws-reveal-heading-block .ws-gallery-subtitle,
+.ws-reveal-ready .ws-reveal-heading-block .ws-planning-desc,
+.ws-reveal-ready .ws-reveal-heading-block .ws-faq-desc,
+.ws-reveal-ready .ws-reveal-heading-block .ws-shelf-guide-desc,
+.ws-reveal-ready .ws-reveal-heading-block .ws-cta-line,
+.ws-reveal-ready .ws-reveal-heading-block .ws-planning-accent-bar,
+.ws-reveal-ready .ws-reveal-heading-block .ws-faq-accent-bar {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 750ms var(--ws-reveal-ease) 180ms,
+              transform 750ms var(--ws-reveal-ease) 180ms;
+  will-change: opacity, transform;
+}
+
+/* Step 4: Action Buttons and Links */
+.ws-reveal-ready .ws-reveal-heading-block .ws-go,
+.ws-reveal-ready .ws-reveal-heading-block .ws-cta-action,
+.ws-reveal-ready .ws-reveal-heading-block .ws-cta-btn,
+.ws-reveal-ready .ws-reveal-heading-block .ws-shelf-guide-action,
+.ws-reveal-ready .ws-reveal-heading-block .ws-text-link {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms var(--ws-reveal-ease) 270ms,
+              transform 700ms var(--ws-reveal-ease) 270ms;
+  will-change: opacity, transform;
+}
+
+/* When the heading block is revealed, trigger the cascade */
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-mark,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-crumb,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-expertise-badge,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-gallery-badge,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-shelf-guide-badge,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed small,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed h1,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed h2,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed h3,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-expertise-title,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-gallery-title,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-cta-title,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-planning-title,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-faq-title,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-shelf-guide-heading,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed p,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-cta-desc,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-gallery-subtitle,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-planning-desc,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-faq-desc,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-shelf-guide-desc,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-cta-line,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-planning-accent-bar,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-faq-accent-bar,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-go,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-cta-action,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-cta-btn,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-shelf-guide-action,
+.ws-reveal-ready .ws-reveal-heading-block.is-revealed .ws-text-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Complete cleanup to free GPU memory and ensure 100% native hover state */
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-mark,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-crumb,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-expertise-badge,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-gallery-badge,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-shelf-guide-badge,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete small,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete h1,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete h2,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete h3,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-expertise-title,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-gallery-title,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-cta-title,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-planning-title,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-faq-title,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-shelf-guide-heading,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete p,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-cta-desc,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-gallery-subtitle,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-planning-desc,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-faq-desc,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-shelf-guide-desc,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-cta-line,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-planning-accent-bar,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-faq-accent-bar,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-go,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-cta-action,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-cta-btn,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-shelf-guide-action,
+.ws-reveal-ready .ws-reveal-heading-block.reveal-complete .ws-text-link {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+  will-change: auto;
+}
+
+/* Standalone Headings & Paragraphs */
+.ws-reveal-ready .ws-reveal-heading {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 750ms var(--ws-reveal-ease),
+              transform 750ms var(--ws-reveal-ease);
+}
+.ws-reveal-ready .ws-reveal-heading.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ws-reveal-ready .ws-reveal-heading.reveal-complete {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+.ws-reveal-ready .ws-reveal-para {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 750ms var(--ws-reveal-ease),
+              transform 750ms var(--ws-reveal-ease);
+}
+.ws-reveal-ready .ws-reveal-para.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ws-reveal-ready .ws-reveal-para.reveal-complete {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* --------------------------------------------------------------------------
+   4. Major Visual Images: Smooth Fade-in with Subtle Scale & Upward Motion
+   -------------------------------------------------------------------------- */
+.ws-reveal-ready .ws-reveal-image {
+  opacity: 0;
+  transform: translateY(32px) scale(0.96);
+  transition: opacity 850ms var(--ws-reveal-ease),
+              transform 850ms var(--ws-reveal-ease);
+}
+
+.ws-reveal-ready .ws-reveal-image.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.ws-reveal-ready .ws-reveal-image.reveal-complete {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* --------------------------------------------------------------------------
+   5. Service Cards: Staggered Fade-Up with Micro-Choreography
+   (Noticeable 110ms cascade delay, :not(:hover) protection for native lifts)
+   -------------------------------------------------------------------------- */
+.ws-reveal-ready .ws-reveal-service-card {
+  opacity: 0;
+  transform: translateY(38px);
+  transition: opacity 800ms var(--ws-reveal-ease),
+              transform 800ms var(--ws-reveal-ease);
+  transition-delay: calc(var(--reveal-index, 0) * var(--ws-stagger-card));
+}
+
+.ws-reveal-ready .ws-reveal-service-card.is-revealed:not(:hover) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-service-card.is-revealed {
+  opacity: 1;
+}
+
+.ws-reveal-ready .ws-reveal-service-card.reveal-complete {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+  will-change: auto;
+}
+
+/* Service card internal micro-stagger for description and action link */
+.ws-reveal-ready .ws-reveal-service-card .ws-area-body p,
+.ws-reveal-ready .ws-reveal-service-card .ws-expertise-card-desc,
+.ws-reveal-ready .ws-reveal-service-card article p {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 700ms var(--ws-reveal-ease) calc(var(--reveal-index, 0) * var(--ws-stagger-card) + 70ms),
+              transform 700ms var(--ws-reveal-ease) calc(var(--reveal-index, 0) * var(--ws-stagger-card) + 70ms);
+}
+
+.ws-reveal-ready .ws-reveal-service-card.is-revealed .ws-area-body p,
+.ws-reveal-ready .ws-reveal-service-card.is-revealed .ws-expertise-card-desc,
+.ws-reveal-ready .ws-reveal-service-card.is-revealed article p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-service-card.reveal-complete .ws-area-body p,
+.ws-reveal-ready .ws-reveal-service-card.reveal-complete .ws-expertise-card-desc,
+.ws-reveal-ready .ws-reveal-service-card.reveal-complete article p {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+}
+
+/* --------------------------------------------------------------------------
+   6. Feature & Benefit Cards: Staggered Fade-Up
+   (Trust items, benefit principles, planning cards, FAQ items, CTA cards)
+   -------------------------------------------------------------------------- */
+.ws-reveal-ready .ws-reveal-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 750ms var(--ws-reveal-ease),
+              transform 750ms var(--ws-reveal-ease);
+  transition-delay: calc(var(--reveal-index, 0) * var(--ws-stagger-feature));
+}
+
+.ws-reveal-ready .ws-reveal-card.is-revealed:not(:hover) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-card.is-revealed {
+  opacity: 1;
+}
+
+.ws-reveal-ready .ws-reveal-card.reveal-complete {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+  will-change: auto;
+}
+
+/* Card descriptions micro-stagger */
+.ws-reveal-ready .ws-reveal-card .ws-trust-desc,
+.ws-reveal-ready .ws-reveal-card .ws-benefit-desc,
+.ws-reveal-ready .ws-reveal-card .ws-step-desc,
+.ws-reveal-ready .ws-reveal-card > p {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 700ms var(--ws-reveal-ease) calc(var(--reveal-index, 0) * var(--ws-stagger-feature) + 60ms),
+              transform 700ms var(--ws-reveal-ease) calc(var(--reveal-index, 0) * var(--ws-stagger-feature) + 60ms);
+}
+
+.ws-reveal-ready .ws-reveal-card.is-revealed .ws-trust-desc,
+.ws-reveal-ready .ws-reveal-card.is-revealed .ws-benefit-desc,
+.ws-reveal-ready .ws-reveal-card.is-revealed .ws-step-desc,
+.ws-reveal-ready .ws-reveal-card.is-revealed > p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-card.reveal-complete .ws-trust-desc,
+.ws-reveal-ready .ws-reveal-card.reveal-complete .ws-benefit-desc,
+.ws-reveal-ready .ws-reveal-card.reveal-complete .ws-step-desc,
+.ws-reveal-ready .ws-reveal-card.reveal-complete > p {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+}
+
+/* --------------------------------------------------------------------------
+   7. Gallery Images: Elegant Reveal with Subtle Scaling
+   -------------------------------------------------------------------------- */
+.ws-reveal-ready .ws-reveal-gallery {
+  opacity: 0;
+  transform: translateY(30px) scale(0.955);
+  transition: opacity 800ms var(--ws-reveal-ease),
+              transform 800ms var(--ws-reveal-ease);
+  transition-delay: calc(var(--reveal-index, 0) * var(--ws-stagger-gallery));
+}
+
+.ws-reveal-ready .ws-reveal-gallery.is-revealed:not(:hover) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.ws-reveal-ready .ws-reveal-gallery.is-revealed {
+  opacity: 1;
+}
+
+.ws-reveal-ready .ws-reveal-gallery.reveal-complete {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+  will-change: auto;
+}
+
+/* --------------------------------------------------------------------------
+   8. Process Steps, Client Badges, Ticks & Pills
+   -------------------------------------------------------------------------- */
+.ws-reveal-ready .ws-reveal-item {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 700ms var(--ws-reveal-ease),
+              transform 700ms var(--ws-reveal-ease);
+  transition-delay: calc(var(--reveal-index, 0) * var(--ws-stagger-item));
+}
+
+.ws-reveal-ready .ws-reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-item.reveal-complete {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+  will-change: auto;
+}
+
+/* --------------------------------------------------------------------------
+   9. Footer Content: Staggered Column Reveal
+   -------------------------------------------------------------------------- */
+.ws-reveal-ready .ws-reveal-footer-col {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 750ms var(--ws-reveal-ease),
+              transform 750ms var(--ws-reveal-ease);
+  transition-delay: calc(var(--reveal-index, 0) * 95ms);
+}
+
+.ws-reveal-ready .ws-reveal-footer-col.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-footer-col.reveal-complete {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+  will-change: auto;
+}
+
+.ws-reveal-ready .ws-reveal-footer-bar {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms var(--ws-reveal-ease) 260ms,
+              transform 700ms var(--ws-reveal-ease) 260ms;
+}
+
+.ws-reveal-ready .ws-reveal-footer-bar.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ws-reveal-ready .ws-reveal-footer-bar.reveal-complete {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* --------------------------------------------------------------------------
+   10. Accessibility: prefers-reduced-motion
+   Completely bypasses all animations and transforms for users who prefer reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .ws-reveal-ready .ws-reveal-hero,
+  .ws-reveal-ready .ws-reveal-hero *,
+  .ws-reveal-ready .ws-reveal-section,
+  .ws-reveal-ready .ws-reveal-heading-block,
+  .ws-reveal-ready .ws-reveal-heading-block *,
+  .ws-reveal-ready .ws-reveal-heading,
+  .ws-reveal-ready .ws-reveal-para,
+  .ws-reveal-ready .ws-reveal-image,
+  .ws-reveal-ready .ws-reveal-service-card,
+  .ws-reveal-ready .ws-reveal-service-card *,
+  .ws-reveal-ready .ws-reveal-card,
+  .ws-reveal-ready .ws-reveal-card *,
+  .ws-reveal-ready .ws-reveal-gallery,
+  .ws-reveal-ready .ws-reveal-item,
+  .ws-reveal-ready .ws-reveal-footer-col,
+  .ws-reveal-ready .ws-reveal-footer-bar {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+}
