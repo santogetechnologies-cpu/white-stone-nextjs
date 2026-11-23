@@ -1,0 +1,92 @@
+/* Redesigned hero: light airy scene, two-tone heading, three service cards */
+.hero.ws-hero {
+  height: auto;
+  min-height: clamp(380px, 38vw, 600px);
+  background: #eef6fc;
+}
+.ws-hero .hero-scene {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f7fbfe, #dfeef9);
+}
+.ws-hero .hero-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; stroke: none; }
+.ws-hero .hero-content {
+  flex: none;
+  justify-content: flex-start;
+  padding-block: clamp(14px, 2.5vw, 40px) clamp(48px, 5vw, 90px);
+  pointer-events: auto;
+}
+.ws-hero .hero-content h1 {
+  transform: none;
+  font-size: clamp(42px, 6.4vw, 96px);
+  line-height: 1;
+  letter-spacing: -.035em;
+  font-weight: 800;
+  color: #0b2a4f;
+}
+.ws-hero .hero-line-dark { display: block; }
+.ws-hero .hero-line-accent {
+  position: relative;
+  display: inline-block;
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: #0c7a8a;
+  padding-bottom: .12em;
+}
+.ws-hero .hero-swoosh {
+  position: absolute;
+  left: 2%;
+  right: -4%;
+  bottom: -.02em;
+  width: 98%;
+  height: .14em;
+  color: #0c7a8a;
+}
+.ws-hero .hero-services {
+  list-style: none;
+  margin: clamp(18px, 2.4vw, 34px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, clamp(96px, 11vw, 170px));
+  gap: clamp(10px, 1.4vw, 20px);
+}
+.ws-hero .hero-services a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: clamp(14px, 1.6vw, 24px) 6px clamp(12px, 1.4vw, 20px);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid rgba(214, 228, 240, .9);
+  box-shadow: 0 10px 28px #1a3f7010;
+  backdrop-filter: blur(6px);
+  color: #0b2a4f;
+  font-size: clamp(12px, 1.05vw, 16px);
+  font-weight: 650;
+  text-align: center;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.ws-hero .hero-services a:hover { transform: translateY(-3px); box-shadow: 0 16px 34px #1a3f7020; }
+.ws-hero .hero-services svg { width: clamp(34px, 3.6vw, 56px); height: auto; color: #2b4a66; }
+
+@media (max-width: 767px) {
+  .ws-hero .ws-nav-center,
+  .ws-hero .ws-contact-button,
+  .ws-hero .ws-nav-tools .ws-locale,
+  .ws-hero .ws-menu-button > span:not(.ws-menu-glyph) { display: none; }
+  .ws-hero .ws-menu-button { width: 44px; min-height: 44px; padding: 0; justify-content: center; background: #fff; border: 1px solid #e2eaf3; color: #0b2a4f; border-radius: 14px; box-shadow: 0 8px 20px #1a3f7014; }
+  .hero.ws-hero { min-height: 0; padding-bottom: 0; background: #eef6fc; }
+  .ws-hero .hero-content { padding-top: 6px; padding-bottom: 34px; order: 2; }
+  .ws-hero .hero-content h1 { font-size: clamp(34px, 10.4vw, 52px); }
+  .ws-hero .hero-services a { font-size: 10px; }
+  .ws-hero .hero-scene { position: absolute; inset: 0; width: auto; height: auto; margin: 0; border: 0; border-radius: 0; box-shadow: none; order: 0; }
+  .ws-hero .hero-scene svg { inset: auto 0 0 auto; width: 100%; height: 100%; }
+  .ws-hero .hero-services { grid-template-columns: repeat(3, 1fr); max-width: 62%; gap: 6px; }
+  .ws-hero .hero-services a { border-radius: 16px; padding: 12px 2px 10px; gap: 8px; }
+  .ws-hero .hero-services svg { width: 32px; }
+}
