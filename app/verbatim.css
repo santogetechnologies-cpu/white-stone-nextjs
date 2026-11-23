@@ -74,7 +74,7 @@
 .wv-article aside a { color: #486079; }
 .wv-article aside a:hover { color: #04767f; }
 .wv-article .wv-flow { max-width: 800px; }
-.wv-article .wv-flow ul, .wv-article .wv-flow ol { grid-template-columns: 1fr; }
+.wv-article .wv-flow .wv-list { grid-template-columns: 1fr; }
 
 /* Startseite: Streifen und Fakten */
 .wv-strip { padding-block: clamp(34px, 4vw, 60px); background: linear-gradient(180deg, #f6fbfd, #fff); }
@@ -114,3 +114,113 @@
   .wv-pair { grid-template-columns: 1fr; max-width: 420px; }
   .wv-section::before { font-size: 110px; }
 }
+
+/* ======================================================================
+   Gestaltete Darstellungsformen (gleicher Wortlaut, neue Form)
+   ====================================================================== */
+.wv-glyph { width: 22px; height: 22px; display: block; }
+
+/* Ablauf als verbundener Fluss */
+.wv-flow .wv-steps { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 0; counter-reset: none; max-width: 880px; }
+.wv-flow .wv-steps li { position: relative; display: grid; grid-template-columns: 58px 1fr; gap: 18px; padding: 0 0 26px; border: 0; }
+.wv-flow .wv-steps li::before { content: ''; position: absolute; left: 28px; top: 54px; bottom: 0; width: 2px; background: linear-gradient(180deg, #36b6d8, #cfe4ea); }
+.wv-flow .wv-steps li:last-child::before { display: none; }
+.wv-flow .wv-steps li::after { display: none; }
+.wv-step-dot { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; font: 800 18px/1 'Inter', sans-serif; color: #fff; background: linear-gradient(135deg, #36b6d8, #04767f); box-shadow: 0 12px 26px #04767f40; position: relative; z-index: 1; }
+.wv-step-body { background: #fff; border: 1px solid #d6e8ec; border-radius: 20px; padding: 18px 22px; box-shadow: 0 12px 30px #123d6a0f; display: grid; gap: 6px; transition: transform .3s ease, box-shadow .3s ease; }
+.wv-step-body:hover { transform: translateX(6px); box-shadow: 0 18px 38px #123d6a1c; }
+.wv-step-body strong { font-size: clamp(17px, 1.3vw, 20px); color: #102949; letter-spacing: -.01em; }
+.wv-step-body span { color: #486079; line-height: 1.55; }
+
+/* Leistungs- und Vorteilskarten */
+.wv-feat { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 18px; margin-top: 26px; }
+.wv-feat article { position: relative; padding: 26px 24px 24px; border-radius: 24px; background: linear-gradient(160deg, #ffffff 0%, #f3fafc 100%); border: 1px solid #d6e8ec; box-shadow: 0 14px 34px #123d6a10; overflow: hidden; transition: transform .3s ease, box-shadow .3s ease; }
+.wv-feat article::after { content: ''; position: absolute; right: -40px; top: -40px; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, #cfeef4, transparent 70%); }
+.wv-feat article:hover { transform: translateY(-6px); box-shadow: 0 22px 46px #123d6a20; }
+.wv-feat-icon { width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, #36b6d8, #04767f); box-shadow: 0 10px 22px #04767f38; margin-bottom: 16px; position: relative; z-index: 1; }
+.wv-feat h4 { margin: 0 0 8px; font-size: clamp(17px, 1.25vw, 20px); line-height: 1.25; color: #102949; letter-spacing: -.01em; }
+.wv-feat p { margin: 0; font-size: 15px; line-height: 1.55; }
+.wv-feat .wv-feat-solo { color: #29415f; font-weight: 560; }
+
+/* Kurze Punkte als Kacheln */
+.wv-flow .wv-tiles { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 12px; }
+.wv-flow .wv-tiles li { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px; background: #fff; border: 1px solid #d6e8ec; box-shadow: 0 8px 22px #123d6a0c; color: #1d3554; font-weight: 600; line-height: 1.4; font-size: 15px; transition: border-color .25s ease, transform .25s ease; }
+.wv-flow .wv-tiles li::before, .wv-flow .wv-tiles li::after { display: none; }
+.wv-tiles li:hover { border-color: #8fd9e8; transform: translateY(-3px); }
+.wv-tile-icon { flex: none; width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; color: #04767f; background: linear-gradient(135deg, #e3f6fa, #cdeef4); }
+.wv-tile-icon .wv-glyph { width: 19px; height: 19px; }
+
+/* Längere Punkte: ruhige Liste */
+.wv-list { list-style: none; padding: 0; margin-top: 20px; display: grid; gap: 0; max-width: 880px; }
+
+/* Tabellen mit drei Spalten als Fluss: Problem → Risiko → Lösung */
+.wv-flowrows { display: grid; gap: 12px; margin-top: 26px; }
+.wv-flowrow { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: 30px; position: relative; }
+.wv-flowrow span { position: relative; padding: 16px 18px; border-radius: 18px; background: #fff; border: 1px solid #d6e8ec; color: #486079; line-height: 1.45; font-size: 15px; box-shadow: 0 8px 22px #123d6a0c; }
+.wv-flowrow span:not(:last-child)::after { content: '→'; position: absolute; right: -24px; top: 50%; transform: translateY(-50%); color: #36b6d8; font-weight: 800; font-size: 18px; }
+.wv-flowrow span.is-first { color: #102949; font-weight: 700; background: linear-gradient(135deg, #f1f8fb, #e5f2f7); }
+.wv-flowrow span.is-last { color: #fff; font-weight: 600; background: linear-gradient(135deg, #123d6a, #04767f); border-color: transparent; }
+.wv-flowrow.is-head span { background: none; border: 0; box-shadow: none; padding: 0 4px; color: #04767f; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.wv-flowrow.is-head span::after { display: none; }
+
+/* Zweispaltige Tabellen als Karten */
+.wv-pairs { margin-top: 26px; }
+.wv-pairs-head { display: flex; gap: 10px; align-items: center; color: #04767f; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.wv-pairs-head span + span::before { content: '→ '; color: #36b6d8; }
+.wv-pairs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 14px; margin-top: 14px; }
+.wv-pairs-grid article { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 18px; border-radius: 20px; background: #fff; border: 1px solid #d6e8ec; box-shadow: 0 10px 26px #123d6a0e; }
+.wv-pairs-grid .wv-feat-icon { width: 42px; height: 42px; border-radius: 13px; margin: 0; }
+.wv-pairs-grid h4 { margin: 0 0 4px; font-size: 16px; color: #102949; }
+.wv-pairs-grid p { margin: 0; font-size: 14.5px; line-height: 1.5; }
+
+/* Hinweis mit Pfeil */
+.wv-flow .wv-arrow { display: inline-flex; align-items: center; gap: 12px; padding: 10px 18px 10px 10px; border-radius: 999px; background: linear-gradient(135deg, #e6f6fa, #f2f9fb); border: 1px solid #c8e8ef; color: #123d6a; font-weight: 650; }
+.wv-flow .wv-arrow span { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, #36b6d8, #04767f); }
+.wv-flow .wv-note { font-size: clamp(17px, 1.3vw, 20px); color: #2b4565; padding: 22px 26px; border-radius: 22px; background: linear-gradient(135deg, #f1f8fb, #ffffff); border: 1px solid #d6e8ec; }
+
+/* Fotos im Fließtext (Beiträge) */
+.wv-inline { position: relative; margin: 46px 0 10px; isolation: isolate; }
+.wv-inline img { position: relative; z-index: 1; width: 100%; aspect-ratio: 16 / 8; object-fit: cover; height: auto; display: block; border-radius: 26px; box-shadow: 0 24px 52px #123d6a24; }
+.wv-inline::before { content: ''; position: absolute; inset: 18px -14px -14px 18px; border-radius: 30px; background: linear-gradient(135deg, #8fd9e8, #36b6d8 50%, #04767f); opacity: .35; z-index: 0; animation: wvFloat 9s ease-in-out infinite; }
+.wv-inline.is-alt::before { inset: 18px 18px -14px -14px; }
+
+/* Leistungsübersicht: Zeilen mit Foto */
+.wv-group-head { max-width: 900px; margin-bottom: clamp(30px, 4vw, 54px); }
+.wv-rows { display: grid; gap: clamp(46px, 6vw, 90px); }
+.wv-row { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(30px, 5vw, 80px); align-items: center; }
+.wv-row.is-flip .wv-photo { order: 2; }
+.wv-row .wv-photo img { aspect-ratio: 4 / 3; object-fit: cover; }
+
+/* Abschnittsfotos: festes Seitenverhältnis, damit nichts überlang wird */
+.wv-grid.has-photo .wv-photo img { aspect-ratio: 4 / 5; object-fit: cover; max-height: 640px; }
+.wv-grid.has-photo { align-items: start; }
+.wv-grid.has-photo .wv-photo { position: sticky; top: 110px; }
+
+@media (max-width: 860px) {
+  .wv-row, .wv-row.is-flip { grid-template-columns: 1fr; }
+  .wv-row.is-flip .wv-photo { order: 0; }
+  .wv-grid.has-photo .wv-photo { position: relative; top: 0; }
+  .wv-grid.has-photo .wv-photo img { aspect-ratio: 4 / 3; }
+  .wv-flowrow { grid-template-columns: 1fr; gap: 8px; }
+  .wv-flowrow span:not(:last-child)::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -19px; transform: translateX(-50%); }
+  .wv-flowrow.is-head { display: none; }
+  .wv-flowrows { gap: 26px; }
+}
+
+/* kleinere Begleitfotos neben Formularen, FAQ und Linklisten */
+.wv-photo-side { margin-top: 34px; max-width: 460px; width: calc(100% - 28px); }
+.wv-photo-side img { aspect-ratio: 4 / 3; object-fit: cover; }
+.wv-grid.has-photo .wv-photo-wide img { aspect-ratio: 16 / 10; }
+.ws-pricing .wv-grid.has-photo { align-items: center; margin-bottom: 34px; }
+.ws-pricing .wv-grid.has-photo .wv-photo { position: relative; top: 0; }
+
+/* lange Abschnitte: breites Titelbild */
+.wv-grid.is-long { grid-template-columns: 1fr; gap: clamp(30px, 4vw, 56px); }
+.wv-banner { max-width: 1120px; width: calc(100% - 28px); margin-inline: auto; }
+.wv-banner img { aspect-ratio: 21 / 8; object-fit: cover; }
+.wv-grid.is-long .wv-text { max-width: 1120px; margin-inline: auto; width: 100%; }
+.wv-grid.is-long .wv-steps, .wv-grid.is-long .wv-list { max-width: none; }
+.wv-grid.is-long .wv-steps { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); column-gap: 30px; }
+@media (max-width: 860px) { .wv-banner img { aspect-ratio: 16 / 9; } }
+.wv-flow, .wv-text { min-width: 0; }
+@media (max-width: 860px) { .wv-article .ws-wrap, .wv-grid, .wv-grid.is-long { grid-template-columns: minmax(0, 1fr); } }

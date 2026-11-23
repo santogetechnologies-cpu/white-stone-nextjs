@@ -32,6 +32,7 @@ export const verbatimGuides = postList.map(p => {
   const photoKey = pool[n % pool.length];
   return {
     slug: p.slug, title: p.title, category, photoKey, relatedHref, date: p.date,
+    pool: [...pool.slice(pool.indexOf(photoKey) + 1), ...pool.slice(0, pool.indexOf(photoKey)), 'reinigung_card', 'nachhaltigkeit'],
     summary: firstParagraph(p.blocks), verbatim: p.blocks, sections: [], takeaway: ''
   };
 });

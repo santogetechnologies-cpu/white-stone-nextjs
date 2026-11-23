@@ -7,7 +7,7 @@ import HouseholdPlanner from './HouseholdPlanner';
 import ContactForm from './ContactForm';
 import CleaningServicesGrid from './CleaningServicesGrid';
 import {shelfServicesData} from './ShelfServicesSection';
-import VerbatimBody, {Flow,PhotoGrid,PeopleList,NewsIndex,headingsOf} from './Verbatim';
+import VerbatimBody, {Flow,PhotoGrid,NewsIndex,headingsOf,ServiceRows,Img} from './Verbatim';
 import {oldPage} from '../lib/verbatim';
 import {photos} from '../lib/photos';
 import HouseholdServicesSection from './HouseholdServicesSection';
@@ -20,8 +20,10 @@ export function ServicesPage({lang='de'} = {}){
   return <>
     <PageIntro lang={lang} tag={page.title} title={h1.x} photo="buero"/>
     <section className="ws-wrap ws-section"><AreaCards lang={lang}/></section>
-    <section className="wv-section"><div className="ws-wrap"><Flow blocks={blocks} lang={lang}/></div></section>
+    <ServiceRows lang={lang} blocks={blocks} photoFor={photoForHeading} pool={['reinigung_card','nachhaltigkeit','gallery_buero']}/>
   </>}
+const headingPhotos=[[/büro/i,'buero'],[/glas|fenster/i,'glas'],[/fassad/i,'fassade_hubsteiger'],[/hotel/i,'hotel'],[/bau/i,'bau'],[/kinder|kita/i,'kita'],[/schul/i,'schule'],[/regal/i,'regalservice_mitarbeiter']];
+const photoForHeading=h=>(headingPhotos.find(([re])=>re.test(h))||[null,'reinigung'])[1];
 export function CleaningPage({lang='de'} = {}){
   const {t, url} = language(lang);
   const {cleaningServices} = getCatalog(lang);
@@ -40,7 +42,7 @@ export function CleaningPage({lang='de'} = {}){
           <CleaningServicesGrid services={services} lang={lang} isEn={isEn} />
         </div>
       </section>
-      <section className="wv-section"><div className="ws-wrap"><Flow blocks={home.slice(i + 2, i + 4)} lang={lang}/></div></section>
+      <section className="wv-section"><div className="ws-wrap wv-grid has-photo"><div className="wv-text"><Flow blocks={home.slice(i + 2, i + 4)} lang={lang}/></div><figure className="wv-photo"><Img k="gallery_buero" lang={lang}/></figure></div></section>
     </>
   );
 }
@@ -87,7 +89,7 @@ function Planning({lang='de', service}){
   );
 }
 
-function Questions({lang='de', items}){
+function Questions({lang='de', items, photo}){
   const {t} = language(lang);
   return (
     <section className="ws-section ws-faq-wrap">
@@ -95,27 +97,30 @@ function Questions({lang='de', items}){
         <div className="ws-faq-head">
           <Subhead tag={t("Gut zu wissen")} title={t("Häufige Fragen.")}/>
           <div className="ws-faq-accent-bar" aria-hidden="true" />
+          {photo && <figure className="wv-photo wv-photo-side"><Img k={photo} lang={lang}/></figure>}
         </div>
         <Faq items={items}/>
       </div>
     </section>
   );
 }
-const extraPhotos={
-  'glas-und-fensterreinigung':['gallery_glas','guides_glas','cleaning_guide_window'],
-  'buero-und-gebaeudereinigung':['gallery_buero','nachhaltigkeit'],
-  'hotelreinigung':['gallery_hotel','cleaning_guide_hotel'],
-  'bau-und-sonderreinigung':['gallery_bau'],
-  'fassadenreinigung':['fassade_hubsteiger','fassade_balkon','cleaning_guide_facade'],
-  'kita-reinigung':['reinigung_card'],
-  'schulreinigung':['reinigung'],
-  'regalservice':['regalservice_mitarbeiter','guides_regalservice','gallery_regalservice'],
+// Aktuelle Fotos je Leistung; jeder Textabschnitt erhält eines davon.
+const SHELF=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].map(n=>`/fotografie/shelf-services/shelf-${String(n).padStart(2,'0')}-`);
+const shelfFiles=['stocking','checks','prices','promotions','deliveries','rotation','replenishment','planogram','organisation','inventory','facing','seasonal','stands','stockroom','expiry','support'];
+export const photoPools={
+  'glas-und-fensterreinigung':['gallery_glas','cleaning_guide_window','guides_glas','fassade_hubsteiger','reinigung_card'],
+  'buero-und-gebaeudereinigung':['gallery_buero','nachhaltigkeit','reinigung','reinigung_card','buero'],
+  'hotelreinigung':['gallery_hotel','cleaning_guide_hotel','reinigung','nachhaltigkeit'],
+  'bau-und-sonderreinigung':['gallery_bau','cleaning_guide_surface','reinigung','fassade_balkon','reinigung_card'],
+  'fassadenreinigung':['fassade_hubsteiger','fassade_balkon','cleaning_guide_facade','cleaning_guide_surface','fassade'],
+  'kita-reinigung':['reinigung_card','nachhaltigkeit','reinigung','gallery_buero'],
+  'schulreinigung':['reinigung','reinigung_card','nachhaltigkeit','gallery_buero'],
+  'regalservice':['regalservice','guides_regalservice','gallery_regalservice',...SHELF.map((p,i)=>p+shelfFiles[i]+'.webp')],
 };
-const spread=list=>{const out=[];list.forEach((p,i)=>{out[1+i*2]=p;});return out;};
 export function ServiceDetail({lang='de', service}){
   const {t} = language(lang);
   return <><PageIntro lang={lang} tag={service.shortTitle} title={service.pageTitle} photo={service.photoKey} crumb={[t("Reinigung"),'/reinigung']}><Go lang={lang} href={'/kontakt?bereich='+encodeURIComponent(service.shortTitle)}>{t("Einsatz anfragen")}</Go></PageIntro>
-  <VerbatimBody lang={lang} blocks={service.verbatim} photos={spread(extraPhotos[service.slug]||[])}/></>}
+  <VerbatimBody lang={lang} blocks={service.verbatim} pool={photoPools[service.slug]||['reinigung']}/></>}
 export function RetailPage({lang='de'} = {}){
   const {t} = language(lang);
   const {retailService} = getCatalog(lang);
@@ -127,7 +132,7 @@ export function RetailPage({lang='de'} = {}){
       <PageIntro lang={lang} tag={t("Regalservice")} title={h1.x} photo="regalservice_mitarbeiter" crumb={[t("Leistungen"), '/leistungen']}>
         <Go lang={lang} href={'/kontakt?bereich=' + encodeURIComponent(retailService.shortTitle)}>{t("Einsatz anfragen")}</Go>
       </PageIntro>
-      <VerbatimBody lang={lang} blocks={body} photos={[null,'regalservice',null,'gallery_regalservice']}/>
+      <VerbatimBody lang={lang} blocks={body} pool={photoPools.regalservice}/>
       <PhotoGrid items={gallery} lang={lang} />
       <Clients lang={lang} />
     </>
@@ -145,11 +150,10 @@ export function HouseholdPage({lang='de'} = {}){
 
       <HouseholdServicesSection lang={lang} isEn={lang === 'en'} />
 
-      <section className="ws-wrap ws-section"><Subhead tag={t("Hilfe im Haushalt")} title={t("Das können Sie abgeben.")}/><Blocks items={s.scope}/></section>
-      <section className="ws-pricing"><div className="ws-wrap ws-section"><Heading tag={t("Preisgestaltung")} first={t("Wie entsteht")} accent={t("Ihr Preis?")}>{householdPricing.intro}</Heading><div className="ws-price-notes">{householdPricing.factors.map(f=><div key={f.title}><h3>{f.title}</h3><p>{f.text}</p></div>)}</div></div></section>
+      <section className="ws-wrap ws-section"><div className="wv-grid has-photo"><div className="wv-text"><Subhead tag={t("Hilfe im Haushalt")} title={t("Das können Sie abgeben.")}/><Blocks items={s.scope}/></div><figure className="wv-photo"><Img k="guides_haushalt" lang={lang}/></figure></div></section>
+      <section className="ws-pricing"><div className="ws-wrap ws-section"><div className="wv-grid has-photo"><div className="wv-text"><Heading tag={t("Preisgestaltung")} first={t("Wie entsteht")} accent={t("Ihr Preis?")}>{householdPricing.intro}</Heading></div><figure className="wv-photo wv-photo-wide"><Img k="gallery_haushalt" lang={lang}/></figure></div><div className="ws-price-notes">{householdPricing.factors.map(f=><div key={f.title}><h3>{f.title}</h3><p>{f.text}</p></div>)}</div></div></section>
       <div className="ws-wrap ws-section"><HouseholdPlanner lang={lang} approvedRate={rate>0&&rate<=1000?rate:null}/></div>
-      <Questions lang={lang} items={s.faq}/>
-      <PhotoGrid lang={lang} items={['guides_haushalt','gallery_haushalt','haushalt_mann'].map(k=>({src:photos[k].src,alt:language(lang).alt(k),width:photos[k].width,height:photos[k].height}))}/>
+      <Questions lang={lang} items={s.faq} photo="haushalt_mann"/>
     </>
   );
 }
@@ -161,7 +165,7 @@ export function AboutPage({lang='de'} = {}){
   const intro = blocks[h3], lead = blocks[h3 + 1];
   const rest = blocks.filter(b => b !== intro && b !== lead);
   return <><PageIntro lang={lang} tag={page.title} title={intro.x} lead={lead.x} photo="buero"/>
-  <VerbatimBody lang={lang} blocks={rest} photos={['hotel','nachhaltigkeit',null,'gallery_buero']}/><Clients lang={lang}/></>}
+  <VerbatimBody lang={lang} blocks={rest} pool={['hotel','nachhaltigkeit','gallery_buero','reinigung_card','gallery_glas','fassade_hubsteiger']}/><Clients lang={lang}/></>}
 export function TeamPage({lang='de'} = {}){
   const {t} = language(lang);
   const page = oldPage('unser-team');
@@ -169,7 +173,7 @@ export function TeamPage({lang='de'} = {}){
   const person = aboutContent.team;
   const closing = page.blocks.slice(page.blocks.findIndex(b => b.t === 'txt' && b.k === 'sub'));
   return <><PageIntro lang={lang} tag={page.title} title={person.name} lead={person.role} photo="ali" crumb={[t("Über uns"),'/ueber-uns']}><Go lang={lang} href="/kontakt">{t("Kontakt aufnehmen")}</Go></PageIntro>
-  <VerbatimBody lang={lang} blocks={closing}/></>}
+  <VerbatimBody lang={lang} blocks={closing} pool={['buero']}/></>}
 export function AdvicePage({lang='de'} = {}){
   const {adviceArticles} = getCatalog(lang);
   const page = oldPage('neueste-nachrichten');
@@ -178,13 +182,13 @@ export function ArticlePage({lang='de', article:a}){
   const {t, url} = language(lang);
   const heads = headingsOf(a.verbatim);
   return <><PageIntro lang={lang} tag={a.category} title={a.title} photo={a.photoKey} crumb={[t("Ratgeber"),'/ratgeber']}/>
-  <section className="wv-article"><div className="ws-wrap"><aside>{heads.length>0&&<><Mark>{t("In diesem Beitrag")}</Mark><ol>{heads.map((h,i)=><li key={i}><a href={url('#absatz-'+(i+1))}>{h}</a></li>)}</ol></>}<a className="ws-text-link" href={url("/ratgeber")}>{t("← Alle Beiträge")}</a></aside><Flow blocks={a.verbatim} lang={lang} anchors/></div></section>
+  <section className="wv-article"><div className="ws-wrap"><aside>{heads.length>0&&<><Mark>{t("In diesem Beitrag")}</Mark><ol>{heads.map((h,i)=><li key={i}><a href={url('#absatz-'+(i+1))}>{h}</a></li>)}</ol></>}<a className="ws-text-link" href={url("/ratgeber")}>{t("← Alle Beiträge")}</a></aside><Flow blocks={a.verbatim} lang={lang} anchors pool={a.pool}/></div></section>
   <section className="wv-section"><div className="ws-wrap"><Go lang={lang} href={a.relatedHref}>{t("Passende Leistung ansehen")}</Go></div></section></>}
 export function ContactPage({lang='de', topic=''}){
   const {t, url} = language(lang);
   const page = oldPage('kontaktieren-sie-uns');
   const [label, lead, , , , , formTitle] = [page.blocks[0].x, page.blocks[1].x, 0, 0, 0, 0, page.blocks.find(b => b.t === 'h3' && b.x.startsWith('Füllen Sie')).x];
-  return <section className="ws-contact-page"><div className="ws-wrap"><nav className="ws-crumb" aria-label={t("Brotkrumennavigation")}><a href={url("/")}>{t("Startseite")}</a>{t(" / Kontakt")}</nav><div className="ws-inquiry"><div><Mark>{label}</Mark><h1>{page.title}</h1><p lang="de">{lead}</p><dl className="ws-contact-info">{[[t("E-Mail"),company.email],[t("Telefon"),company.phone],[t("Adresse"),company.address]].map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></div><div className="ws-contact-card"><h2 lang="de">{formTitle}</h2>{topic&&<p>{t("Bereich: ")}{topic}</p>}<ContactForm lang={lang} topic={topic}/></div></div></div></section>}
+  return <section className="ws-contact-page"><div className="ws-wrap"><nav className="ws-crumb" aria-label={t("Brotkrumennavigation")}><a href={url("/")}>{t("Startseite")}</a>{t(" / Kontakt")}</nav><div className="ws-inquiry"><div><Mark>{label}</Mark><h1>{page.title}</h1><p lang="de">{lead}</p><dl className="ws-contact-info">{[[t("E-Mail"),company.email],[t("Telefon"),company.phone],[t("Adresse"),company.address]].map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl><figure className="wv-photo wv-photo-side"><Img k="reinigung_card" lang={lang}/></figure></div><div className="ws-contact-card"><h2 lang="de">{formTitle}</h2>{topic&&<p>{t("Bereich: ")}{topic}</p>}<ContactForm lang={lang} topic={topic}/></div></div></div></section>}
 export function LegalPage({lang='de', privacy=false}){
   const {t} = language(lang);
   const {aboutContent} = getCatalog(lang);

@@ -4,7 +4,7 @@ import {getCatalog} from '../lib/content';
 import { AreaCards, CTA, Go, Heading, Icon, Mark, Pic } from './Design';
 import Tide from './Tide';
 import Gallery from './Gallery';
-import VerbatimBody, {Flow, NewsIndex, SquarePair} from './Verbatim';
+import VerbatimBody, {Flow, NewsIndex, SquarePair, Img} from './Verbatim';
 import {oldPage} from '../lib/verbatim';
 
 // Wortlaut: "Unsere Werte" der bisherigen Startseite
@@ -101,12 +101,13 @@ export default function HomeSections({lang='de'} = {}){
       </div>
     </div>
   </section>
-  <VerbatimBody lang={lang} blocks={main} photos={['buero',null,'hotel',null,'regalservice_mitarbeiter','nachhaltigkeit']}/>
+  <VerbatimBody lang={lang} blocks={main} photos={['buero','reinigung','hotel','gallery_hotel','regalservice_mitarbeiter','nachhaltigkeit','gallery_glas']}/>
   <section className="ws-cleaning-section" aria-label="Unsere Kernleistungen">
     <div className="ws-wrap ws-section ws-directory">
       <div>
         <Heading tag={t("Reinigung")} first="Unsere" accent="Kernleistungen:"/>
         <Go lang={lang} href="/reinigung">{t("Zur Reinigung")}</Go>
+        <figure className="wv-photo wv-photo-side"><Img k="cleaning_guide_window" lang={lang}/></figure>
       </div>
       <div className="ws-directory-links">
         {cleaningServices.map((s,i)=><a href={url('/reinigung/'+s.slug)} key={s.slug}><small>0{i+1}</small><span>{s.shortTitle}</span><b aria-hidden="true">↗</b></a>)}
