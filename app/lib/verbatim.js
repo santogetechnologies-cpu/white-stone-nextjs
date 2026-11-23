@@ -8,7 +8,7 @@ const postList = Object.values(data).filter(p => p.kind === 'post').sort((a, b) 
 
 // Je Thema ein Pool aktueller Fotos der White-Stone-Website, damit die Beiträge abwechslungsreich bebildert sind.
 const topics = [
-  [/fassad|algen/, 'Fassadenreinigung', ['fassade', 'fassade_hubsteiger', 'cleaning_guide_facade', 'fassade_balkon', 'cleaning_guide_surface'], '/reinigung/fassadenreinigung'],
+  [/fassad|algen/, 'Fassadenreinigung', ['fassade', 'fassade_hubsteiger', 'fassade_balkon', 'cleaning_guide_facade', 'cleaning_guide_surface'], '/reinigung/fassadenreinigung'],
   [/glas|fenster/, 'Glas- & Fensterreinigung', ['glas', 'cleaning_guide_window', 'guides_glas', 'gallery_glas'], '/reinigung/glas-und-fensterreinigung'],
   [/regal|merchandising/, 'Regalservice', ['regalservice', 'regalservice_mitarbeiter', 'guides_regalservice', 'gallery_regalservice'], '/regalservice'],
   [/hotel/, 'Hotelreinigung', ['hotel', 'cleaning_guide_hotel', 'gallery_hotel'], '/reinigung/hotelreinigung'],

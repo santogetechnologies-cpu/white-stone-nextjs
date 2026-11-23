@@ -4,7 +4,7 @@ import {getCatalog} from '../lib/content';
 import { AreaCards, CTA, Go, Heading, Icon, Mark, Pic } from './Design';
 import Tide from './Tide';
 import Gallery from './Gallery';
-import VerbatimBody, {Flow, NewsIndex} from './Verbatim';
+import VerbatimBody, {Flow, NewsIndex, SquarePair} from './Verbatim';
 import {oldPage} from '../lib/verbatim';
 
 // Wortlaut: "Unsere Werte" der bisherigen Startseite
@@ -81,7 +81,7 @@ export default function HomeSections({lang='de'} = {}){
     <div><h3>{layers[3]}</h3><p>{layers[4]}</p></div>
   </div></section>
   <TrustHighlights lang={lang} />
-  <section id="leistungen" className="ws-showcase"><div className="ws-waterstage"><Tide/></div><div className="ws-wrap ws-section"><div className="ws-showcase-head"><Heading tag={t("Unsere Leistungen")} first={t("Reinigung, Regalservice")} accent={t("und Haushalt.")}/></div><AreaCards lang={lang}/></div></section>
+  <section id="leistungen" className="ws-showcase"><div className="ws-waterstage"><Tide/></div><div className="ws-wrap ws-section"><div className="ws-showcase-head"><Heading tag={t("Unsere Leistungen")} first={t("Reinigung, Regalservice")} accent={t("und Haushalt.")}/></div><AreaCards lang={lang}/><SquarePair lang={lang} keys={['fassade_hubsteiger','fassade_balkon']}/></div></section>
   <section className="ws-benefits" aria-label="Unsere Werte">
     <div className="ws-wrap ws-benefits-wrap">
       <div className="ws-benefits-grid">
