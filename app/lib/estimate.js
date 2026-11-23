@@ -1,6 +1,4 @@
 export const extras = [
-  ['waesche','Wäsche und Betten',30],
-  ['backofen','Backofen innen',45],
   ['fenster','Fenster und Rahmen',60],
 ];
 export const rhythms = [['Einmalig',1],['Alle vier Wochen',1],['Alle zwei Wochen',2],['Wöchentlich',4]];

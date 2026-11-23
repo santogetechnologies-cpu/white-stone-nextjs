@@ -4,8 +4,10 @@ import {setTimeout as wait} from 'node:timers/promises';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {localizedPath} from '../app/lib/paths.js';
-import {cleaningServices,adviceArticles} from '../app/lib/catalog.js';
-import {additionalGuidesDE} from '../app/lib/legacy-content.js';
+import {cleaningServices} from '../app/lib/catalog.js';
+import {readFileSync} from 'node:fs';
+const adviceArticles=Object.values(JSON.parse(readFileSync(new URL('../app/lib/verbatim.json',import.meta.url),'utf8'))).filter(p=>p.kind==='post');
+const additionalGuidesDE=[];
 const origin='http://127.0.0.1:3187';
 const server=spawn(process.execPath,['node_modules/next/dist/bin/next','start','--hostname','127.0.0.1','--port','3187'],{windowsHide:true,env:{...process.env,CONTACT_TO:'',CONTACT_FROM:'',RESEND_API_KEY:''},stdio:['ignore','pipe','pipe']});
 try {

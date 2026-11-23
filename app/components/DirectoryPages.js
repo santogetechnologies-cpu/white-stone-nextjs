@@ -1,63 +1,50 @@
 import {language} from '../lib/language';
 import {getCatalog} from '../lib/content';
 import {company} from '../lib/company';
-import {AreaCards,PageIntro,Go,Pic,Faq,Subhead,Mark,Heading,CTA} from './Design';
+import {AreaCards,PageIntro,Go,Pic,Faq,Subhead,Mark,Heading} from './Design';
 import {Clients,Values,Workflow} from './HomeSections';
 import HouseholdPlanner from './HouseholdPlanner';
 import ContactForm from './ContactForm';
-import GuideIndex from './GuideIndex';
 import CleaningServicesGrid from './CleaningServicesGrid';
-import { CleaningWhyChooseUs, CleaningProcess } from './CleaningExtraSections';
-import ShelfServicesSection from './ShelfServicesSection';
+import {shelfServicesData} from './ShelfServicesSection';
+import VerbatimBody, {Flow,PhotoGrid,PeopleList,NewsIndex,headingsOf} from './Verbatim';
+import {oldPage} from '../lib/verbatim';
+import {photos} from '../lib/photos';
 import HouseholdServicesSection from './HouseholdServicesSection';
 
 export function ServicesPage({lang='de'} = {}){
   const {t} = language(lang);
-  return <><PageIntro lang={lang} tag={t("Leistungen")} title={t("Unsere Leistungsbereiche.")} lead={t("Drei Wege zu einem gepflegten Alltag. Wählen Sie den Bereich, der zu Ihrem Gebäude, Ihrer Filiale oder Ihrem Haushalt passt.")}/><section className="ws-wrap ws-section"><AreaCards lang={lang}/></section><Workflow lang={lang}/></>}
+  const page = oldPage('unsere-leistungen');
+  const blocks = page.blocks.filter(b => !(b.t === 'txt' && b.k === 'sub') && b.t !== 'h1');
+  const h1 = page.blocks.find(b => b.t === 'h1');
+  return <>
+    <PageIntro lang={lang} tag={page.title} title={h1.x} photo="buero"/>
+    <section className="ws-wrap ws-section"><AreaCards lang={lang}/></section>
+    <section className="wv-section"><div className="ws-wrap"><Flow blocks={blocks} lang={lang}/></div></section>
+  </>}
 export function CleaningPage({lang='de'} = {}){
   const {t, url} = language(lang);
   const {cleaningServices} = getCatalog(lang);
   const isEn = lang === 'en';
-  const services = cleaningServices.map(s => ({
-    ...s,
-    href: url('/reinigung/' + s.slug),
-  }));
-
+  const services = cleaningServices.map(s => ({...s, href: url('/reinigung/' + s.slug)}));
+  const home = oldPage('home-5').blocks;
+  const i = home.findIndex(b => b.t === 'h3' && b.x === 'Professionelle Reinigung für jede Anforderung');
+  const intro = home.slice(i, i + 4);
   return (
     <>
-      <PageIntro
-        lang={lang}
-        tag={t("Reinigung")}
-        title={t("Sauberkeit für jeden Raum.")}
-        lead={t("Glas, Arbeitsplätze, Gästezimmer oder Schulen: Jede Umgebung stellt andere Anforderungen. Wählen Sie Ihr Einsatzgebiet.")}
-        photo="reinigung"
-        crumb={[t("Leistungen"), '/leistungen']}
-      >
+      <PageIntro lang={lang} tag={t("Reinigung")} title={intro[0].x} lead={intro[1].x} photo="reinigung" crumb={[t("Leistungen"), '/leistungen']}>
         <Go lang={lang} href="/kontakt?bereich=Reinigung">{t("Reinigung anfragen")}</Go>
       </PageIntro>
-
-      <section className="ws-expertise-section" aria-label={isEn ? "Sixteen areas of expertise" : "Sechzehn Spezialgebiete"}>
+      <section className="ws-expertise-section" aria-label={t("Reinigung")}>
         <div className="ws-wrap ws-expertise-wrap">
-          <div className="ws-expertise-header">
-            <h2 className="ws-expertise-title">
-              {isEn ? "Sixteen areas of " : "Sechzehn "}
-              <em>{isEn ? "expertise." : "Spezialgebiete."}</em>
-            </h2>
-          </div>
-
-          <CleaningServicesGrid
-            services={services}
-            lang={lang}
-            isEn={isEn}
-          />
+          <CleaningServicesGrid services={services} lang={lang} isEn={isEn} />
         </div>
       </section>
-
-      <CleaningWhyChooseUs isEn={isEn} />
-      <CleaningProcess isEn={isEn} />
+      <section className="wv-section"><div className="ws-wrap"><Flow blocks={home.slice(i + 2, i + 4)} lang={lang}/></div></section>
     </>
   );
 }
+
 function Blocks({items}){return <div className="ws-blocks">{items.map(p=><article key={p.title}><h3>{p.title}</h3><p>{p.text}</p></article>)}</div>}
 function Planning({lang='de', service}){
   const {t} = language(lang);
@@ -114,41 +101,35 @@ function Questions({lang='de', items}){
     </section>
   );
 }
-export function ServiceDetail({lang='de', service,retail=false}){
+const extraPhotos={
+  'glas-und-fensterreinigung':['gallery_glas','guides_glas','cleaning_guide_window'],
+  'buero-und-gebaeudereinigung':['gallery_buero','nachhaltigkeit'],
+  'hotelreinigung':['gallery_hotel','cleaning_guide_hotel'],
+  'bau-und-sonderreinigung':['gallery_bau'],
+  'fassadenreinigung':['fassade_hubsteiger','fassade_balkon','cleaning_guide_facade'],
+  'kita-reinigung':['reinigung_card'],
+  'schulreinigung':['reinigung'],
+  'regalservice':['regalservice_mitarbeiter','guides_regalservice','gallery_regalservice'],
+};
+const spread=list=>{const out=[];list.forEach((p,i)=>{out[1+i*2]=p;});return out;};
+export function ServiceDetail({lang='de', service}){
   const {t} = language(lang);
-  return <><PageIntro lang={lang} tag={retail?t("Regalservice"):service.shortTitle} title={retail?t("Regalservice für den Handel."):service.title+'.'} lead={service.summary} photo={service.photoKey} crumb={retail?[t("Leistungen"),'/leistungen']:[t("Reinigung"),'/reinigung']}><Go lang={lang} href={'/kontakt?bereich='+encodeURIComponent(service.shortTitle)}>{t("Einsatz anfragen")}</Go></PageIntro>
- {retail&&<Clients lang={lang}/>}<section className="ws-wrap ws-section"><div className="ws-section-top"><Heading tag={t("Leistungen im Detail")} first={retail?t("Vom Lager"):t("Was wir")} accent={retail?t("bis ins Regal."):t("für Sie tun.")}/><p>{service.intro}</p></div><Blocks items={[...service.scope,...(getCatalog(lang).extra.services[service.slug]||[])]}/></section><Planning lang={lang} service={service}/><Questions lang={lang} items={service.faq}/></>}
+  return <><PageIntro lang={lang} tag={service.shortTitle} title={service.pageTitle} photo={service.photoKey} crumb={[t("Reinigung"),'/reinigung']}><Go lang={lang} href={'/kontakt?bereich='+encodeURIComponent(service.shortTitle)}>{t("Einsatz anfragen")}</Go></PageIntro>
+  <VerbatimBody lang={lang} blocks={service.verbatim} photos={spread(extraPhotos[service.slug]||[])}/></>}
 export function RetailPage({lang='de'} = {}){
   const {t} = language(lang);
   const {retailService} = getCatalog(lang);
-  const isEn = lang === 'en';
+  const h1 = retailService.verbatim.find(b => b.t === 'h1');
+  const body = retailService.verbatim.filter(b => b !== h1);
+  const gallery = [...shelfServicesData.de.map(x => ({src: x.image, alt: x.title, width: 720, height: 720})), ...[1,2,3].map(n => ({src: `/assets/shelf_guide_card${n}.webp`, alt: t("Regalservice"), width: 720, height: 540}))];
   return (
     <>
-      <PageIntro
-        lang={lang}
-        tag={t("Regalservice")}
-        title={t("Regalservice für den Handel.")}
-        lead={retailService.summary}
-        photo={retailService.photoKey}
-        crumb={[t("Leistungen"), '/leistungen']}
-      >
-        <Go lang={lang} href={'/kontakt?bereich=' + encodeURIComponent(retailService.shortTitle)}>
-          {t("Einsatz anfragen")}
-        </Go>
+      <PageIntro lang={lang} tag={t("Regalservice")} title={h1.x} photo="regalservice_mitarbeiter" crumb={[t("Leistungen"), '/leistungen']}>
+        <Go lang={lang} href={'/kontakt?bereich=' + encodeURIComponent(retailService.shortTitle)}>{t("Einsatz anfragen")}</Go>
       </PageIntro>
-
-      <ShelfServicesSection lang={lang} isEn={isEn} />
-
+      <VerbatimBody lang={lang} blocks={body} photos={[null,'regalservice',null,'gallery_regalservice']}/>
+      <PhotoGrid items={gallery} lang={lang} />
       <Clients lang={lang} />
-      <section className="ws-wrap ws-section">
-        <div className="ws-section-top">
-          <Heading tag={t("Leistungen im Detail")} first={t("Vom Lager")} accent={t("bis ins Regal.")} />
-          <p>{retailService.intro}</p>
-        </div>
-        <Blocks items={[...retailService.scope, ...(getCatalog(lang).extra.services[retailService.slug] || [])]} />
-      </section>
-      <Planning lang={lang} service={retailService} />
-      <Questions lang={lang} items={retailService.faq} />
     </>
   );
 }
@@ -168,27 +149,42 @@ export function HouseholdPage({lang='de'} = {}){
       <section className="ws-pricing"><div className="ws-wrap ws-section"><Heading tag={t("Preisgestaltung")} first={t("Wie entsteht")} accent={t("Ihr Preis?")}>{householdPricing.intro}</Heading><div className="ws-price-notes">{householdPricing.factors.map(f=><div key={f.title}><h3>{f.title}</h3><p>{f.text}</p></div>)}</div></div></section>
       <div className="ws-wrap ws-section"><HouseholdPlanner lang={lang} approvedRate={rate>0&&rate<=1000?rate:null}/></div>
       <Questions lang={lang} items={s.faq}/>
+      <PhotoGrid lang={lang} items={['guides_haushalt','gallery_haushalt','haushalt_mann'].map(k=>({src:photos[k].src,alt:language(lang).alt(k),width:photos[k].width,height:photos[k].height}))}/>
     </>
   );
 }
 export function AboutPage({lang='de'} = {}){
   const {t} = language(lang);
-  const {aboutContent} = getCatalog(lang);
-  return <><PageIntro lang={lang} tag={t("Über uns")} title={aboutContent.title+'.'} lead={aboutContent.intro} photo="buero"/><section className="ws-wrap ws-section"><Subhead tag={t("Unsere Arbeitsweise")} title={t("Sorgfalt beginnt beim Zuhören.")}/><Blocks items={aboutContent.principles}/><Go lang={lang} href="/team">{t("Zur Geschäftsführung")}</Go></section><section className="ws-company-section"><div className="ws-wrap"><h2>{lang==='en'?'Working with White Stone':'Zusammenarbeit mit White Stone'}</h2><Blocks items={getCatalog(lang).extra.company}/></div></section><Values lang={lang}/><Clients lang={lang}/><Questions lang={lang} items={getCatalog(lang).extra.faq}/></>}
+  const page = oldPage('uber-uns');
+  const blocks = page.blocks.filter((b,i) => !(i === 0 && b.k === 'sub'));
+  const h3 = blocks.findIndex(b => b.t === 'h3');
+  const intro = blocks[h3], lead = blocks[h3 + 1];
+  const rest = blocks.filter(b => b !== intro && b !== lead);
+  return <><PageIntro lang={lang} tag={page.title} title={intro.x} lead={lead.x} photo="buero"/>
+  <VerbatimBody lang={lang} blocks={rest} photos={['hotel','nachhaltigkeit',null,'gallery_buero']}/><Clients lang={lang}/></>}
 export function TeamPage({lang='de'} = {}){
   const {t} = language(lang);
+  const page = oldPage('unser-team');
   const {aboutContent} = getCatalog(lang);
-  const person=aboutContent.team;return <><PageIntro lang={lang} tag={t("Unser Team")} title={person.name+'.'} lead={person.role+' · White Stone GmbH'} photo="ali" crumb={[t("Über uns"),'/ueber-uns']}><Go lang={lang} href="/kontakt">{t("Kontakt aufnehmen")}</Go></PageIntro><section className="ws-wrap ws-section ws-two"><Subhead tag={t("Geschäftsführung")} title={t("Ihr Ansprechpartner.")}/><div className="ws-prose"><p>{person.text}</p><p>{t("Beschreiben Sie kurz den Standort, die gewünschten Aufgaben und den geplanten Beginn. So können wir das erste Gespräch auf Ihren Bedarf ausrichten.")}</p></div></section></>}
+  const person = aboutContent.team;
+  const closing = page.blocks.slice(page.blocks.findIndex(b => b.t === 'txt' && b.k === 'sub'));
+  return <><PageIntro lang={lang} tag={page.title} title={person.name} lead={person.role} photo="ali" crumb={[t("Über uns"),'/ueber-uns']}><Go lang={lang} href="/kontakt">{t("Kontakt aufnehmen")}</Go></PageIntro>
+  <VerbatimBody lang={lang} blocks={closing}/></>}
 export function AdvicePage({lang='de'} = {}){
-  const {t} = language(lang);
   const {adviceArticles} = getCatalog(lang);
-  return <><PageIntro lang={lang} tag={t("Ratgeber")} title={t("Wissen aus der Praxis.")} photo="glas" lead={t("Vom Pflegeplan für eine Glasfassade bis zur Vorbereitung eines Haushaltsbesuchs: Hier finden Sie Antworten für Ihren Alltag.")}/><GuideIndex lang={lang} entries={adviceArticles.map(({slug,title,summary,category,photoKey})=>({slug,title,summary,category,photoKey}))}/></>}
+  const page = oldPage('neueste-nachrichten');
+  return <><PageIntro lang={lang} tag={page.title} title={page.title} photo="glas"/><NewsIndex lang={lang} articles={adviceArticles}/></>}
 export function ArticlePage({lang='de', article:a}){
   const {t, url} = language(lang);
-  return <><PageIntro lang={lang} tag={a.category} title={a.title} lead={a.summary} photo={a.photoKey} crumb={[t("Ratgeber"),'/ratgeber']}/><section className="ws-wrap ws-section ws-article"><aside><Mark>{t("In diesem Beitrag")}</Mark><ol>{a.sections.map((s,i)=><li key={i}><a href={url('#absatz-'+(i+1))}>{s.title}</a></li>)}</ol><a className="ws-text-link" href={url("/ratgeber")}>{t("← Alle Beiträge")}</a></aside><div>{a.sections.map((s,i)=><article key={s.title} id={'absatz-'+(i+1)}><h2>{s.title}</h2><p>{s.text}</p></article>)}<div className="ws-tip"><Mark>{t("Für die Praxis")}</Mark><p>{a.takeaway}</p></div><Go lang={lang} href={a.relatedHref}>{t("Passende Leistung ansehen")}</Go></div></section></>}
+  const heads = headingsOf(a.verbatim);
+  return <><PageIntro lang={lang} tag={a.category} title={a.title} photo={a.photoKey} crumb={[t("Ratgeber"),'/ratgeber']}/>
+  <section className="wv-article"><div className="ws-wrap"><aside>{heads.length>0&&<><Mark>{t("In diesem Beitrag")}</Mark><ol>{heads.map((h,i)=><li key={i}><a href={url('#absatz-'+(i+1))}>{h}</a></li>)}</ol></>}<a className="ws-text-link" href={url("/ratgeber")}>{t("← Alle Beiträge")}</a></aside><Flow blocks={a.verbatim} lang={lang} anchors/></div></section>
+  <section className="wv-section"><div className="ws-wrap"><Go lang={lang} href={a.relatedHref}>{t("Passende Leistung ansehen")}</Go></div></section></>}
 export function ContactPage({lang='de', topic=''}){
   const {t, url} = language(lang);
-  return <section className="ws-contact-page"><div className="ws-wrap"><nav className="ws-crumb" aria-label={t("Brotkrumennavigation")}><a href={url("/")}>{t("Startseite")}</a>{t(" / Kontakt")}</nav><div className="ws-inquiry"><div><Mark>{t("Kontakt · München")}</Mark><h1>{t("Schreiben ")}<em>{t("Sie uns.")}</em></h1><p>{t("Ob einzelner Einsatz oder regelmäßige Betreuung: Beschreiben Sie kurz Ihr Anliegen. Wir melden uns bei Ihnen.")}</p><dl className="ws-contact-info">{[[t("E-Mail"),company.email],[t("Telefon"),company.phone],[t("Adresse"),company.address]].map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></div><div className="ws-contact-card"><h2>{t("Ihre Anfrage")}</h2>{topic&&<p>{t("Bereich: ")}{topic}</p>}<ContactForm lang={lang} topic={topic}/></div></div></div></section>}
+  const page = oldPage('kontaktieren-sie-uns');
+  const [label, lead, , , , , formTitle] = [page.blocks[0].x, page.blocks[1].x, 0, 0, 0, 0, page.blocks.find(b => b.t === 'h3' && b.x.startsWith('Füllen Sie')).x];
+  return <section className="ws-contact-page"><div className="ws-wrap"><nav className="ws-crumb" aria-label={t("Brotkrumennavigation")}><a href={url("/")}>{t("Startseite")}</a>{t(" / Kontakt")}</nav><div className="ws-inquiry"><div><Mark>{label}</Mark><h1>{page.title}</h1><p lang="de">{lead}</p><dl className="ws-contact-info">{[[t("E-Mail"),company.email],[t("Telefon"),company.phone],[t("Adresse"),company.address]].map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl></div><div className="ws-contact-card"><h2 lang="de">{formTitle}</h2>{topic&&<p>{t("Bereich: ")}{topic}</p>}<ContactForm lang={lang} topic={topic}/></div></div></div></section>}
 export function LegalPage({lang='de', privacy=false}){
   const {t} = language(lang);
   const {aboutContent} = getCatalog(lang);

@@ -1,4 +1,4 @@
-// Bildmaterial der bisherigen Firmenwebsite. Die Herkunft ist je Motiv dokumentiert.
+// Aktuelle Bilder der White Stone Website.
 export const photos = {
   reinigung: {
     src: "/fotografie/reinigung.webp",
@@ -29,7 +29,6 @@ export const photos = {
     alt: "Eine Haushaltshilfe wischt eine helle Arbeitsfläche mit einem blauen Tuch.",
     width: 1400,
     height: 764,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2026/03/10-scaled.png",
   },
   haushalt_kueche: {
     src: "/fotografie/haushalt-kueche.webp",
@@ -48,7 +47,6 @@ export const photos = {
     alt: "Ein Fensterreiniger arbeitet von einer Hebebühne an einer blauen Glasfassade.",
     width: 1024,
     height: 1024,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2026/03/ChatGPT-Image-Mar-1-2026-02_53_21-PM.png",
   },
   guides_glas: {
     src: "/fotografie/guides-glas.webp",
@@ -133,55 +131,65 @@ export const photos = {
     alt: "Eine Reinigungskraft im blauen White-Stone-Poloshirt wischt konzentriert einen Bürotisch.",
     width: 1447,
     height: 1087,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2026/03/ChatGPT-Image-Mar-1-2026-09_00_07-PM.png",
   },
   hotel: {
     src: "/fotografie/hotel.webp",
     alt: "Eine Reinigungskraft im blauen White-Stone-Poloshirt bereitet sorgfältig ein Bett in einem Gästezimmer vor.",
     width: 1437,
     height: 1095,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2026/03/4.png",
   },
   bau: {
     src: "/fotografie/bau.webp",
     alt: "Reinigungskräfte im blauen White-Stone-Poloshirt entfernen nach dem Ausbau Staub vom Boden und von den Fenstern.",
     width: 1254,
     height: 1254,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2026/03/ChatGPT-Image-Mar-1-2026-09_24_19-PM.png",
   },
   fassade: {
     src: "/fotografie/fassade.webp",
     alt: "Fachkräfte im blauen White-Stone-Poloshirt reinigen eine Steinfassade mit langen wasserführenden Bürsten.",
     width: 1730,
     height: 1366,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2026/03/ChatGPT-Image-Mar-3-2026-11_08_19-PM.png",
   },
   kita: {
     src: "/fotografie/kita.webp",
     alt: "Eine Reinigungskraft im blauen White-Stone-Poloshirt räumt Spielzeug im Gruppenraum einer Kindertagesstätte auf.",
     width: 1674,
     height: 939,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2026/03/ChatGPT-Image-Mar-4-2026-12_16_24-AM.png",
   },
   schule: {
     src: "/fotografie/schule.webp",
     alt: "Eine Reinigungskraft im blauen White-Stone-Poloshirt wischt den Boden in einem leeren Klassenzimmer.",
     width: 1459,
     height: 1078,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2026/03/ChatGPT-Image-Mar-4-2026-12_35_16-AM.png",
   },
   ali: {
     src: "/fotografie/ali.webp",
     alt: "Saqib Ali, Geschäftsführer der White Stone GmbH.",
     width: 800,
     height: 800,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2025/11/saqib-ali.jpg",
   },
   nachhaltigkeit: {
     src: "/fotografie/nachhaltigkeit.webp",
     alt: "Zwei Reinigungskräfte sortieren Wertstoffe und reinigen eine Bürofläche.",
     width: 1400,
     height: 933,
-    source: "https://whitestonegmbh.de/wp-content/uploads/2026/03/ChatGPT-Image-Mar-1-2026-09_15_45-PM.png",
+  },
+  fassade_hubsteiger: {
+    src: "/fotografie/fassade-hubsteiger.webp",
+    alt: "Zwei Fachkräfte in weißen Schutzanzügen reinigen vom Hubsteiger aus mit einer langen Teleskopstange eine Hausfassade.",
+    width: 959,
+    height: 902,
+  },
+  fassade_balkon: {
+    src: "/fotografie/fassade-balkon.webp",
+    alt: "Ein Mitarbeiter im weißen Schutzanzug reinigt auf einem Balkon mit einer Hochdrucklanze die Balkonverkleidung, links steht eine Leiter.",
+    width: 960,
+    height: 903,
+  },
+  regalservice_mitarbeiter: {
+    src: "/fotografie/regalservice-mitarbeiter.webp",
+    alt: "Ein Mitarbeiter im Poloshirt der White Stone GmbH mit dem Aufdruck Regal Dienst räumt Getränkekartons in ein Supermarktregal ein.",
+    width: 1500,
+    height: 2000,
   },
 };

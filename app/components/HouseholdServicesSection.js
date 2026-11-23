@@ -69,18 +69,6 @@ export const householdServicesData = {
       image: "/fotografie/household-services/household-11-dusting.webp"
     },
     {
-      id: 12,
-      title: "Laundry & Ironing Services",
-      summary: "Sorting, machine washing, drying, folding and neat ironing of clothing, shirts, table linens and towels.",
-      image: "/fotografie/household-services/household-12-laundry.webp"
-    },
-    {
-      id: 13,
-      title: "Bed Making & Linen Changing",
-      summary: "Fresh changing of duvet covers, pillowcases and fitted sheets with hospital-grade neatness and pillow fluffing.",
-      image: "/fotografie/household-services/household-13-bedmaking.webp"
-    },
-    {
       id: 14,
       title: "Furniture Cleaning & Care",
       summary: "Gentle polishing of wooden, glass and lacquered surfaces with protective care products to preserve finishes.",
@@ -165,18 +153,6 @@ export const householdServicesData = {
       title: "Staubwischen & Oberflächenpflege",
       summary: "Sorgfältiges trockenes und feuchtes Abwischen von Regalböden, Bilderrahmen, Leisten, Türklinken und Lampen.",
       image: "/fotografie/household-services/household-11-dusting.webp"
-    },
-    {
-      id: 12,
-      title: "Wäscheservice & Bügelhilfe",
-      summary: "Waschen, Trocknen, Zusammenlegen und faltenfreies Bügeln von Kleidung, Hemden, Tischwäsche und Handtüchern.",
-      image: "/fotografie/household-services/household-12-laundry.webp"
-    },
-    {
-      id: 13,
-      title: "Bettenmachen & Wäschewechsel",
-      summary: "Frisches Beziehen von Bettdecken, Kissen und Spannbettlaken sowie ordentliches Aufschütteln und Glattstreichen.",
-      image: "/fotografie/household-services/household-13-bedmaking.webp"
     },
     {
       id: 14,

@@ -28,4 +28,7 @@ export const photoAlt = {
   schule: 'A cleaner in a navy White Stone uniform mops the floor in a modern classroom.',
   ali: 'Saqib Ali, Managing Director of White Stone GmbH.',
   nachhaltigkeit: 'Two cleaners sort recycling and clean an office.',
+  fassade_hubsteiger: 'Two specialists in white protective suits clean a building façade from an aerial work platform using a long telescopic pole.',
+  fassade_balkon: 'A worker in a white protective suit cleans balcony panelling with a pressure lance; a ladder stands on the left.',
+  regalservice_mitarbeiter: 'A staff member in a White Stone GmbH polo shirt printed with “Regal Dienst” stocking juice cartons on a supermarket shelf.',
 };

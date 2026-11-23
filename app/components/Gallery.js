@@ -73,7 +73,7 @@ const entries = [
   },
   {
     key: 'gallery_haushalt',
-    title: 'Haushaltshilfe',
+    title: 'Haushalt',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -121,7 +121,7 @@ const entries = [
   },
   {
     key: 'gallery_bau',
-    title: 'Bodenreinigung',
+    title: 'Bau- & Sonderreinigung',
     icon: (
       <svg
         viewBox="0 0 24 24"
