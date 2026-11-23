@@ -11,5 +11,14 @@ import {Footer} from './Design';
 import PageTransitionLoader from './PageTransitionLoader';
 import ScrollRevealManager from './ScrollRevealManager';
 export default function DocumentShell({lang,children}) {
-  return <html lang={lang}><body><IconDefs/><PageTransitionLoader/><ScrollRevealManager/>{children}<Footer lang={lang}/></body></html>;
+  return (
+    <html lang={lang}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;650;700;750;800;850;900&display=swap" rel="stylesheet" />
+      </head>
+      <body><IconDefs/><PageTransitionLoader/><ScrollRevealManager/>{children}<Footer lang={lang}/></body>
+    </html>
+  );
 }

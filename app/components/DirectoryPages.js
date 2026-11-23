@@ -6,6 +6,10 @@ import {Clients,Values,Workflow} from './HomeSections';
 import HouseholdPlanner from './HouseholdPlanner';
 import ContactForm from './ContactForm';
 import GuideIndex from './GuideIndex';
+import CleaningServicesGrid from './CleaningServicesGrid';
+import { CleaningWhyChooseUs, CleaningProcess } from './CleaningExtraSections';
+import ShelfServicesSection from './ShelfServicesSection';
+import HouseholdServicesSection from './HouseholdServicesSection';
 
 export function ServicesPage({lang='de'} = {}){
   const {t} = language(lang);
@@ -14,6 +18,10 @@ export function CleaningPage({lang='de'} = {}){
   const {t, url} = language(lang);
   const {cleaningServices} = getCatalog(lang);
   const isEn = lang === 'en';
+  const services = cleaningServices.map(s => ({
+    ...s,
+    href: url('/reinigung/' + s.slug),
+  }));
 
   return (
     <>
@@ -28,52 +36,25 @@ export function CleaningPage({lang='de'} = {}){
         <Go lang={lang} href="/kontakt?bereich=Reinigung">{t("Reinigung anfragen")}</Go>
       </PageIntro>
 
-      <section className="ws-expertise-section" aria-label={isEn ? "Seven areas of expertise" : "Sieben Spezialgebiete"}>
+      <section className="ws-expertise-section" aria-label={isEn ? "Sixteen areas of expertise" : "Sechzehn Spezialgebiete"}>
         <div className="ws-wrap ws-expertise-wrap">
           <div className="ws-expertise-header">
-            <div className="ws-expertise-badge">
-              <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <rect x="1" y="1" width="5.5" height="5.5" rx="1.5" />
-                <rect x="9.5" y="1" width="5.5" height="5.5" rx="1.5" />
-                <rect x="1" y="9.5" width="5.5" height="5.5" rx="1.5" />
-                <rect x="9.5" y="9.5" width="5.5" height="5.5" rx="1.5" />
-              </svg>
-              <span>{isEn ? "CLEANING SERVICES" : "LEISTUNGSSPEKTRUM"}</span>
-            </div>
             <h2 className="ws-expertise-title">
-              {isEn ? "Seven areas of " : "Sieben "}
+              {isEn ? "Sixteen areas of " : "Sechzehn "}
               <em>{isEn ? "expertise." : "Spezialgebiete."}</em>
             </h2>
           </div>
 
-          <div className="ws-expertise-list">
-            {cleaningServices.map((s, i) => (
-              <a href={url('/reinigung/' + s.slug)} key={s.slug} className="ws-expertise-card">
-                <div className="ws-expertise-img-wrap">
-                  <Pic lang={lang} name={s.photoKey} className={`ws-expertise-img ws-expertise-img-${s.photoKey}`} />
-                </div>
-                <div className="ws-expertise-content">
-                  <div className="ws-expertise-meta">
-                    <span className="ws-expertise-num">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="ws-expertise-dash" aria-hidden="true">—</span>
-                    <span className="ws-expertise-label">{isEn ? "CLEANING" : "REINIGUNG"}</span>
-                  </div>
-                  <h3 className="ws-expertise-card-title">{s.title}</h3>
-                  <p className="ws-expertise-card-desc">{s.summary}</p>
-                </div>
-                <div className="ws-expertise-action">
-                  <span className="ws-expertise-divider" aria-hidden="true" />
-                  <span className="ws-expertise-arrow" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
+          <CleaningServicesGrid
+            services={services}
+            lang={lang}
+            isEn={isEn}
+          />
         </div>
       </section>
+
+      <CleaningWhyChooseUs isEn={isEn} />
+      <CleaningProcess isEn={isEn} />
     </>
   );
 }
@@ -138,13 +119,58 @@ export function ServiceDetail({lang='de', service,retail=false}){
   return <><PageIntro lang={lang} tag={retail?t("Regalservice"):service.shortTitle} title={retail?t("Regalservice für den Handel."):service.title+'.'} lead={service.summary} photo={service.photoKey} crumb={retail?[t("Leistungen"),'/leistungen']:[t("Reinigung"),'/reinigung']}><Go lang={lang} href={'/kontakt?bereich='+encodeURIComponent(service.shortTitle)}>{t("Einsatz anfragen")}</Go></PageIntro>
  {retail&&<Clients lang={lang}/>}<section className="ws-wrap ws-section"><div className="ws-section-top"><Heading tag={t("Leistungen im Detail")} first={retail?t("Vom Lager"):t("Was wir")} accent={retail?t("bis ins Regal."):t("für Sie tun.")}/><p>{service.intro}</p></div><Blocks items={[...service.scope,...(getCatalog(lang).extra.services[service.slug]||[])]}/></section><Planning lang={lang} service={service}/><Questions lang={lang} items={service.faq}/></>}
 export function RetailPage({lang='de'} = {}){
+  const {t} = language(lang);
   const {retailService} = getCatalog(lang);
-  return <ServiceDetail lang={lang} service={retailService} retail/>}
+  const isEn = lang === 'en';
+  return (
+    <>
+      <PageIntro
+        lang={lang}
+        tag={t("Regalservice")}
+        title={t("Regalservice für den Handel.")}
+        lead={retailService.summary}
+        photo={retailService.photoKey}
+        crumb={[t("Leistungen"), '/leistungen']}
+      >
+        <Go lang={lang} href={'/kontakt?bereich=' + encodeURIComponent(retailService.shortTitle)}>
+          {t("Einsatz anfragen")}
+        </Go>
+      </PageIntro>
+
+      <ShelfServicesSection lang={lang} isEn={isEn} />
+
+      <Clients lang={lang} />
+      <section className="ws-wrap ws-section">
+        <div className="ws-section-top">
+          <Heading tag={t("Leistungen im Detail")} first={t("Vom Lager")} accent={t("bis ins Regal.")} />
+          <p>{retailService.intro}</p>
+        </div>
+        <Blocks items={[...retailService.scope, ...(getCatalog(lang).extra.services[retailService.slug] || [])]} />
+      </section>
+      <Planning lang={lang} service={retailService} />
+      <Questions lang={lang} items={retailService.faq} />
+    </>
+  );
+}
 export function HouseholdPage({lang='de'} = {}){
   const {t, url} = language(lang);
   const {householdService, householdPricing} = getCatalog(lang);
-  const s=householdService;const rate=Number(process.env.HOUSEHOLD_HOURLY_RATE);return <><PageIntro lang={lang} tag={t("Haushalt")} title={t("Mehr Zeit für Ihr Zuhause.")} lead={s.intro} photo="haushalt" crumb={[t("Leistungen"),'/leistungen']}><Go lang={lang} href="#preisrechner">{t("Kosten berechnen")}</Go> <a className="ws-text-link" href={url("#haushaltsanfrage")}>{t("Direkt anfragen ↓")}</a></PageIntro>
- <section className="ws-wrap ws-section"><Subhead tag={t("Hilfe im Haushalt")} title={t("Das können Sie abgeben.")}/><Blocks items={s.scope}/></section><section className="ws-pricing"><div className="ws-wrap ws-section"><Heading tag={t("Preisgestaltung")} first={t("Wie entsteht")} accent={t("Ihr Preis?")}>{householdPricing.intro}</Heading><div className="ws-price-notes">{householdPricing.factors.map(f=><div key={f.title}><h3>{f.title}</h3><p>{f.text}</p></div>)}</div></div></section><div className="ws-wrap ws-section"><HouseholdPlanner lang={lang} approvedRate={rate>0&&rate<=1000?rate:null}/></div><Questions lang={lang} items={s.faq}/></>}
+  const s=householdService;const rate=Number(process.env.HOUSEHOLD_HOURLY_RATE);
+  return (
+    <>
+      <PageIntro lang={lang} tag={t("Haushalt")} title={t("Mehr Zeit für Ihr Zuhause.")} lead={s.intro} photo="haushalt" crumb={[t("Leistungen"),'/leistungen']}>
+        <Go lang={lang} href="#preisrechner">{t("Kosten berechnen")}</Go> <a className="ws-text-link" href={url("#haushaltsanfrage")}>{t("Direkt anfragen ↓")}</a>
+      </PageIntro>
+
+      <HouseholdServicesSection lang={lang} isEn={lang === 'en'} />
+
+      <section className="ws-wrap ws-section"><Subhead tag={t("Hilfe im Haushalt")} title={t("Das können Sie abgeben.")}/><Blocks items={s.scope}/></section>
+      <section className="ws-pricing"><div className="ws-wrap ws-section"><Heading tag={t("Preisgestaltung")} first={t("Wie entsteht")} accent={t("Ihr Preis?")}>{householdPricing.intro}</Heading><div className="ws-price-notes">{householdPricing.factors.map(f=><div key={f.title}><h3>{f.title}</h3><p>{f.text}</p></div>)}</div></div></section>
+      <div className="ws-wrap ws-section"><HouseholdPlanner lang={lang} approvedRate={rate>0&&rate<=1000?rate:null}/></div>
+      <Questions lang={lang} items={s.faq}/>
+    </>
+  );
+}
 export function AboutPage({lang='de'} = {}){
   const {t} = language(lang);
   const {aboutContent} = getCatalog(lang);

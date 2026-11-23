@@ -110,8 +110,9 @@ export default function ScrollRevealManager() {
       registerGroup('.ws-directory-links', ':scope > a', 'ws-reveal-service-card');
       registerGroup('.ws-blocks', ':scope > article', 'ws-reveal-service-card');
       registerGroup('.ws-reads', ':scope > a', 'ws-reveal-service-card');
+      registerGroup('.ws-guide-grid', ':scope > .ws-guide-card', 'ws-reveal-service-card');
       registerGroup('.ws-related-grid', ':scope > a', 'ws-reveal-service-card');
-      registerGroup('.ws-shelf-guides-grid', ':scope > .ws-shelf-guide-card', 'ws-reveal-service-card');
+      registerGroup('.ws-shelf-guides-grid, .ws-shelf-guides-asym', ':scope > .ws-shelf-guide-card', 'ws-reveal-service-card');
 
       // 4. Feature & Benefit Cards (Staggered 95ms delay)
       registerGroup('.ws-trust-grid', ':scope > .ws-trust-item', 'ws-reveal-card');

@@ -1,4 +1,5 @@
 import RelatedGuides from './RelatedGuides';
+import { WhereWeClean, CleaningPlans } from './CleaningExtraSections';
 import {notFound} from 'next/navigation';
 import Site from './Site';
 import Navigation from './Navigation';
@@ -36,7 +37,12 @@ export default async function LocalizedPage({lang,params,searchParams}) {
     else if(index>=0)topic=(lang==='en'?enServices:deServices)[index].shortTitle;
   }
   const theme=record.article||record.key==='/ratgeber'?'guides':({'/haushalt':'household','/regalservice':'retail'})[record.key]||'building';
-  content=<><Navigation lang={lang}/><main className={'ws-world ws-page-refined '+theme}><View lang={lang} article={record.article} service={record.service} privacy={record.key==='/datenschutz'} topic={topic}/><RelatedGuides page={record} lang={lang}/>{!['/haushalt','/kontakt','/impressum','/datenschutz'].includes(record.key)&&<CTA lang={lang}/>}</main></>;
+  content=<><Navigation lang={lang}/><main className={'ws-world ws-page-refined '+theme}><View lang={lang} article={record.article} service={record.service} privacy={record.key==='/datenschutz'} topic={topic}/><RelatedGuides page={record} lang={lang}/>{record.key==='/reinigung'&&(
+    <>
+      <WhereWeClean lang={lang}/>
+      <CleaningPlans lang={lang}/>
+    </>
+  )}{!['/haushalt','/kontakt','/impressum','/datenschutz'].includes(record.key)&&<CTA lang={lang}/>}</main></>;
  }
  return <><script type="application/ld+json" dangerouslySetInnerHTML={{__html:json}}/>{content}</>;
 }

@@ -172,26 +172,38 @@ function ShelfRelatedGuides({lang = 'de'}) {
       img: '/assets/shelf_guide_card1.webp',
       alt: en ? 'How to read a shelf plan' : 'Einen Regalplan im Markt richtig lesen',
       title: en ? 'How to read a shelf plan' : 'Einen Regalplan im Markt richtig lesen',
-      tint: 'blue',
+      accent: 'teal',
+      cardClass: 'ws-shelf-card-1',
     },
     {
       slug: 'regalservice-beauftragen',
       img: '/assets/shelf_guide_card2.webp',
       alt: en ? 'Arranging shelf services for a store' : 'Regalservice für eine Filiale beauftragen',
       title: en ? 'Arranging shelf services for a store' : 'Regalservice für eine Filiale beauftragen',
-      tint: 'lavender',
+      accent: 'blue',
+      cardClass: 'ws-shelf-card-2',
     },
     {
       slug: 'aktionsflaeche-aufbauen',
       img: '/assets/shelf_guide_card3.webp',
       alt: en ? 'Setting up the next weekly promotion' : 'Eine Aktionsfläche für die nächste Woche aufbauen',
       title: en ? 'Setting up the next weekly promotion' : 'Eine Aktionsfläche für die nächste Woche aufbauen',
-      tint: 'peach',
+      accent: 'coral',
+      cardClass: 'ws-shelf-card-3',
     },
   ];
 
   return (
     <section className="ws-shelf-guides-section" aria-label={en ? 'Related guides' : 'Passende Ratgeber'}>
+      {/* Subtle flowing background curved shapes */}
+      <div className="ws-shelf-guides-bg-curves" aria-hidden="true">
+        <svg viewBox="0 0 1440 850" preserveAspectRatio="none" className="ws-shelf-curve-svg" fill="none" stroke="none">
+          <path d="M680,0 C920,160 1200,70 1440,190 L1440,0 Z" fill="rgba(255, 255, 255, 0.6)" stroke="none" />
+          <path d="M0,640 C380,550 780,780 1440,620 L1440,850 L0,850 Z" fill="rgba(255, 255, 255, 0.5)" stroke="none" />
+          <path d="M0,700 C420,620 860,820 1440,680 L1440,850 L0,850 Z" fill="rgba(205, 240, 232, 0.35)" stroke="none" />
+        </svg>
+      </div>
+
       <div className="ws-wrap ws-shelf-guides-wrap">
         <div className="ws-shelf-guides-layout">
           {/* Left Content Area */}
@@ -209,11 +221,13 @@ function ShelfRelatedGuides({lang = 'de'}) {
             </div>
 
             <h2 className="ws-shelf-guide-heading">
-              {en ? (
-                <>Related <em>guides</em></>
-              ) : (
-                <>Passende <em>Ratgeber</em></>
-              )}
+              <span className="ws-shelf-guide-word-navy">{en ? 'Related' : 'Passende'}</span>
+              <span className="ws-shelf-guide-word-teal-wrap">
+                <span className="ws-shelf-guide-word-teal">{en ? 'Guides' : 'Ratgeber'}</span>
+                <svg className="ws-shelf-guide-swoop" viewBox="0 0 160 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M 2 14 C 28 8 72 2 112 2 C 132 2 150 5 158 9 C 148 6 128 4 108 4 C 68 4 26 10 2 14 Z" fill="#00828a"/>
+                </svg>
+              </span>
             </h2>
 
             <p className="ws-shelf-guide-desc">
@@ -230,13 +244,13 @@ function ShelfRelatedGuides({lang = 'de'}) {
             </div>
           </div>
 
-          {/* Right Guide Cards (3 Cards) */}
-          <div className="ws-shelf-guides-grid">
+          {/* Right Cards Area - Asymmetric Grid */}
+          <div className="ws-shelf-guides-asym">
             {guides.map((item, idx) => (
               <a
                 key={item.slug}
                 href={link('/ratgeber/' + item.slug)}
-                className={`ws-shelf-guide-card ws-shelf-card-tint-${item.tint}`}
+                className={`ws-shelf-guide-card ${item.cardClass} ws-shelf-card-accent-${item.accent}`}
                 style={{ '--reveal-index': idx }}
               >
                 <div className="ws-shelf-guide-img-frame">
@@ -244,8 +258,8 @@ function ShelfRelatedGuides({lang = 'de'}) {
                     <img
                       src={item.img}
                       alt={item.alt}
-                      width="540"
-                      height="424"
+                      width={idx === 2 ? '800' : '540'}
+                      height={idx === 2 ? '350' : '424'}
                       className="ws-shelf-guide-img"
                       loading="lazy"
                       decoding="async"
@@ -254,16 +268,18 @@ function ShelfRelatedGuides({lang = 'de'}) {
                 </div>
 
                 <div className="ws-shelf-guide-body">
-                  <div className="ws-shelf-guide-tag">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
-                      <path d="M6 6h10"/>
-                      <path d="M6 10h10"/>
-                    </svg>
-                    <span>{en ? 'GUIDE' : 'RATGEBER'}</span>
-                  </div>
+                  <div className="ws-shelf-guide-meta">
+                    <div className="ws-shelf-guide-tag">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                        <path d="M6 6h10"/>
+                        <path d="M6 10h10"/>
+                      </svg>
+                      <span>{en ? 'GUIDE' : 'RATGEBER'}</span>
+                    </div>
 
-                  <h3 className="ws-shelf-guide-title">{item.title}</h3>
+                    <h3 className="ws-shelf-guide-title">{item.title}</h3>
+                  </div>
 
                   <div className="ws-shelf-guide-foot">
                     <span className="ws-shelf-guide-circle-btn" aria-hidden="true">
@@ -273,9 +289,6 @@ function ShelfRelatedGuides({lang = 'de'}) {
                       </svg>
                     </span>
                   </div>
-
-                  {/* Subtle soft gradient accent at the card bottom */}
-                  <div className={`ws-shelf-card-wave ws-shelf-card-wave-${item.tint}`} aria-hidden="true" />
                 </div>
               </a>
             ))}

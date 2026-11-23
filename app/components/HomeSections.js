@@ -119,7 +119,7 @@ export default function HomeSections({lang='de'} = {}){
         <Go lang={lang} href="/reinigung">{t("Zur Reinigung")}</Go>
       </div>
       <div className="ws-directory-links">
-        {cleaningServices.map((s,i)=><a href={url('/reinigung/'+s.slug)} key={s.slug}><small>0{i+1}</small><span>{s.shortTitle}</span><b aria-hidden="true">↗</b></a>)}
+        {cleaningServices.slice(0, 7).map((s,i)=><a href={url('/reinigung/'+s.slug)} key={s.slug}><small>0{i+1}</small><span>{s.shortTitle}</span><b aria-hidden="true">↗</b></a>)}
       </div>
     </div>
   </section>
@@ -144,7 +144,7 @@ export default function HomeSections({lang='de'} = {}){
       <Gallery lang={lang}/>
     </div>
   </section>
-  <Values lang={lang}/>
   <section className="ws-guides-section"><div className="ws-wrap ws-section"><div className="ws-section-top"><Heading tag={t("Ratgeber")} first={t("Wissen für die")} accent={t("Praxis.")}/><Go lang={lang} href="/ratgeber">{t("Alle Beiträge")}</Go></div><Reads lang={lang} items={[adviceArticles.find(a=>a.relatedHref.startsWith('/reinigung')),adviceArticles.find(a=>a.relatedHref==='/regalservice'),adviceArticles.find(a=>a.relatedHref==='/haushalt')].map((a,i)=>a||adviceArticles[i]).map((a,i)=>i===0?{...a,photoKey:'guides_glas'}:i===1?{...a,photoKey:'guides_regalservice'}:i===2?{...a,photoKey:'guides_haushalt'}:a)}/></div></section>
-  <CTA lang={lang}/>
+  <Values lang={lang}/>
+  <CTA lang={lang} showBanner={true}/>
 </div>}

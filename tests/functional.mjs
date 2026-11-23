@@ -33,7 +33,7 @@ test('Fehlende Konfiguration oder ungültige Eingaben versenden keine Mail',asyn
 });
 test('Alle Beiträge und Bildverweise sind lokal auflösbar',()=>{
  const services=new Set(cleaningServices.map(s=>'/reinigung/'+s.slug));const paths=new Set(['/reinigung','/regalservice','/haushalt','/kontakt',...services]);
- assert.equal(services.size,7);assert.equal(new Set(adviceArticles.map(a=>a.slug)).size,32);
+ assert.equal(services.size,16);assert.equal(new Set(adviceArticles.map(a=>a.slug)).size,32);
  for(const a of adviceArticles){assert.ok(paths.has(a.relatedHref),a.slug);assert.ok(photos[a.photoKey],a.slug);}
  for(const p of Object.values(photos))assert.ok(existsSync(fileURLToPath(new URL('../public'+p.src,import.meta.url))),p.src);
 });
