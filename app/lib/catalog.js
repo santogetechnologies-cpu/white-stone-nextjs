@@ -77,7 +77,7 @@ export const cleaningServices = [
   {
     slug: 'fassadenreinigung',
     title: 'Fassadenreinigung',
-    shortTitle: 'Fassadenpflege',
+    shortTitle: 'Fassadenreinigung',
     summary: 'Materialgerechte Pflege für verputzte, verglaste und verkleidete Außenflächen.',
     intro: 'Straßenstaub auf Metall, grüne Beläge im Schatten und Laufspuren auf Putz verlangen unterschiedliche Verfahren. Wir sehen uns Material, Zustand und Zugänglichkeit an, bevor wir eine Behandlung empfehlen.',
     photoKey: 'fassade',
@@ -95,7 +95,7 @@ export const cleaningServices = [
   {
     slug: 'kita-reinigung',
     title: 'Kita- und Kindergartenreinigung',
-    shortTitle: 'Kitareinigung',
+    shortTitle: 'Kindergartenreinigung',
     summary: 'Abgestimmte Pflege für Spielräume, Essplätze, Wickelbereiche und kleine Waschbecken.',
     intro: 'In der Kita wird auf dem Boden gebaut, am Tisch gebastelt und im Nebenraum geschlafen. Zusammen mit der Leitung ordnen wir Aufgaben den einzelnen Zonen zu und richten die Einsatzzeiten am Tagesablauf der Kinder aus.',
     photoKey: 'kita',

@@ -30,7 +30,7 @@ export function Img({ k, lang = 'de' }) {
 }
 
 /* ---------- Darstellungsformen für Listen und Tabellen (Wortlaut unverändert) ---------- */
-const splitTitle = x => { const m = x.match(/^([^:\n]{2,70}):\s+([\s\S]+)$/) || x.match(/^([^–\n]{2,60})\s+[–-]\s+([\s\S]+)$/); return m ? [m[1], m[2]] : null; };
+const splitTitle = x => { const m = x.match(/^([^:\n]{2,70}:)\s+([\s\S]+)$/); return m ? [m[1], m[2]] : null; };
 const STEP_HEAD = /ablauf|prozess|schritt|so funktioniert|vorgehen|so arbeiten|workflow|phasen/i;
 
 function listKind(b, heading) {
@@ -190,7 +190,7 @@ export function NewsIndex({ articles, lang = 'de' }) {
   const fmt = d => new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(d));
   return <section className="wv-section"><div className="ws-wrap"><div className="wv-news" lang="de">{articles.map(a => <a key={a.slug} href={url('/ratgeber/' + a.slug)}>
     <span className="wv-news-img"><Pic lang={lang} name={a.photoKey} /></span>
-    <div><small>{fmt(a.date)}</small><h3>{a.title}</h3><span className="ws-more">Read more <b aria-hidden="true">↗</b></span></div>
+    <div><small>{fmt(a.date)} · whitestonegmbh</small><h3>{a.title}</h3><span className="ws-more">Read more <b aria-hidden="true">↗</b></span></div>
   </a>)}</div></div></section>;
 }
 

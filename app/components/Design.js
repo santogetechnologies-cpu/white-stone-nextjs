@@ -149,9 +149,9 @@ export function Footer({lang='de'} = {}){
           {/* Column 1: Brand */}
           <div className="ws-foot-col ws-foot-brand-col">
             <Brand lang={lang}/>
-            <p className="ws-foot-desc">
-              {t("Reinigung, Regalservice und Haushalt")}<br/>
-              {t("in München und Umgebung.")}
+            <p className="ws-foot-desc" lang="de">
+              <strong>Erfahren Sie mehr über uns</strong><br/>
+              White Stone GmbH – Ihr Premium-Dienstleister für Gebäudereinigung in München. Ob Büro, Hotel oder Spezialreinigung: Wir stehen für Sauberkeit, Qualität und Nachhaltigkeit.
             </p>
           </div>
 
@@ -161,7 +161,7 @@ export function Footer({lang='de'} = {}){
               <svg className="ws-foot-pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
               </svg>
-              <span>{t("Leistungen")}</span>
+              <span>Unsere Leistungen</span>
             </div>
             <ul className="ws-foot-links">
               {areaCards.map(a => (
@@ -190,13 +190,13 @@ export function Footer({lang='de'} = {}){
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
-              <span>{t("Unternehmen")}</span>
+              <span>Wichtige Listen</span>
             </div>
             <ul className="ws-foot-links">
               <li><a href={url("/ueber-uns")} className="ws-foot-link"><span>{t("Über uns")}</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
               <li><a href={url("/team")} className="ws-foot-link"><span>{t("Unser Team")}</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
-              <li><a href={url("/ratgeber")} className="ws-foot-link"><span>{t("Ratgeber")}</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
-              <li><a href={url("/kontakt")} className="ws-foot-link"><span>{t("Kontakt")}</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
+              <li><a href={url("/ratgeber")} className="ws-foot-link"><span>Neueste Nachrichten</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
+              <li><a href={url("/kontakt")} className="ws-foot-link"><span>Kontaktieren Sie uns</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
             </ul>
           </div>
 
@@ -206,7 +206,7 @@ export function Footer({lang='de'} = {}){
               <svg className="ws-foot-pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
-              <span>{t("Kontakt")}</span>
+              <span>Offizielle Informationen</span>
             </div>
             <div className="ws-foot-contact-list">
               <div className="ws-foot-contact-item">
@@ -253,7 +253,7 @@ export function Footer({lang='de'} = {}){
         {/* Bottom Copyright Bar */}
         <div className="ws-foot-bar">
           <div className="ws-foot-bar-left">
-            <span>{t("© 2026 White Stone GmbH. Alle Rechte vorbehalten.")}</span>
+            <span>Copyright © White Stone 2026 | Alle Rechte vorbehalten.</span>
           </div>
           <div className="ws-foot-bar-right">
             <span className="ws-foot-bar-sep" aria-hidden="true"/>

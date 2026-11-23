@@ -172,7 +172,8 @@ export function TeamPage({lang='de'} = {}){
   const {aboutContent} = getCatalog(lang);
   const person = aboutContent.team;
   const closing = page.blocks.slice(page.blocks.findIndex(b => b.t === 'txt' && b.k === 'sub'));
-  return <><PageIntro lang={lang} tag={page.title} title={person.name} lead={person.role} photo="ali" crumb={[t("Über uns"),'/ueber-uns']}><Go lang={lang} href="/kontakt">{t("Kontakt aufnehmen")}</Go></PageIntro>
+  const head = page.blocks.find(b => b.t === 'h3').x; // "Geschäftsführung"
+  return <><PageIntro lang={lang} tag={head} title={person.name} lead={person.role} photo="ali" crumb={[page.title,'/team']}><Go lang={lang} href="/kontakt">{t("Kontakt aufnehmen")}</Go></PageIntro>
   <VerbatimBody lang={lang} blocks={closing} pool={['buero']}/></>}
 export function AdvicePage({lang='de'} = {}){
   const {adviceArticles} = getCatalog(lang);
@@ -192,5 +193,13 @@ export function ContactPage({lang='de', topic=''}){
 export function LegalPage({lang='de', privacy=false}){
   const {t} = language(lang);
   const {aboutContent} = getCatalog(lang);
-  return <><PageIntro lang={lang} tag={t("Unternehmen")} title={privacy?t("Datenschutz."):t("Impressum.")}/><section className="ws-wrap ws-section ws-legal ws-prose">{privacy?<><h2>{t("Kontaktanfragen")}</h2><p>{t("Wenn Sie uns schreiben, verwenden wir Ihre Angaben zur Bearbeitung der Anfrage. Bei Haushaltsanfragen werden auch die gewählten Leistungen und die Kalkulation übermittelt. Die Telefonnummer ist freiwillig.")}</p><h2>{t("Technische Dienste")}</h2><p>{t("Beim Besuch werden technisch notwendige Verbindungsdaten verarbeitet. Die Schriftarten werden über Google Fonts angefordert. Bei aktiviertem Formularversand erfolgt die Übermittlung der E-Mail über Resend.")}</p><h2>{t("Ihre Daten")}</h2><p>{t("Für Fragen zu Ihren Daten wenden Sie sich an White Stone GmbH. Die vollständigen Angaben zur verantwortlichen Stelle und zum Datenschutz werden vor Inbetriebnahme ergänzt.")}</p></>:<><h2>White Stone GmbH</h2><p>{t("Geschäftsführer: ")}{aboutContent.team.name}<br/>{t("Anschrift: ")}{company.address}<br/>{t("E-Mail: ")}{company.email}<br/>{t("Telefon: ")}{company.phone}</p><p>{t("Die bestätigten Unternehmens- und Registerangaben werden vor Inbetriebnahme ergänzt.")}</p></>}</section></>}
+  return <><PageIntro lang={lang} tag={t("Unternehmen")} title={privacy?t("Datenschutz."):"Impressum"}/><section className="ws-wrap ws-section ws-legal ws-prose">{privacy?<><h2>{t("Kontaktanfragen")}</h2><p>{t("Wenn Sie uns schreiben, verwenden wir Ihre Angaben zur Bearbeitung der Anfrage. Bei Haushaltsanfragen werden auch die gewählten Leistungen und die Kalkulation übermittelt. Die Telefonnummer ist freiwillig.")}</p><h2>{t("Technische Dienste")}</h2><p>{t("Beim Besuch werden technisch notwendige Verbindungsdaten verarbeitet. Die Schriftarten werden über Google Fonts angefordert. Bei aktiviertem Formularversand erfolgt die Übermittlung der E-Mail über Resend.")}</p><h2>{t("Ihre Daten")}</h2><p>{t("Für Fragen zu Ihren Daten wenden Sie sich an White Stone GmbH. Die vollständigen Angaben zur verantwortlichen Stelle und zum Datenschutz werden vor Inbetriebnahme ergänzt.")}</p></>:<Imprint/>}</section></>}
 
+
+/** Impressum mit dem Wortlaut der bisherigen Website. Anschrift, Telefon und E-Mail kommen aus company.js (freigegebene Angaben). */
+function Imprint(){
+  const blocks = oldPage('impressum').blocks;
+  const contact = /Seebrucker|hostingersite|Telefonnummer|Handy Nummer/;
+  const value = b => /Telefonnummer|hostingersite/.test(b.x) ? 'E-Mail : '+company.email+' Telefonnummer: '+company.phone : /Handy Nummer/.test(b.x) ? 'Handy Nummer: '+company.phone : company.address;
+  return <div lang="de">{blocks.map((b,i)=>b.t==='h3'?<h2 key={i}>{b.x}</h2>:b.t==='h6'?<h3 key={i}>{b.x}</h3>:<p key={i}>{contact.test(b.x)?value(b):b.x}</p>)}</div>;
+}
