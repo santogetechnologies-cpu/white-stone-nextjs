@@ -115,3 +115,58 @@
 .ws-hero .hero-waves .hw-shine { stroke: url(#hw-shine); stroke-width: 3; fill: none; }
 .ws-hero .hero-sparkle { stroke: none; }
 .ws-hero .hero-swoosh { fill: none; }
+
+/* ---------- animierte Leistungssymbole ---------- */
+.ws-hero .hero-services svg.ai { overflow: visible; }
+.ws-hero .ai * { transform-box: fill-box; }
+/* Sprühflasche: Abzug drücken, Sprühnebel */
+.ws-hero .ai-trigger { transform-origin: 0% 0%; animation: aiTrigger 2.4s ease-in-out infinite; }
+.ws-hero .ai-drop { fill: currentColor; stroke: none; opacity: 0; animation: aiMist 2.4s ease-out infinite; }
+.ws-hero .ai-drop.d2 { animation-delay: .1s; --dx: -9px; --dy: -5px; }
+.ws-hero .ai-drop.d3 { animation-delay: .2s; --dx: -10px; --dy: 4px; }
+.ws-hero .ai-drop.d4 { animation-delay: .32s; --dx: -6px; --dy: 1px; }
+@keyframes aiTrigger { 0%, 30%, 100% { transform: rotate(0); } 12%, 20% { transform: rotate(-22deg) translateX(-1px); } }
+@keyframes aiMist { 0%, 10% { opacity: 0; transform: translate(0, 0) scale(.6); } 18% { opacity: 1; } 45% { opacity: 0; transform: translate(var(--dx, -11px), var(--dy, -1px)) scale(1.5); } 100% { opacity: 0; } }
+/* Regal: Waren rutschen nacheinander an ihren Platz */
+.ws-hero .ai-box { fill: color-mix(in srgb, currentColor 16%, transparent); animation: aiStock 4.8s cubic-bezier(.2, .8, .2, 1) infinite; opacity: 0; }
+.ws-hero .ai-box.b2 { animation-delay: .25s; } .ws-hero .ai-box.b3 { animation-delay: .5s; }
+.ws-hero .ai-box.b4 { animation-delay: .75s; } .ws-hero .ai-box.b5 { animation-delay: 1s; } .ws-hero .ai-box.b6 { animation-delay: 1.25s; }
+@keyframes aiStock { 0% { opacity: 0; transform: translateX(16px); } 12%, 78% { opacity: 1; transform: translateX(0); } 90%, 100% { opacity: 0; transform: translateY(-3px); } }
+/* Haus: Tuch wischt über die Fassade, Flecken verschwinden, es glänzt */
+.ws-hero .ai-cloth { fill: color-mix(in srgb, currentColor 22%, white); animation: aiWipe 3.6s ease-in-out infinite; }
+.ws-hero .ai-cloth path { stroke-width: 1.2; }
+@keyframes aiWipe {
+  0% { transform: translate(13px, 26px) rotate(-12deg); } 18% { transform: translate(35px, 27px) rotate(10deg); }
+  36% { transform: translate(14px, 31px) rotate(-12deg); } 54% { transform: translate(35px, 36px) rotate(10deg); }
+  72%, 100% { transform: translate(15px, 37px) rotate(-8deg); opacity: 1; }
+}
+.ws-hero .ai-dirt { fill: currentColor; stroke: none; opacity: .55; animation: aiDirt 3.6s linear infinite; }
+.ws-hero .ai-dirt.t2 { animation-name: aiDirt2; } .ws-hero .ai-dirt.t3 { animation-name: aiDirt3; } .ws-hero .ai-dirt.t4 { animation-name: aiDirt4; }
+@keyframes aiDirt { 0%, 4% { opacity: .55; } 8%, 92% { opacity: 0; } 100% { opacity: .55; } }
+@keyframes aiDirt2 { 0%, 16% { opacity: .55; } 20%, 92% { opacity: 0; } 100% { opacity: .55; } }
+@keyframes aiDirt3 { 0%, 34% { opacity: .55; } 38%, 92% { opacity: 0; } 100% { opacity: .55; } }
+@keyframes aiDirt4 { 0%, 52% { opacity: .55; } 56%, 92% { opacity: 0; } 100% { opacity: .55; } }
+.ws-hero .ai-shine { fill: currentColor; stroke: none; transform-origin: 50% 50%; opacity: 0; animation: aiShine 3.6s ease-in-out infinite; }
+@keyframes aiShine { 0%, 60% { opacity: 0; transform: scale(.3) rotate(0); } 72% { opacity: 1; transform: scale(1.2) rotate(30deg); } 90%, 100% { opacity: 0; transform: scale(.5) rotate(60deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .ws-hero .ai * { animation: none !important; }
+  .ws-hero .ai-box { opacity: 1; } .ws-hero .ai-dirt, .ws-hero .ai-shine { opacity: 0; }
+}
+
+/* ---------- Kopfzeile: keine Überlappung von Logo und Menü ---------- */
+.ws-nav-header .brand { flex: none; }
+.ws-nav-header .ws-nav-center { min-width: 0; }
+.ws-main-nav.ws-top-services a { font-size: clamp(13px, .95vw, 14.5px); padding-inline: clamp(6px, .8vw, 14px); }
+@media (max-width: 1400px) { .ws-main-nav.ws-top-services { display: none; } .ws-nav-header .ws-nav-tools { margin-left: auto; } }
+.ws-nav-header .ws-nav-center { justify-content: safe center; }
+
+/* Feinschliff: kräftigerer Sprühnebel, helles Putzschwamm-Tuch */
+.ws-hero .ai-spray .ai-drop { fill: #36a9e1; }
+.ws-hero .ai-drop.d1 { --dx: -12px; --dy: -2px; }
+.ws-hero .ai-drop.d5 { animation-delay: .4s; --dx: -12px; --dy: -7px; }
+.ws-hero .ai-drop.d6 { animation-delay: .48s; --dx: -11px; --dy: 6px; }
+@keyframes aiMist { 0%, 10% { opacity: 0; transform: translate(0, 0) scale(.5); } 16% { opacity: 1; } 50% { opacity: 0; transform: translate(var(--dx, -11px), var(--dy, -1px)) scale(1.9); } 100% { opacity: 0; } }
+.ws-hero .ai-cloth rect { fill: #8fd3f4; stroke: #2f8fd6; stroke-width: 1.4; }
+.ws-hero .ai-foam { fill: #fff; stroke: #8fd3f4; stroke-width: .8; animation: aiFoam .9s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+.ws-hero .ai-foam.f2 { animation-delay: .45s; }
+@keyframes aiFoam { from { transform: scale(.6); opacity: .5; } to { transform: scale(1.2); opacity: 1; } }
