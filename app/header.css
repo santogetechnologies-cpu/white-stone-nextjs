@@ -75,3 +75,10 @@
   .ws-nav-header .ws-menu-button { width: 46px; min-height: 46px; padding: 0; justify-content: center; }
 }
 @media (max-width: 990px) { .ws-main-nav.ws-top-services { display: none; } .ws-nav-header .ws-nav-tools { margin-left: auto; } }
+
+/* Logo (Bilddatei) in Kopfzeile, Menü und Fußzeile */
+.brand .brand-logo { flex: none; width: 48px; height: 48px; object-fit: contain; display: block; transition: transform .3s ease; }
+.brand:hover .brand-logo { transform: rotate(-8deg) scale(1.05); }
+.ws-footer .brand .brand-logo, .ws-foot-brand-col .brand .brand-logo { width: 52px; height: 52px; }
+@media (max-width: 1399px) { .ws-nav-header .brand .brand-logo { width: 42px; height: 42px; } }
+@media (max-width: 767px) { .brand .brand-logo { width: 38px; height: 38px; } }

@@ -24,7 +24,7 @@ const pages = [
 
 export function Brand({ lang = 'de' }) {
   return <a className="brand" href={localizedPath('/', lang)} aria-label={'White Stone GmbH · ' + (lang === 'en' ? 'Home' : 'Startseite')}>
-    <span className="brand-emblem" aria-hidden="true"><span>w</span><i>✓</i></span><span>White Stone GmbH</span>
+    <img className="brand-logo" src="/assets/white-stone-logo.webp" alt="" width="256" height="256" decoding="async" /><span>White Stone GmbH</span>
   </a>;
 }
 function LocaleSwitch({ lang, path, suffix }) {
