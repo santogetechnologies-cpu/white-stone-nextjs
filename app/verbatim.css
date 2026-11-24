@@ -277,3 +277,30 @@
 .wv-hl-photo { display: block; margin-top: 16px; border-radius: 18px; overflow: hidden; aspect-ratio: 16 / 8; box-shadow: 0 12px 26px rgba(18, 61, 106, .14); }
 .wv-hl-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
 .wv-hl-card:hover .wv-hl-photo img { transform: scale(1.06); }
+
+/* ---------- Neugestaltung ohne Fotos: Feature-Karte und Faktenleiste ---------- */
+.wv-hl-cards { align-items: stretch; }
+.wv-hl-card.is-feature { color: #fff; background: linear-gradient(150deg, #0b2a4f 0%, #0d4f75 55%, #04767f 100%); box-shadow: 0 26px 56px rgba(11, 42, 79, .32); display: flex; flex-direction: column; justify-content: center; overflow: hidden; min-height: 240px; }
+.wv-hl-card.is-feature::before { opacity: .55; }
+.wv-hl-card.is-feature::after { background: radial-gradient(circle, rgba(143, 217, 232, .35), transparent 70%); }
+.wv-hl-card.is-feature h3 { color: #fff; font-size: clamp(24px, 2.2vw, 34px); line-height: 1.12; position: relative; z-index: 1; }
+.wv-hl-card.is-feature .wv-hl-icon { background: rgba(255, 255, 255, .16); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .35); backdrop-filter: blur(6px); position: relative; z-index: 1; }
+.wv-hl-rings { position: absolute; right: -60px; bottom: -60px; width: 240px; height: 240px; pointer-events: none; }
+.wv-hl-rings i { position: absolute; inset: 0; border-radius: 50%; border: 1.5px solid rgba(143, 217, 232, .5); animation: hlRing 6s ease-out infinite; }
+.wv-hl-rings i:nth-child(2) { animation-delay: 2s; } .wv-hl-rings i:nth-child(3) { animation-delay: 4s; }
+@keyframes hlRing { 0% { transform: scale(.2); opacity: .9; } 100% { transform: scale(1.25); opacity: 0; } }
+.wv-hl-photo { display: none; }
+
+/* Faktenleiste */
+.wv-hl-facts { position: relative; gap: 0; padding: 8px; border-radius: 26px; background: linear-gradient(120deg, #0b2a4f, #0d4f75 50%, #04767f); box-shadow: 0 22px 50px rgba(11, 42, 79, .25); overflow: hidden; }
+.wv-hl-facts::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .16) 50%, transparent 65%); transform: translateX(-100%); animation: hlBar 7s ease-in-out infinite; pointer-events: none; }
+@keyframes hlBar { 0%, 55% { transform: translateX(-100%); } 85%, 100% { transform: translateX(100%); } }
+.wv-hl-facts li { background: none; border: 0; box-shadow: none; border-radius: 18px; color: #e6f3f8; padding: 18px 20px; }
+.wv-hl-facts li + li { box-shadow: inset 1px 0 0 rgba(255, 255, 255, .14); }
+.wv-hl-facts li::after { display: none; }
+.wv-hl-facts li:hover { transform: none; background: rgba(255, 255, 255, .07); }
+.wv-hl-facts strong { background: linear-gradient(135deg, #8fe3f4, #5fd0c3); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.wv-hl-ficon { color: #8fe3f4; background: rgba(255, 255, 255, .1); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22); }
+@media (max-width: 980px) { .wv-hl-facts li + li { box-shadow: none; } .wv-hl-facts li:nth-child(n+3) { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14); } }
+@media (max-width: 560px) { .wv-hl-facts li + li { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14); } }
+@media (prefers-reduced-motion: reduce) { .wv-hl-rings i, .wv-hl-facts::after { animation: none; } }

@@ -93,9 +93,9 @@ function Highlights({ layers }) {
   const cards = [[layers[0], layers[1]], [layers[2], null], [layers[3], layers[4]]];
   const facts = trustHighlights.map(f => { const m = f.title.match(/^(Mehr als \d+|\d+\+)(.*)$/); return { ...f, num: m && m[1], rest: m ? m[2] : f.title }; });
   return <section className="wv-hl" aria-label={layers[0]}><div className="ws-wrap" lang="de">
-    <div className="wv-hl-cards">{cards.map(([h, p], i) => <article key={h} className="wv-hl-card" style={{ '--i': i }}>
+    <div className="wv-hl-cards">{cards.map(([h, p], i) => <article key={h} className={'wv-hl-card' + (p ? '' : ' is-feature')} style={{ '--i': i }}>
       <span className="wv-hl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={HL_ICONS[i]} /></svg></span>
-      <h3>{h}</h3>{p ? <p>{p}</p> : <span className="wv-hl-photo"><Pic name="hotel" /></span>}
+      <h3>{h}</h3>{p && <p>{p}</p>}{!p && <span className="wv-hl-rings" aria-hidden="true"><i /><i /><i /></span>}
     </article>)}</div>
     <ul className="wv-hl-facts">{facts.map((f, i) => <li key={f.title} style={{ '--i': i }}>
       <span className="wv-hl-ficon"><Icon name={f.icon} /></span>
