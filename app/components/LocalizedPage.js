@@ -7,6 +7,7 @@ import {ServicesPage,CleaningPage,RetailPage,HouseholdPage,AboutPage,TeamPage,Ad
 import {getCatalog} from '../lib/content';
 import {localizedPath} from '../lib/paths';
 import {pageMetadata,routeRecords,schemaGraph} from '../lib/search';
+import {createPicker,CTA_PHOTOS} from '../lib/photoPicker';
 
 const templates={'/leistungen':ServicesPage,'/reinigung':CleaningPage,'/regalservice':RetailPage,'/haushalt':HouseholdPage,'/ueber-uns':AboutPage,'/team':TeamPage,'/ratgeber':AdvicePage,'/kontakt':ContactPage,'/impressum':LegalPage,'/datenschutz':LegalPage};
 export function pathsFor(lang) {
@@ -35,8 +36,10 @@ export default async function LocalizedPage({lang,params,searchParams}) {
     if(requested==='Reinigung')topic=lang==='en'?'Cleaning':'Reinigung';
     else if(index>=0)topic=(lang==='en'?enServices:deServices)[index].shortTitle;
   }
+  // Ein Bild pro Seite nur einmal: Kopfbild und Bilder des Anfrage-Abschnitts sind bereits vergeben.
+  const picker=createPicker([record.photo,...(['/haushalt','/kontakt','/impressum','/datenschutz'].includes(record.key)?[]:CTA_PHOTOS)]);
   const theme=record.article||record.key==='/ratgeber'?'guides':({'/haushalt':'household','/regalservice':'retail'})[record.key]||'building';
-  content=<><Navigation lang={lang}/><main className={'ws-world ws-page-refined '+theme}><View lang={lang} article={record.article} service={record.service} privacy={record.key==='/datenschutz'} topic={topic}/><RelatedGuides page={record} lang={lang}/>{!['/haushalt','/kontakt','/impressum','/datenschutz'].includes(record.key)&&<CTA lang={lang}/>}</main></>;
+  content=<><Navigation lang={lang}/><main className={'ws-world ws-page-refined '+theme}><View lang={lang} article={record.article} service={record.service} privacy={record.key==='/datenschutz'} topic={topic} picker={picker}/><RelatedGuides page={record} lang={lang} picker={picker}/>{!['/haushalt','/kontakt','/impressum','/datenschutz'].includes(record.key)&&<CTA lang={lang}/>}</main></>;
  }
  return <><script type="application/ld+json" dangerouslySetInnerHTML={{__html:json}}/>{content}</>;
 }

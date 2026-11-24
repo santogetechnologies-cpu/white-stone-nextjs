@@ -10,25 +10,28 @@ import {shelfServicesData} from './ShelfServicesSection';
 import VerbatimBody, {Flow,PhotoGrid,NewsIndex,headingsOf,ServiceRows,Img} from './Verbatim';
 import {oldPage,src} from '../lib/verbatim';
 import {photos} from '../lib/photos';
+import {createPicker} from '../lib/photoPicker';
 import HouseholdServicesSection from './HouseholdServicesSection';
 
-export function ServicesPage({lang='de'} = {}){
+export function ServicesPage({lang='de', picker=createPicker()} = {}){
   const {t} = language(lang);
   const page = oldPage('unsere-leistungen', lang);
   const blocks = page.blocks.filter(b => !(b.t === 'txt' && b.k === 'sub') && b.t !== 'h1');
   const h1 = page.blocks.find(b => b.t === 'h1');
   return <>
+    {['reinigung_card','regalservice_card','haushalt_kueche'].forEach(picker.use)}
     <PageIntro lang={lang} tag={page.title} title={h1.x} photo="buero"/>
     <section className="ws-wrap ws-section"><AreaCards lang={lang}/></section>
-    <ServiceRows lang={lang} blocks={blocks} photoFor={photoForHeading} pool={['ws_office_floor_trolley','ws_modern_interior_counter','ws_office_workstation','reinigung_card','nachhaltigkeit']}/>
+    <ServiceRows lang={lang} blocks={blocks} picker={picker} photoFor={photoForHeading} pool={['ws_office_floor_trolley','ws_modern_interior_counter','ws_office_workstation','reinigung_card','nachhaltigkeit']}/>
   </>}
-const headingPhotos=[[/büro/i,'buero'],[/glas|fenster/i,'glas'],[/fassad/i,'fassade_hubsteiger'],[/hotel/i,'hotel'],[/bau/i,'bau'],[/kinder|kita/i,'kita'],[/schul/i,'schule'],[/regal/i,'regalservice_mitarbeiter']];
-const photoForHeading=h=>(headingPhotos.find(([re])=>re.test(h))||[null,'reinigung'])[1];
-export function CleaningPage({lang='de'} = {}){
+const headingPhotos=[[/büro/i,['buero','ws_office_workstation','gallery_buero']],[/glas|fenster/i,['glas','ws_office_window_squeegee','gallery_glas']],[/fassad/i,['fassade_hubsteiger','fassade','fassade_balkon']],[/hotel/i,['hotel','ws_hotel_bathroom_sanitizing','gallery_hotel']],[/bau/i,['bau','ws_renovation_vacuum','gallery_bau']],[/kinder|kita/i,['kita','ws_daycare_playroom']],[/schul/i,['schule','ws_hall_floor_mopping']],[/regal/i,['regalservice_mitarbeiter','ws_shelf_tablet_audit','regalservice']]];
+const photoForHeading=h=>(headingPhotos.find(([re])=>re.test(h))||[null,['reinigung']])[1];
+export function CleaningPage({lang='de', picker=createPicker()} = {}){
   const {t, url} = language(lang);
   const {cleaningServices} = getCatalog(lang);
   const isEn = lang === 'en';
   const services = cleaningServices.map(s => ({...s, href: url('/reinigung/' + s.slug)}));
+  services.forEach(s => picker.use(s.photoKey)); picker.use('reinigung'); picker.use('gallery_buero');
   const home = oldPage('home-5', lang).blocks;
   const i = home.findIndex(b => b.t === 'h3' && src(b) === 'Professionelle Reinigung für jede Anforderung');
   const intro = home.slice(i, i + 4);
@@ -117,19 +120,17 @@ export const photoPools={
   'schulreinigung':['ws_hall_floor_mopping','schule','ws_office_floor_trolley','reinigung'],
   'regalservice':['ws_shelf_tablet_audit','ws_shelf_pasta_facing','ws_shelf_stocking_box','regalservice','guides_regalservice','gallery_regalservice',...SHELF.map((p,i)=>p+shelfFiles[i]+'.webp')],
 };
-export function ServiceDetail({lang='de', service}){
+export function ServiceDetail({lang='de', service, picker=createPicker()}){
   const {t} = language(lang);
   return <><PageIntro lang={lang} tag={service.shortTitle} title={service.pageTitle} photo={service.photoKey} crumb={[t("Reinigung"),'/reinigung']}><Go lang={lang} href={'/kontakt?bereich='+encodeURIComponent(service.shortTitle)}>{t("Einsatz anfragen")}</Go></PageIntro>
-  <VerbatimBody lang={lang} blocks={service.verbatim} pool={photoPools[service.slug]||['reinigung']}/></>}
-export function RetailPage({lang='de'} = {}){
+  <VerbatimBody lang={lang} blocks={service.verbatim} picker={picker} pool={photoPools[service.slug]||['reinigung']}/></>}
+export function RetailPage({lang='de', picker=createPicker()} = {}){
   const {t} = language(lang);
   const {retailService} = getCatalog(lang);
   const h1 = retailService.verbatim.find(b => b.t === 'h1');
   const body = retailService.verbatim.filter(b => b !== h1);
+  picker.use('regalservice_mitarbeiter');
   const gallery = [
-    {src: photos.ws_shelf_tablet_audit.src, alt: t("Regalservice"), width: 1254, height: 1254},
-    {src: photos.ws_shelf_pasta_facing.src, alt: t("Regalservice"), width: 1254, height: 1254},
-    {src: photos.ws_shelf_stocking_box.src, alt: t("Regalservice"), width: 1254, height: 1254},
     ...shelfServicesData.de.map(x => ({src: x.image, alt: x.title, width: 720, height: 720})),
     ...[1,2,3].map(n => ({src: `/assets/shelf_guide_card${n}.webp`, alt: t("Regalservice"), width: 720, height: 540}))
   ];
@@ -138,13 +139,13 @@ export function RetailPage({lang='de'} = {}){
       <PageIntro lang={lang} tag={t("Regalservice")} title={h1.x} photo="regalservice_mitarbeiter" crumb={[t("Leistungen"), '/leistungen']}>
         <Go lang={lang} href={'/kontakt?bereich=' + encodeURIComponent(retailService.shortTitle)}>{t("Einsatz anfragen")}</Go>
       </PageIntro>
-      <VerbatimBody lang={lang} blocks={body} pool={photoPools.regalservice}/>
+      <VerbatimBody lang={lang} blocks={body} picker={picker} pool={photoPools.regalservice}/>
       <PhotoGrid items={gallery} lang={lang} />
       <Clients lang={lang} />
     </>
   );
 }
-export function HouseholdPage({lang='de'} = {}){
+export function HouseholdPage({lang='de', picker=createPicker()} = {}){
   const {t, url} = language(lang);
   const {householdService, householdPricing} = getCatalog(lang);
   const s=householdService;const rate=Number(process.env.HOUSEHOLD_HOURLY_RATE);
@@ -157,13 +158,13 @@ export function HouseholdPage({lang='de'} = {}){
       <HouseholdServicesSection lang={lang} isEn={lang === 'en'} />
 
       <section className="ws-wrap ws-section"><div className="wv-grid has-photo"><div className="wv-text"><Subhead tag={t("Hilfe im Haushalt")} title={t("Das können Sie abgeben.")}/><Blocks items={s.scope}/></div><figure className="wv-photo"><Img k="guides_haushalt" lang={lang}/></figure></div></section>
-      <section className="ws-pricing"><div className="ws-wrap ws-section"><div className="wv-grid has-photo"><div className="wv-text"><Heading tag={t("Preisgestaltung")} first={t("Wie entsteht")} accent={t("Ihr Preis?")}>{householdPricing.intro}</Heading></div><figure className="wv-photo wv-photo-wide"><Img k="gallery_haushalt" lang={lang}/></figure></div><div className="ws-price-notes">{householdPricing.factors.map(f=><div key={f.title}><h3>{f.title}</h3><p>{f.text}</p></div>)}</div></div></section>
+      <section className="ws-pricing"><div className="ws-wrap ws-section"><div className="wv-grid has-photo"><div className="wv-text"><Heading tag={t("Preisgestaltung")} first={t("Wie entsteht")} accent={t("Ihr Preis?")}>{householdPricing.intro}</Heading></div><figure className="wv-photo wv-photo-wide"><Img k="ws_home_glass_table" lang={lang}/></figure></div><div className="ws-price-notes">{householdPricing.factors.map(f=><div key={f.title}><h3>{f.title}</h3><p>{f.text}</p></div>)}</div></div></section>
       <div className="ws-wrap ws-section"><HouseholdPlanner lang={lang} approvedRate={rate>0&&rate<=1000?rate:null}/></div>
-      <Questions lang={lang} items={s.faq} photo="haushalt_mann"/>
+      <Questions lang={lang} items={s.faq} photo="reinigung_card"/>
     </>
   );
 }
-export function AboutPage({lang='de'} = {}){
+export function AboutPage({lang='de', picker=createPicker()} = {}){
   const {t} = language(lang);
   const page = oldPage('uber-uns', lang);
   const blocks = page.blocks.filter((b,i) => !(i === 0 && b.k === 'sub'));
@@ -171,8 +172,8 @@ export function AboutPage({lang='de'} = {}){
   const intro = blocks[h3], lead = blocks[h3 + 1];
   const rest = blocks.filter(b => b !== intro && b !== lead);
   return <><PageIntro lang={lang} tag={page.title} title={intro.x} lead={lead.x} photo="buero"/>
-  <VerbatimBody lang={lang} blocks={rest} pool={['ws_modern_interior_counter','ws_office_meeting_table','ws_hotel_bedroom_prep','hotel','nachhaltigkeit','gallery_buero']}/><Clients lang={lang}/></>}
-export function TeamPage({lang='de'} = {}){
+  <VerbatimBody lang={lang} blocks={rest} picker={picker} pool={['ws_modern_interior_counter','ws_office_meeting_table','ws_hotel_bedroom_prep','hotel','nachhaltigkeit','gallery_buero']}/><Clients lang={lang}/></>}
+export function TeamPage({lang='de', picker=createPicker()} = {}){
   const {t} = language(lang);
   const page = oldPage('unser-team', lang);
   const {aboutContent} = getCatalog(lang);
@@ -180,16 +181,17 @@ export function TeamPage({lang='de'} = {}){
   const closing = page.blocks.slice(page.blocks.findIndex(b => b.t === 'txt' && b.k === 'sub'));
   const head = page.blocks.find(b => b.t === 'h3').x; // Geschäftsführung / Management
   return <><PageIntro lang={lang} tag={head} title={person.name} lead={person.role} photo="ali" crumb={[page.title,'/team']}><Go lang={lang} href="/kontakt">{t("Kontakt aufnehmen")}</Go></PageIntro>
-  <VerbatimBody lang={lang} blocks={closing} pool={['buero']}/></>}
-export function AdvicePage({lang='de'} = {}){
+  <VerbatimBody lang={lang} blocks={closing} picker={picker} pool={['buero']}/></>}
+export function AdvicePage({lang='de', picker=createPicker()} = {}){
   const {adviceArticles} = getCatalog(lang);
   const page = oldPage('neueste-nachrichten', lang);
-  return <><PageIntro lang={lang} tag={page.title} title={page.title} photo="glas"/><NewsIndex lang={lang} articles={adviceArticles}/></>}
-export function ArticlePage({lang='de', article:a}){
+  picker.use('glas');
+  return <><PageIntro lang={lang} tag={page.title} title={page.title} photo="glas"/><NewsIndex lang={lang} articles={adviceArticles} picker={picker}/></>}
+export function ArticlePage({lang='de', article:a, picker=createPicker()}){
   const {t, url} = language(lang);
   const heads = headingsOf(a.verbatim);
   return <><PageIntro lang={lang} tag={a.category} title={a.title} photo={a.photoKey} crumb={[t("Ratgeber"),'/ratgeber']}/>
-  <section className="wv-article"><div className="ws-wrap"><aside>{heads.length>0&&<><Mark>{t("In diesem Beitrag")}</Mark><ol>{heads.map((h,i)=><li key={i}><a href={url('#absatz-'+(i+1))}>{h}</a></li>)}</ol></>}<a className="ws-text-link" href={url("/ratgeber")}>{t("← Alle Beiträge")}</a></aside><Flow blocks={a.verbatim} lang={lang} anchors pool={a.pool}/></div></section>
+  <section className="wv-article"><div className="ws-wrap"><aside>{heads.length>0&&<><Mark>{t("In diesem Beitrag")}</Mark><ol>{heads.map((h,i)=><li key={i}><a href={url('#absatz-'+(i+1))}>{h}</a></li>)}</ol></>}<a className="ws-text-link" href={url("/ratgeber")}>{t("← Alle Beiträge")}</a></aside><Flow blocks={a.verbatim} lang={lang} anchors pool={a.pool} picker={picker}/></div></section>
   <section className="wv-section"><div className="ws-wrap"><Go lang={lang} href={a.relatedHref}>{t("Passende Leistung ansehen")}</Go></div></section></>}
 export function ContactPage({lang='de', topic=''}){
   const {t, url} = language(lang);

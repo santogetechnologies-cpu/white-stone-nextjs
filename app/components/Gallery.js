@@ -51,7 +51,7 @@ const entries = [
     ),
   },
   {
-    key: 'gallery_regalservice',
+    key: 'ws_shelf_pasta_facing',
     title: 'Warenpflege',
     icon: (
       <svg
