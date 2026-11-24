@@ -224,3 +224,17 @@
 @media (max-width: 860px) { .wv-banner img { aspect-ratio: 16 / 9; } }
 .wv-flow, .wv-text { min-width: 0; }
 @media (max-width: 860px) { .wv-article .ws-wrap, .wv-grid, .wv-grid.is-long { grid-template-columns: minmax(0, 1fr); } }
+
+/* Startseite: eigener Fassaden-Abschnitt mit zwei quadratischen Fotos */
+.wv-facade { position: relative; padding-block: clamp(60px, 7vw, 110px); background: linear-gradient(180deg, #ffffff 0%, #eef7fb 100%); overflow: hidden; }
+.wv-facade-head { max-width: 860px; margin: 0 auto clamp(40px, 5vw, 70px); text-align: center; }
+.wv-facade-head .ws-mark { justify-content: center; }
+.wv-facade-head h2 { font-size: clamp(30px, 3.4vw, 52px); line-height: 1.08; letter-spacing: -.035em; margin: 14px 0 18px; color: #102949; }
+.wv-facade-head p { font-size: clamp(16px, 1.25vw, 19px); line-height: 1.65; color: #486079; margin: 0 auto; max-width: 720px; }
+.wv-facade-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(34px, 5vw, 80px); max-width: 1040px; margin: 0 auto; padding: 14px; }
+.wv-facade-grid article { display: grid; gap: 26px; }
+.wv-facade-cap { position: relative; z-index: 2; margin: -70px 22px 0; padding: 22px 24px 24px; border-radius: 22px; background: rgba(255, 255, 255, .92); backdrop-filter: blur(8px); border: 1px solid #d6e8ec; box-shadow: 0 18px 40px #123d6a1a; }
+.wv-facade-cap h3 { margin: 0 0 8px; font-size: clamp(19px, 1.5vw, 24px); color: #102949; letter-spacing: -.02em; }
+.wv-facade-cap p { margin: 0; font-size: 15.5px; line-height: 1.6; color: #486079; }
+.wv-facade-go { text-align: center; margin-top: clamp(34px, 4vw, 56px); }
+@media (max-width: 760px) { .wv-facade-grid { grid-template-columns: 1fr; max-width: 460px; } .wv-facade-cap { margin: -50px 12px 0; } }

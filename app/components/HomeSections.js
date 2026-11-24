@@ -64,6 +64,25 @@ export function Values({lang='de'} = {}){
 export function Reads({lang='de', items}) {
   const {url, t} = language(lang);
   return <div className="ws-reads">{items.map(a=><a key={a.slug} href={url('/ratgeber/'+a.slug)}><div><Pic lang={lang} name={a.photoKey}/></div><small>{a.category}</small><h3>{a.title}</h3><span className="ws-guide-btn"><span className="ws-guide-btn-text">{t("Artikel lesen")}</span><span className="ws-guide-btn-icon" aria-hidden="true">↗</span></span></a>)}</div>}
+/** Eigener Abschnitt für die beiden Fassadenfotos – Wortlaut der bisherigen Seite „Fassadenreinigung“. */
+function FacadeShowcase({lang='de'}){
+  const page = oldPage('fassadenreinigung'), b = page.blocks;
+  const find = (t, start) => b.find(x => x.t === t && x.x.startsWith(start));
+  const at = start => b.findIndex(x => x.x && x.x.startsWith(start));
+  const title = b.find(x => x.t === 'h1').x;
+  const lead = b.find(x => x.t === 'p').x;
+  const hoehe = b[at('Höhenarbeiten')], hoeheText = b[at('Höhenarbeiten') + 1];
+  const umwelt = find('h3', 'Sicherheit & Umweltbewusstsein'), druck = find('p', 'Unsere Fassadenreinigung erfolgt mit schonenden');
+  const items = [['fassade_hubsteiger', hoehe.x, hoeheText.x], ['fassade_balkon', umwelt.x, druck.x]];
+  return <section className="wv-facade" aria-label={page.title}><div className="ws-wrap" lang="de">
+    <div className="wv-facade-head"><Mark>{page.title}</Mark><h2>{title}</h2><p>{lead}</p></div>
+    <div className="wv-facade-grid">{items.map(([k, h, txt]) => <article key={k}>
+      <figure className="wv-square"><Img k={k} lang={lang}/></figure>
+      <div className="wv-facade-cap"><h3>{h}</h3><p>{txt}</p></div>
+    </article>)}</div>
+    <div className="wv-facade-go"><Go lang={lang} href="/reinigung/fassadenreinigung">{page.title}</Go></div>
+  </div></section>;
+}
 export default function HomeSections({lang='de'} = {}){
   const {t, url} = language(lang);
   const {adviceArticles, cleaningServices} = getCatalog(lang);
@@ -81,7 +100,8 @@ export default function HomeSections({lang='de'} = {}){
     <div><h3>{layers[3]}</h3><p>{layers[4]}</p></div>
   </div></section>
   <TrustHighlights lang={lang} />
-  <section id="leistungen" className="ws-showcase"><div className="ws-waterstage"><Tide/></div><div className="ws-wrap ws-section"><div className="ws-showcase-head"><Heading tag={t("Unsere Leistungen")} first={t("Reinigung, Regalservice")} accent={t("und Haushalt.")}/></div><AreaCards lang={lang}/><SquarePair lang={lang} keys={['fassade_hubsteiger','fassade_balkon']}/></div></section>
+  <section id="leistungen" className="ws-showcase"><div className="ws-waterstage"><Tide/></div><div className="ws-wrap ws-section"><div className="ws-showcase-head"><Heading tag={t("Unsere Leistungen")} first={t("Reinigung, Regalservice")} accent={t("und Haushalt.")}/></div><AreaCards lang={lang}/></div></section>
+  <FacadeShowcase lang={lang}/>
   <section className="ws-benefits" aria-label="Unsere Werte">
     <div className="ws-wrap ws-benefits-wrap">
       <div className="ws-benefits-grid">
