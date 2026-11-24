@@ -304,3 +304,55 @@
 @media (max-width: 980px) { .wv-hl-facts li + li { box-shadow: none; } .wv-hl-facts li:nth-child(n+3) { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14); } }
 @media (max-width: 560px) { .wv-hl-facts li + li { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14); } }
 @media (prefers-reduced-motion: reduce) { .wv-hl-rings i, .wv-hl-facts::after { animation: none; } }
+
+/* ---------- Abschluss-Banner (Regalservice) ---------- */
+.wb-banner { position: relative; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); align-items: stretch; margin-top: clamp(40px, 5vw, 70px); border-radius: 32px; overflow: hidden; background: linear-gradient(125deg, #0b2a4f 0%, #0e3f6b 45%, #06707c 100%); box-shadow: 0 30px 70px rgba(11, 42, 79, .3); isolation: isolate; }
+.wb-glow { position: absolute; inset: -40% auto auto -10%; width: 60%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(54, 182, 216, .35), transparent 65%); z-index: -1; animation: wbGlow 9s ease-in-out infinite alternate; }
+@keyframes wbGlow { to { transform: translate(18%, 22%) scale(1.15); } }
+.wb-text { padding: clamp(32px, 4.5vw, 64px); color: #e6f2f8; display: flex; flex-direction: column; gap: 18px; justify-content: center; }
+.wb-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #8fe3f4; }
+.wb-eyebrow i { width: 26px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, #36b6d8, #0cb04a); }
+.wb-heading { margin: 0; font-size: clamp(30px, 3.4vw, 50px); line-height: 1.06; letter-spacing: -.035em; color: #fff; font-weight: 800; }
+.wb-heading em { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-weight: 700; color: #8fe3f4; letter-spacing: -.01em; }
+.wb-desc { margin: 0; max-width: 54ch; font-size: clamp(16px, 1.2vw, 18.5px); line-height: 1.65; color: #c8dde9; }
+.wb-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 6px; }
+.wb-btn { display: inline-flex; align-items: center; gap: 12px; padding: 15px 26px; border-radius: 999px; background: #fff; color: #0b2a4f; font-weight: 750; font-size: 15.5px; box-shadow: 0 14px 30px rgba(0, 0, 0, .22); transition: transform .25s ease, box-shadow .25s ease; }
+.wb-btn svg { transition: transform .25s ease; color: #0b6e7c; }
+.wb-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0, 0, 0, .3); }
+.wb-btn:hover svg { transform: translateX(4px); }
+.wb-link { color: #fff; font-weight: 700; border-bottom: 1.5px solid rgba(143, 227, 244, .6); padding-bottom: 2px; }
+.wb-link:hover { color: #8fe3f4; }
+.wb-loc { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: #9fc3d4; }
+.wb-art { position: relative; margin: 0; min-height: 320px; }
+.wb-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.wb-art::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, #0e3f6b 0%, rgba(14, 63, 107, .35) 30%, transparent 60%); }
+@media (max-width: 860px) {
+  .wb-banner { grid-template-columns: 1fr; }
+  .wb-art { min-height: 240px; order: -1; }
+  .wb-art::before { background: linear-gradient(0deg, #0b2a4f 0%, transparent 55%); }
+}
+@media (prefers-reduced-motion: reduce) { .wb-glow { animation: none; } }
+.ws-world .wb-banner .wb-desc, .wb-banner p.wb-desc { color: #d3e6f0; }
+.wb-art::before { background: linear-gradient(90deg, #0e3f6b 0%, rgba(14, 63, 107, .55) 22%, rgba(14, 63, 107, 0) 55%); }
+
+/* kurze Abschnitte: Foto im Querformat, mittig zum Text */
+.wv-grid.has-photo.is-short { align-items: center; }
+.wv-grid.has-photo.is-short .wv-photo { position: relative; top: 0; }
+.wv-grid.has-photo.is-short .wv-photo img { aspect-ratio: 4 / 3; }
+
+/* Blog: kein großer Abstand zwischen Überschrift und Karten */
+.ws-guides-section .ws-section { padding-bottom: 0; }
+.ws-guides-section .wv-section { padding-top: clamp(24px, 3vw, 40px); }
+.ws-guides-section .wv-section::before { display: none; }
+
+/* Geschäftsführung: breite, zentrierte Karte statt halb leerer Zeile */
+.wv-person-wrap { display: flex; justify-content: center; }
+.wv-person-wrap .ws-person { width: min(760px, 100%); display: grid; grid-template-columns: auto 1fr; align-items: center; gap: clamp(20px, 3vw, 40px); padding: clamp(22px, 3vw, 36px) clamp(24px, 3.5vw, 44px); border-radius: 30px; background: linear-gradient(125deg, #0b2a4f, #0e3f6b 55%, #06707c); box-shadow: 0 26px 60px rgba(11, 42, 79, .28); color: #fff; position: relative; overflow: hidden; }
+.wv-person-wrap .ws-person::after { content: ''; position: absolute; right: -80px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(54, 182, 216, .35), transparent 65%); }
+.wv-person-wrap .ws-person-pic { width: clamp(96px, 10vw, 132px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 4px rgba(255, 255, 255, .25), 0 14px 30px rgba(0, 0, 0, .3); }
+.wv-person-wrap .ws-person-pic img { width: 100%; height: 100%; object-fit: cover; }
+.wv-person-wrap .ws-person small { color: #8fe3f4; letter-spacing: .14em; font-weight: 800; }
+.wv-person-wrap .ws-person h3 { color: #fff; font-size: clamp(26px, 2.6vw, 38px); margin: 6px 0 2px; }
+.wv-person-wrap .ws-person p { color: #c8dde9; margin: 0 0 14px; }
+.wv-person-wrap .ws-person .ws-text-link { display: inline-flex; padding: 10px 20px; border-radius: 999px; background: #fff; color: #0b2a4f; font-weight: 750; text-decoration: none; }
+@media (max-width: 560px) { .wv-person-wrap .ws-person { grid-template-columns: 1fr; text-align: center; justify-items: center; } }

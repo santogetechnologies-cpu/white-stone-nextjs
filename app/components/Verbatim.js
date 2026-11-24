@@ -205,9 +205,10 @@ export default function VerbatimBody({ blocks, lang = 'de', photos = [], pool = 
     let photo = photos[i];
     if (photo === undefined) photo = !wide(s) && pool.length ? pool[k++ % pool.length] : null;
     // Lange Abschnitte: Foto als breites Titelbild, Inhalt darunter in voller Breite (keine leere Spalte).
-    const long = s.blocks.reduce((n, b) => n + (b.x || '').length + (b.items || []).join('').length + (b.rows || []).flat().join('').length, 0) > 1500;
+    const size = s.blocks.reduce((n, b) => n + (b.x || '').length + (b.items || []).join('').length + (b.rows || []).flat().join('').length, 0);
+    const long = size > 1500, short = size < 700;
     return <section key={i} className={'wv-section' + (i % 2 ? ' is-alt' : '')}>
-      <div className={'ws-wrap wv-grid' + (photo ? (long ? ' is-long' : ' has-photo') : '')}>
+      <div className={'ws-wrap wv-grid' + (photo ? (long ? ' is-long' : ' has-photo' + (short ? ' is-short' : '')) : '')}>
         {photo && long && <figure className="wv-photo wv-banner"><Img k={photo} lang={lang} /></figure>}
         <div className="wv-text">
           {s.label && <Mark>{s.label}</Mark>}

@@ -113,41 +113,28 @@ export function CTA({lang='de', showBanner=false} = {}){
       </div>
 
       {showBanner && (
-        <div className="ws-wrap ws-hand-wrap">
-          <div className="ws-hand-container">
-            <div className="ws-hand-left" lang={lang}>
-              <div className="ws-hand-eyebrow">
-                <span className="ws-hand-eyebrow-text">{en ? 'Shelf services' : 'Regalservice'}</span>
-                <span className="ws-hand-eyebrow-bar" aria-hidden="true" />
-              </div>
-              <h3 className="ws-hand-heading">
-                <span className="ws-hand-heading-navy">{bHead1} –</span>{' '}
-                <em className="ws-hand-heading-teal">{bHead2.join(' – ')}</em>
-              </h3>
-              <p className="ws-hand-desc">{bText}</p>
-            </div>
-            <div className="ws-hand-divider" aria-hidden="true" />
-            <div className="ws-hand-middle">
-              <div className="ws-hand-action-row">
-                <div className="ws-hand-phone-badge" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                </div>
-                <a href={url("/kontakt")} className="ws-hand-btn">
+        <div className="ws-wrap">
+          <div className="wb-banner" lang={lang}>
+            <div className="wb-glow" aria-hidden="true" />
+            <div className="wb-text">
+              <span className="wb-eyebrow"><i aria-hidden="true" />{en ? 'Shelf services' : 'Regalservice'}</span>
+              <h3 className="wb-heading">{bHead1} <em>– {bHead2.join(' – ')}</em></h3>
+              <p className="wb-desc">{bText}</p>
+              <div className="wb-actions">
+                <a href={url("/kontakt")} className="wb-btn">
                   <span>{en ? "Contact Our Team" : "Team kontaktieren"}</span>
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </a>
+                <a href={url("/regalservice")} className="wb-link">{en ? 'Shelf services' : 'Regalservice'} <span aria-hidden="true">↗</span></a>
               </div>
-              <div className="ws-hand-location" lang={lang}>
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-                <span>{location}</span>
-              </div>
+              <span className="wb-loc">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
+                {location}
+              </span>
             </div>
-            <div className="ws-hand-art" aria-hidden="true">
-              <picture>
-                <source srcSet="/assets/helping-hand-supplies.webp" type="image/webp" />
-                <img src="/assets/helping-hand-supplies.jpg" alt="" width={1024} height={644} loading="lazy" decoding="async" className="ws-hand-art-img" />
-              </picture>
-            </div>
+            <figure className="wb-art" aria-hidden="true">
+              <img src="/fotografie/regalservice-mitarbeiter.webp" alt="" width={1500} height={2000} loading="lazy" decoding="async" />
+            </figure>
           </div>
         </div>
       )}
