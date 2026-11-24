@@ -183,80 +183,22 @@
 @media (prefers-reduced-motion: reduce) { .ws-hero .hx * { animation: none !important; } .ws-hero .hx-item { opacity: 1; } .ws-hero .hx-puff, .ws-hero .hx-drop, .ws-hero .hx-star, .ws-hero .hx-tb, .ws-hero .hx-dirt { opacity: 0; } }
 
 
-/* ---------- realistische, animierte Illustrationen in den Hero-Karten ---------- */
-.ws-hero .hero-services a { gap: 10px; padding: clamp(12px, 1.2vw, 16px) clamp(8px, .9vw, 12px) clamp(12px, 1.2vw, 16px); }
-.ws-hero .hero-services svg.rx { width: clamp(80px, 7.4vw, 116px); height: auto; stroke: none; overflow: visible; filter: drop-shadow(0 8px 12px rgba(16, 52, 90, .14)); }
-.ws-hero .rx * { transform-box: fill-box; }
-
-/* Regal: Waren gleiten nacheinander herein und stehen dann ordentlich in Reihe */
-.ws-hero .rx-p { transform-origin: 50% 100%; opacity: 0; animation: rxStock 8s cubic-bezier(.22, 1, .36, 1) infinite; animation-delay: calc(var(--n) * .16s); }
-.ws-hero .rx-p.p1 { --n: 0; }
-.ws-hero .rx-p.p2 { --n: 1; }
-.ws-hero .rx-p.p3 { --n: 2; }
-.ws-hero .rx-p.p4 { --n: 3; }
-.ws-hero .rx-p.p5 { --n: 4; }
-.ws-hero .rx-p.p6 { --n: 5; }
-.ws-hero .rx-p.p7 { --n: 6; }
-.ws-hero .rx-p.p8 { --n: 7; }
-.ws-hero .rx-p.p9 { --n: 8; }
-.ws-hero .rx-p.p10 { --n: 9; }
-.ws-hero .rx-p.p11 { --n: 10; }
-.ws-hero .rx-p.p12 { --n: 11; }
-.ws-hero .rx-p.p13 { --n: 12; }
-.ws-hero .rx-p.p14 { --n: 13; }
-.ws-hero .rx-p.p15 { --n: 14; }
-.ws-hero .rx-p.p16 { --n: 15; }
-.ws-hero .rx-p.p17 { --n: 16; }
-@keyframes rxStock {
-  0% { opacity: 0; transform: translate(26px, -3px) rotate(7deg); }
-  7% { opacity: 1; transform: translate(-1.2px, 0) rotate(-2deg); }
-  10% { transform: translate(.4px, 0) rotate(.6deg); }
-  13%, 84% { opacity: 1; transform: translate(0, 0) rotate(0); }
-  93%, 100% { opacity: 0; transform: translate(0, 2px) rotate(0) scale(.97); }
-}
-.ws-hero .rx-tag { animation: rxTag 8s ease-in-out infinite; }
-@keyframes rxTag { 0%, 40%, 56%, 100% { opacity: 1; } 46%, 52% { opacity: .55; } }
-.ws-hero .rx-glint { animation: rxGlint 8s ease-in-out infinite; }
-@keyframes rxGlint { 0%, 44% { transform: skewX(-18deg) translateX(0); opacity: 0; } 48% { opacity: 1; } 62%, 100% { transform: skewX(-18deg) translateX(150px); opacity: 0; } }
-
-/* Sprühflasche */
-.ws-hero .rx-trigger { transform-origin: 90% 5%; animation: rxTrigger 2.8s cubic-bezier(.45, 0, .25, 1) infinite; }
-@keyframes rxTrigger { 0%, 36%, 100% { transform: rotate(0); } 12%, 24% { transform: rotate(16deg); } }
-.ws-hero .rx-drop { opacity: 0; animation: rxDrop 2.8s cubic-bezier(.15, .7, .3, 1) infinite; }
-.ws-hero .rx-drop.q1 { animation-delay: .05s; } .ws-hero .rx-drop.q2 { animation-delay: .1s; } .ws-hero .rx-drop.q3 { animation-delay: .15s; }
-.ws-hero .rx-drop.q4 { animation-delay: .2s; } .ws-hero .rx-drop.q5 { animation-delay: .26s; }
-@keyframes rxDrop { 0%, 11% { opacity: 0; transform: translate(0, 0) scale(.4); } 14% { opacity: 1; } 42% { opacity: .9; } 58%, 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2); } }
-.ws-hero .rx-haze { transform-origin: 100% 50%; opacity: 0; animation: rxHaze 2.8s ease-out infinite; }
-@keyframes rxHaze { 0%, 12% { opacity: 0; transform: scale(.3); } 22% { opacity: .9; } 60%, 100% { opacity: 0; transform: scale(1.35) translateX(-3px); } }
-.ws-hero .rx-liquid { animation: rxSlosh 2.8s ease-in-out infinite; }
-@keyframes rxSlosh { 0%, 100% { transform: translate(0, 0); } 30% { transform: translate(-8px, -1px); } 60% { transform: translate(-15px, .5px); } 80% { transform: translate(-7px, 0); } }
-.ws-hero .rx-bub { animation: rxBub 2.8s ease-in infinite; } .ws-hero .rx-bub.b2 { animation-delay: .9s; } .ws-hero .rx-bub.b3 { animation-delay: 1.8s; }
-@keyframes rxBub { 0% { transform: translateY(0); opacity: 0; } 25% { opacity: .9; } 100% { transform: translateY(-16px); opacity: 0; } }
-
-/* Haus: Schwamm putzt das linke Fenster, Schmutz verschwindet, Glas glänzt */
-.ws-hero .rx-sponge { animation: rxWipe 6s cubic-bezier(.45, .05, .55, .95) infinite; }
-@keyframes rxWipe {
-  0% { transform: translate(26px, 51px) rotate(-12deg); } 12% { transform: translate(38px, 52px) rotate(10deg); }
-  24% { transform: translate(25px, 56px) rotate(-10deg); } 36% { transform: translate(38px, 58px) rotate(10deg); }
-  48% { transform: translate(26px, 61px) rotate(-10deg); } 60% { transform: translate(38px, 62px) rotate(8deg); }
-  72% { transform: translate(52px, 70px) rotate(0deg); opacity: 1; } 80% { transform: translate(56px, 76px) rotate(0); opacity: 0; }
-  92% { transform: translate(20px, 50px) rotate(-12deg); opacity: 0; } 100% { transform: translate(26px, 51px) rotate(-12deg); opacity: 1; }
-}
-.ws-hero .rx-foam { transform-origin: 50% 50%; animation: rxFoam .8s ease-in-out infinite alternate; }
-@keyframes rxFoam { from { transform: scale(.75); } to { transform: scale(1.15); } }
-.ws-hero .rx-dirt { animation: rxDirt1 6s linear infinite; }
-.ws-hero .rx-dirt.d2 { animation-name: rxDirt2; } .ws-hero .rx-dirt.d3 { animation-name: rxDirt3; } .ws-hero .rx-dirt.d4 { animation-name: rxDirt4; }
-@keyframes rxDirt1 { 0%, 2% { opacity: 1; } 12%, 92% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes rxDirt2 { 0%, 8% { opacity: 1; } 20%, 92% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes rxDirt3 { 0%, 30% { opacity: 1; } 44%, 92% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes rxDirt4 { 0%, 40% { opacity: 1; } 56%, 92% { opacity: 0; } 100% { opacity: 1; } }
-.ws-hero .rx-wshine { animation: rxShine 6s ease-in-out infinite; }
-@keyframes rxShine { 0%, 62% { transform: skewX(-22deg) translateX(0); opacity: 0; } 66% { opacity: 1; } 80%, 100% { transform: skewX(-22deg) translateX(34px); opacity: 0; } }
-.ws-hero .rx-star { transform-origin: 50% 50%; opacity: 0; animation: rxStar 6s ease-in-out infinite; } .ws-hero .rx-star.s2 { animation-delay: .3s; }
-@keyframes rxStar { 0%, 64% { opacity: 0; transform: scale(.2) rotate(0); } 74% { opacity: 1; transform: scale(1.15) rotate(25deg); } 88%, 100% { opacity: 0; transform: scale(.4) rotate(60deg); } }
-
-@media (max-width: 760px) { .ws-hero .hero-services svg.rx { width: 70px; } }
-@media (prefers-reduced-motion: reduce) {
-  .ws-hero .rx * { animation: none !important; }
-  .ws-hero .rx-p { opacity: 1; } .ws-hero .rx-drop, .ws-hero .rx-haze, .ws-hero .rx-star, .ws-hero .rx-dirt { opacity: 0; }
-}
+/* ---------- Hero-Karten mit echten Fotos ---------- */
+.ws-hero .hero-services a { gap: 12px; padding: clamp(12px, 1.2vw, 16px) clamp(10px, 1vw, 14px) clamp(12px, 1.2vw, 16px); }
+.ws-hero .hp { position: relative; display: block; width: clamp(78px, 7vw, 112px); aspect-ratio: 1; border-radius: 18px; overflow: hidden; isolation: isolate; box-shadow: 0 10px 22px rgba(16, 52, 90, .18), inset 0 0 0 1px rgba(255, 255, 255, .5); background: #e8f1f7; }
+.ws-hero .hp-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.02); animation: hpSlide 9s ease-in-out infinite; will-change: opacity, transform; }
+.ws-hero .hp-img.n1 { animation-delay: 3s; } .ws-hero .hp-img.n2 { animation-delay: 6s; }
+.ws-hero .hp-img.n0 { opacity: 1; }
+@keyframes hpSlide { 0% { opacity: 0; transform: scale(1.02); } 6% { opacity: 1; } 33% { opacity: 1; } 40% { opacity: 0; transform: scale(1.14); } 100% { opacity: 0; transform: scale(1.14); } }
+.ws-hero .hp-fx { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+/* Sprühnebel an der Düse (erstes Foto: Düse oben rechts) */
+.ws-hero .hp-mist i { position: absolute; left: 80%; top: 20%; width: 26%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, .95) 0%, rgba(214, 240, 255, .7) 40%, rgba(214, 240, 255, 0) 70%); opacity: 0; animation: hpMist 9s ease-out infinite; }
+.ws-hero .hp-mist .m2 { animation-delay: .25s; --x: -46px; --y: -18px; } .ws-hero .hp-mist .m3 { animation-delay: .5s; --x: -38px; --y: -30px; }
+.ws-hero .hp-mist .m4 { animation-delay: 1.2s; } .ws-hero .hp-mist .m5 { animation-delay: 1.45s; --x: -46px; --y: -18px; } .ws-hero .hp-mist .m6 { animation-delay: 1.7s; --x: -38px; --y: -30px; }
+@keyframes hpMist { 0% { opacity: 0; transform: translate(0, 0) scale(.3); } 2% { opacity: .95; } 9% { opacity: 0; transform: translate(var(--x, -42px), var(--y, -24px)) scale(1.9); } 100% { opacity: 0; } }
+/* Glanz und Funkeln nach dem Wischen */
+.ws-hero .hp-shine b { position: absolute; width: 18%; aspect-ratio: 1; background: #fff; clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); filter: drop-shadow(0 0 4px rgba(255, 255, 255, .9)); opacity: 0; animation: hpTwinkle 3s ease-in-out infinite; }
+.ws-hero .hp-shine .s1 { left: 22%; top: 18%; } .ws-hero .hp-shine .s2 { left: 64%; top: 58%; width: 13%; animation-delay: 1s; } .ws-hero .hp-shine .s3 { left: 70%; top: 14%; width: 10%; animation-delay: 2s; }
+@keyframes hpTwinkle { 0%, 100% { opacity: 0; transform: scale(.2) rotate(0); } 45% { opacity: 1; transform: scale(1) rotate(45deg); } 70% { opacity: 0; transform: scale(.5) rotate(90deg); } }
+@media (max-width: 760px) { .ws-hero .hp { width: 64px; border-radius: 14px; } }
+@media (prefers-reduced-motion: reduce) { .ws-hero .hp-img, .ws-hero .hp-fx, .ws-hero .hp-fx * { animation: none !important; } .ws-hero .hp-img.n0 { opacity: 1; transform: none; } .ws-hero .hp-fx { display: none; } }
