@@ -20,7 +20,7 @@ export function ServicesPage({lang='de'} = {}){
   return <>
     <PageIntro lang={lang} tag={page.title} title={h1.x} photo="buero"/>
     <section className="ws-wrap ws-section"><AreaCards lang={lang}/></section>
-    <ServiceRows lang={lang} blocks={blocks} photoFor={photoForHeading} pool={['reinigung_card','nachhaltigkeit','gallery_buero']}/>
+    <ServiceRows lang={lang} blocks={blocks} photoFor={photoForHeading} pool={['ws_office_floor_trolley','ws_modern_interior_counter','ws_office_workstation','reinigung_card','nachhaltigkeit']}/>
   </>}
 const headingPhotos=[[/büro/i,'buero'],[/glas|fenster/i,'glas'],[/fassad/i,'fassade_hubsteiger'],[/hotel/i,'hotel'],[/bau/i,'bau'],[/kinder|kita/i,'kita'],[/schul/i,'schule'],[/regal/i,'regalservice_mitarbeiter']];
 const photoForHeading=h=>(headingPhotos.find(([re])=>re.test(h))||[null,'reinigung'])[1];
@@ -108,14 +108,14 @@ function Questions({lang='de', items, photo}){
 const SHELF=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].map(n=>`/fotografie/shelf-services/shelf-${String(n).padStart(2,'0')}-`);
 const shelfFiles=['stocking','checks','prices','promotions','deliveries','rotation','replenishment','planogram','organisation','inventory','facing','seasonal','stands','stockroom','expiry','support'];
 export const photoPools={
-  'glas-und-fensterreinigung':['gallery_glas','cleaning_guide_window','guides_glas','fassade_hubsteiger','reinigung_card'],
-  'buero-und-gebaeudereinigung':['gallery_buero','nachhaltigkeit','reinigung','reinigung_card','buero'],
-  'hotelreinigung':['gallery_hotel','cleaning_guide_hotel','reinigung','nachhaltigkeit'],
-  'bau-und-sonderreinigung':['gallery_bau','cleaning_guide_surface','reinigung','fassade_balkon','reinigung_card'],
+  'glas-und-fensterreinigung':['ws_highrise_window','ws_office_window_squeegee','ws_glass_partition','ws_glass_entrance_door','ws_office_window_wipe','gallery_glas','cleaning_guide_window','guides_glas'],
+  'buero-und-gebaeudereinigung':['ws_office_workstation','ws_office_meeting_table','ws_office_floor_trolley','ws_glass_interior_door','gallery_buero','buero','reinigung_card','nachhaltigkeit'],
+  'hotelreinigung':['ws_hotel_bathroom_sanitizing','ws_hotel_bedroom_prep','gallery_hotel','cleaning_guide_hotel','hotel'],
+  'bau-und-sonderreinigung':['ws_renovation_vacuum','gallery_bau','bau','cleaning_guide_surface'],
   'fassadenreinigung':['fassade_hubsteiger','fassade_balkon','cleaning_guide_facade','cleaning_guide_surface','fassade'],
-  'kita-reinigung':['reinigung_card','nachhaltigkeit','reinigung','gallery_buero'],
-  'schulreinigung':['reinigung','reinigung_card','nachhaltigkeit','gallery_buero'],
-  'regalservice':['regalservice','guides_regalservice','gallery_regalservice',...SHELF.map((p,i)=>p+shelfFiles[i]+'.webp')],
+  'kita-reinigung':['ws_daycare_playroom','kita','ws_modern_interior_counter','reinigung_card'],
+  'schulreinigung':['ws_hall_floor_mopping','schule','ws_office_floor_trolley','reinigung'],
+  'regalservice':['ws_shelf_tablet_audit','ws_shelf_pasta_facing','ws_shelf_stocking_box','regalservice','guides_regalservice','gallery_regalservice',...SHELF.map((p,i)=>p+shelfFiles[i]+'.webp')],
 };
 export function ServiceDetail({lang='de', service}){
   const {t} = language(lang);
@@ -126,7 +126,13 @@ export function RetailPage({lang='de'} = {}){
   const {retailService} = getCatalog(lang);
   const h1 = retailService.verbatim.find(b => b.t === 'h1');
   const body = retailService.verbatim.filter(b => b !== h1);
-  const gallery = [...shelfServicesData.de.map(x => ({src: x.image, alt: x.title, width: 720, height: 720})), ...[1,2,3].map(n => ({src: `/assets/shelf_guide_card${n}.webp`, alt: t("Regalservice"), width: 720, height: 540}))];
+  const gallery = [
+    {src: photos.ws_shelf_tablet_audit.src, alt: t("Regalservice"), width: 1254, height: 1254},
+    {src: photos.ws_shelf_pasta_facing.src, alt: t("Regalservice"), width: 1254, height: 1254},
+    {src: photos.ws_shelf_stocking_box.src, alt: t("Regalservice"), width: 1254, height: 1254},
+    ...shelfServicesData.de.map(x => ({src: x.image, alt: x.title, width: 720, height: 720})),
+    ...[1,2,3].map(n => ({src: `/assets/shelf_guide_card${n}.webp`, alt: t("Regalservice"), width: 720, height: 540}))
+  ];
   return (
     <>
       <PageIntro lang={lang} tag={t("Regalservice")} title={h1.x} photo="regalservice_mitarbeiter" crumb={[t("Leistungen"), '/leistungen']}>
@@ -165,7 +171,7 @@ export function AboutPage({lang='de'} = {}){
   const intro = blocks[h3], lead = blocks[h3 + 1];
   const rest = blocks.filter(b => b !== intro && b !== lead);
   return <><PageIntro lang={lang} tag={page.title} title={intro.x} lead={lead.x} photo="buero"/>
-  <VerbatimBody lang={lang} blocks={rest} pool={['hotel','nachhaltigkeit','gallery_buero','reinigung_card','gallery_glas','fassade_hubsteiger']}/><Clients lang={lang}/></>}
+  <VerbatimBody lang={lang} blocks={rest} pool={['ws_modern_interior_counter','ws_office_meeting_table','ws_hotel_bedroom_prep','hotel','nachhaltigkeit','gallery_buero']}/><Clients lang={lang}/></>}
 export function TeamPage({lang='de'} = {}){
   const {t} = language(lang);
   const page = oldPage('unser-team', lang);
