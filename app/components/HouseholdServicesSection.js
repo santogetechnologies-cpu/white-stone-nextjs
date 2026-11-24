@@ -6,7 +6,7 @@ export const householdServicesData = {
       id: 1,
       title: "General House Cleaning",
       summary: "Comprehensive routine cleaning for all primary living areas to keep your home tidy, hygienic and welcoming.",
-      image: "/fotografie/ws-home-shelving-cleaning.webp"
+      image: "/fotografie/household-services/household-01-general.webp"
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ export const householdServicesData = {
       id: 6,
       title: "Living Room Cleaning",
       summary: "Thorough cleaning of entertainment centers, coffee tables, shelving, electronics dusting and floor care.",
-      image: "/fotografie/ws-home-sofa-table.webp"
+      image: "/fotografie/household-services/household-06-livingroom.webp"
     },
     {
       id: 7,
@@ -60,7 +60,7 @@ export const householdServicesData = {
       id: 10,
       title: "Floor Cleaning & Polishing",
       summary: "Professional vacuuming, damp mopping and specialized care for hardwood, laminate, vinyl and stone floors.",
-      image: "/fotografie/ws-home-kitchen-mopping.webp"
+      image: "/fotografie/household-services/household-10-floor.webp"
     },
     {
       id: 11,
@@ -72,7 +72,7 @@ export const householdServicesData = {
       id: 14,
       title: "Furniture Cleaning & Care",
       summary: "Gentle polishing of wooden, glass and lacquered surfaces with protective care products to preserve finishes.",
-      image: "/fotografie/ws-home-dining-cleaning.webp"
+      image: "/fotografie/household-services/household-14-furniture.webp"
     },
     {
       id: 15,
@@ -92,7 +92,7 @@ export const householdServicesData = {
       id: 1,
       title: "Allgemeine Haushaltsreinigung",
       summary: "Umfassende Grundreinigung aller Wohnbereiche für ein stets ordentliches, hygienisches und einladendes Zuhause.",
-      image: "/fotografie/ws-home-shelving-cleaning.webp"
+      image: "/fotografie/household-services/household-01-general.webp"
     },
     {
       id: 2,
@@ -122,7 +122,7 @@ export const householdServicesData = {
       id: 6,
       title: "Wohnzimmerreinigung",
       summary: "Gründliche Pflege von Sideboards, Couchtischen, Regalen, schonendes Entstauben von Technik und Bodenpflege.",
-      image: "/fotografie/ws-home-sofa-table.webp"
+      image: "/fotografie/household-services/household-06-livingroom.webp"
     },
     {
       id: 7,
@@ -146,7 +146,7 @@ export const householdServicesData = {
       id: 10,
       title: "Bodenreinigung & Bodenpflege",
       summary: "Fachgerechtes Saugen, feuchtes Wischen und materialgerechte Pflege für Parkett, Laminat, Fliesen und Steinböden.",
-      image: "/fotografie/ws-home-kitchen-mopping.webp"
+      image: "/fotografie/household-services/household-10-floor.webp"
     },
     {
       id: 11,
@@ -158,7 +158,7 @@ export const householdServicesData = {
       id: 14,
       title: "Möbelreinigung & Holzpflege",
       summary: "Schonende Reinigung und pflegende Behandlung von Echtholz-, Glas- und Lackmöbeln für langanhaltenden Glanz.",
-      image: "/fotografie/ws-home-dining-cleaning.webp"
+      image: "/fotografie/household-services/household-14-furniture.webp"
     },
     {
       id: 15,

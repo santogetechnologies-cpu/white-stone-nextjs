@@ -1,7 +1,6 @@
 import { Faq, Mark, Pic, Go } from './Design';
 import { language } from '../lib/language';
 import { src } from '../lib/verbatim';
-import { createPicker } from '../lib/photoPicker';
 
 const linkTargets = {
   'Mehr über unsere Dienstleistungen erfahren': '/leistungen',
@@ -160,19 +159,19 @@ function decorate(list) {
 }
 
 /** Fotos in lange Texte einfügen: nach der Einleitung und danach vor jeder dritten Hauptüberschrift. */
-function withFigures(list, pool, picker) {
+function withFigures(list, pool) {
   if (!pool?.length) return list;
   const out = []; let h2 = 0, k = 0;
   list.forEach(n => {
-    if (n.type === 'block' && n.b.t === 'h2') { h2++; if (h2 % 3 === 2) { out.push({ type: 'figure', k: picker ? picker.pick(pool) : pool[k % pool.length], alt: k % 2 === 1 }); k++; } }
+    if (n.type === 'block' && n.b.t === 'h2') { h2++; if (h2 % 3 === 2) { out.push({ type: 'figure', k: pool[k % pool.length], alt: k % 2 === 1 }); k++; } }
     out.push(n);
   });
   return out;
 }
 
-export function Flow({ blocks, lang = 'de', anchors = false, pool, picker }) {
+export function Flow({ blocks, lang = 'de', anchors = false, pool }) {
   let h = 0;
-  return <div className="wv-flow" lang={lang}>{withFigures(decorate(nodes(blocks)), pool, picker).map((n, i) => {
+  return <div className="wv-flow" lang={lang}>{withFigures(decorate(nodes(blocks)), pool).map((n, i) => {
     const isH2 = n.type === 'block' && n.b.t === 'h2';
     return <Node key={i} n={n} lang={lang} id={anchors && isH2 ? 'absatz-' + (++h) : undefined} />;
   })}</div>;
@@ -187,12 +186,11 @@ export function PhotoGrid({ items, lang = 'de', label }) {
 }
 
 /** Cards that link to the 32 posts: German title, date and "Read more" like the old news page. */
-export function NewsIndex({ articles, lang = 'de', picker }) {
+export function NewsIndex({ articles, lang = 'de' }) {
   const { url } = language(lang);
-  const pk = picker || createPicker();
   const fmt = d => new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(d));
   return <section className="wv-section"><div className="ws-wrap"><div className="wv-news" lang={lang}>{articles.map(a => <a key={a.slug} href={url('/ratgeber/' + a.slug)}>
-    <span className="wv-news-img"><Img lang={lang} k={pk.pick([a.photoKey, ...(a.pool || [])])} /></span>
+    <span className="wv-news-img"><Pic lang={lang} name={a.photoKey} /></span>
     <div><small>{fmt(a.date)} · whitestonegmbh</small><h3>{a.title}</h3><span className="ws-more">Read more <b aria-hidden="true">↗</b></span></div>
   </a>)}</div></div></section>;
 }
@@ -200,13 +198,12 @@ export function NewsIndex({ articles, lang = 'de', picker }) {
 const wide = s => s.blocks.some(b => b.t === 'table' && b.rows[0].length >= 3);
 
 /** Old-site text in our section design. Every section gets a current photo: explicit `photos[i]`, otherwise the next one from `pool`. */
-export default function VerbatimBody({ blocks, lang = 'de', photos = [], pool = [], picker }) {
+export default function VerbatimBody({ blocks, lang = 'de', photos = [], pool = [] }) {
   const sections = splitSections(blocks);
-  const pk = picker || createPicker();
+  let k = 0;
   return <div className="wv-body">{sections.map((s, i) => {
     let photo = photos[i];
-    if (photo) pk.use(photo);
-    if (photo === undefined) photo = !wide(s) && pool.length ? pk.pick(pool) : null;
+    if (photo === undefined) photo = !wide(s) && pool.length ? pool[k++ % pool.length] : null;
     // Lange Abschnitte: Foto als breites Titelbild, Inhalt darunter in voller Breite (keine leere Spalte).
     const size = s.blocks.reduce((n, b) => n + (b.x || '').length + (b.items || []).join('').length + (b.rows || []).flat().join('').length, 0);
     const long = size > 1500, short = size < 700;
@@ -224,8 +221,8 @@ export default function VerbatimBody({ blocks, lang = 'de', photos = [], pool = 
 }
 
 /** Leistungsübersicht: jede Leistung (h3-Gruppe) als Zeile mit passendem Foto. */
-export function ServiceRows({ blocks, lang = 'de', photoFor, pool = [], picker }) {
-  const pk = picker || createPicker();
+export function ServiceRows({ blocks, lang = 'de', photoFor, pool = [] }) {
+  let k = 0;
   const groups = []; let cur = null;
   blocks.forEach(b => {
     if (b.t === 'h2') { cur = { head: b, items: [], rows: [] }; groups.push(cur); return; }
@@ -236,9 +233,9 @@ export function ServiceRows({ blocks, lang = 'de', photoFor, pool = [], picker }
   return <div className="wv-body">{groups.map((g, gi) => <section key={gi} className={'wv-section' + (gi % 2 ? ' is-alt' : '')}><div className="ws-wrap">
     {(g.head || g.items.length > 0) && (g.rows.length > 0
       ? <div className="wv-group-head"><Flow blocks={[...(g.head ? [g.head] : []), ...g.items]} lang={lang} /></div>
-      : <div className="wv-grid has-photo"><div className="wv-text"><Flow blocks={[...(g.head ? [g.head] : []), ...g.items]} lang={lang} /></div>{pool.length > 0 && <figure className="wv-photo"><Img k={pk.pick(pool)} lang={lang} /></figure>}</div>)}
+      : <div className="wv-grid has-photo"><div className="wv-text"><Flow blocks={[...(g.head ? [g.head] : []), ...g.items]} lang={lang} /></div>{pool.length > 0 && <figure className="wv-photo"><Img k={pool[k++ % pool.length]} lang={lang} /></figure>}</div>)}
     {g.rows.length > 0 && <div className="wv-rows">{g.rows.map((r, ri) => <div key={ri} className={'wv-row' + (ri % 2 ? ' is-flip' : '')}>
-      <figure className="wv-photo"><Img k={pk.pick(photoFor(src(r[0])))} lang={lang} /></figure>
+      <figure className="wv-photo"><Img k={photoFor(r[0].x)} lang={lang} /></figure>
       <div className="wv-text"><Flow blocks={r} lang={lang} /></div>
     </div>)}</div>}
   </div></section>)}</div>;

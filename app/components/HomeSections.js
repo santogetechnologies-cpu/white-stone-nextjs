@@ -6,7 +6,6 @@ import Tide from './Tide';
 import Gallery from './Gallery';
 import VerbatimBody, {Flow, NewsIndex, SquarePair, Img} from './Verbatim';
 import {oldPage,src} from '../lib/verbatim';
-import {createPicker,CTA_PHOTOS} from '../lib/photoPicker';
 
 // Wortlaut: "Unsere Werte" der bisherigen Startseite
 const principles=[
@@ -107,9 +106,6 @@ function Highlights({ layers, facts: factList, lang }) {
 export default function HomeSections({lang='de'} = {}){
   const {t, url} = language(lang);
   const {adviceArticles, cleaningServices} = getCatalog(lang);
-  // Feste Bilder der Startseite vormerken, damit Textabschnitte und Beitragskarten keine Wiederholungen zeigen.
-  const picker = createPicker(['reinigung_card', 'regalservice_card', 'haushalt_kueche', 'fassade_hubsteiger', 'fassade_balkon', 'cleaning_guide_window', 'ali',
-    'gallery_glas', 'gallery_hotel', 'ws_shelf_pasta_facing', 'gallery_haushalt', 'gallery_buero', 'gallery_bau', 'regalservice_mitarbeiter', ...CTA_PHOTOS]);
   const blocks = oldPage('home-5', lang).blocks;
   const layers = blocks.filter(b => b.k === 'sl').map(b => b.x);
   const rest = blocks.filter(b => b.k !== 'sl');
@@ -144,7 +140,7 @@ export default function HomeSections({lang='de'} = {}){
       </div>
     </div>
   </section>
-  <VerbatimBody lang={lang} blocks={main} picker={picker} pool={['ws_home_shelving_cleaning','buero','hotel','ws_modern_interior_counter','ws_shelf_stocking_box','nachhaltigkeit','ws_office_meeting_table','reinigung','ws_hall_floor_mopping']}/>
+  <VerbatimBody lang={lang} blocks={main} photos={['buero','reinigung','hotel','gallery_hotel','regalservice_mitarbeiter','nachhaltigkeit','gallery_glas']}/>
   <section className="ws-cleaning-section" aria-label={coreLabel}>
     <div className="ws-wrap ws-section ws-directory">
       <div>
@@ -169,7 +165,7 @@ export default function HomeSections({lang='de'} = {}){
     </div>
   </section>
   <section className="ws-guides-section"><div className="ws-wrap ws-section"><div className="ws-section-top" lang={lang}><Heading tag={rest[blogAt].x} first={blogHead[0]?.x}>{blogHead[1]?.x}</Heading><Go lang={lang} href="/ratgeber">{t("Alle Beiträge")}</Go></div></div>
-    <NewsIndex lang={lang} articles={adviceArticles.slice(0,6)} picker={picker}/></section>
+    <NewsIndex lang={lang} articles={adviceArticles.slice(0,6)}/></section>
   <Clients lang={lang}/>
   <CTA lang={lang} showBanner={true}/>
 </div>}
