@@ -1,7 +1,7 @@
 import { language } from '../lib/language';
 import Navigation from './Navigation';
 import HeroScene from './HeroScene';
-import { SprayIcon, ShelfIcon, HomeIcon } from './HeroIcons';
+import PhotoIcon from './HeroIcons';
 
 const services = [
     { href: '/reinigung', de: 'Reinigung', en: 'Cleaning', icon: 'spray' },
@@ -9,8 +9,7 @@ const services = [
     { href: '/haushalt', de: 'Haushalt', en: 'Household', icon: 'home' }
 ];
 
-const ICONS = { spray: SprayIcon, shelf: ShelfIcon, home: HomeIcon };
-function ServiceIcon({ name }) { const C = ICONS[name]; return <C />; }
+function ServiceIcon({ name }) { return <PhotoIcon name={name} />; }
 
 export default function Hero({ lang = 'de' } = {}) {
     const { url } = language(lang);

@@ -17,7 +17,7 @@ const shortcuts = [
 const pages = [
   { href: '/', de: 'Startseite', en: 'Home', match: p => p === '/' },
   { href: '/ueber-uns', de: 'Über uns', en: 'About us' },
-  { href: '/leistungen', de: 'Leistungen', en: 'Services', match: p => ['/leistungen', '/reinigung', '/regalservice', '/haushalt'].some(k => p === k || p.startsWith(k + '/')) },
+  { href: '/leistungen', de: 'Unsere Leistungen', en: 'Our services', short: { de: 'Leistungen', en: 'Services' }, match: p => ['/leistungen', '/reinigung', '/regalservice', '/haushalt'].some(k => p === k || p.startsWith(k + '/')) },
   { href: '/team', de: 'Unser Team', en: 'Our team' },
   { href: '/kontakt', de: 'Kontaktieren Sie uns', en: 'Contact us' },
 ];
@@ -68,7 +68,7 @@ export default function Navigation({ home = false, lang = 'de' }) {
         {pages.map(pg => {
           const de = localizedPath(path, 'de').split(/[?#]/)[0];
           const on = pg.match ? pg.match(de) : de === pg.href || de.startsWith(pg.href + '/');
-          return <a key={pg.href} href={url(pg.href)} aria-current={on ? 'page' : undefined}>{pg[lang]}</a>;
+          return <a key={pg.href} href={url(pg.href)} aria-current={on ? 'page' : undefined}>{pg.short ? <><span className="lbl-long">{pg[lang]}</span><span className="lbl-short">{pg.short[lang]}</span></> : pg[lang]}</a>;
         })}
       </nav>
     </div>
