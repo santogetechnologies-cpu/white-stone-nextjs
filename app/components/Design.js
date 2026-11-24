@@ -3,6 +3,7 @@ import CurrentLines from './CurrentLines';
 import { photos } from '../lib/photos';
 import { company } from '../lib/company';
 import { Brand } from './Navigation';
+import { oldPage, src } from '../lib/verbatim';
 import Tide from './Tide';
 
 export const areaCards=[
@@ -29,8 +30,18 @@ export function CTA({lang='de', showBanner=false} = {}){
   const {url} = language(lang);
   const en = lang === 'en';
   const icon = d => <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d={d} /></svg>;
-  // Wortlaut: Kernleistungen der bisherigen Website ("Hotel- & Housekeeping-Service – perfekte Sauberkeit ...")
-  const cards = [
+  // Wortlaut: Kernleistungen der bisherigen Website ("Hotel- & Housekeeping-Service – perfekte Sauberkeit ...") in der gewählten Sprache
+  const home = oldPage('home-5', lang).blocks;
+  const listAfter = de => home.slice(home.findIndex(b => /^h\d$/.test(b.t) && src(b) === de) + 1).find(b => b.t === 'ul').items;
+  const core = listAfter('Unsere Kernleistungen:').map(x => { const [a, ...b] = x.split(/\s[–-]\s/); return [a, b.join(' – ')]; });
+  const glas = oldPage('glas-und-fensterreinigung', lang).blocks;
+  const ctaAt = glas.findIndex(b => src(b) === 'Bereit für makellose Ergebnisse?');
+  const [ctaHead, ctaText] = [glas[ctaAt].x, glas[ctaAt + 1].x];
+  const regal = oldPage('regalservice-firma-munchen-regalbefullung', lang).blocks;
+  const bAt = regal.findIndex(b => src(b) === 'Immer volle Regale – mit White Stone GmbH');
+  const [bHead, bText] = [regal[bAt].x, regal[bAt + 1].x];
+  const [bHead1, ...bHead2] = bHead.split(/\s[–-]\s/);
+  const cardsBase = [
     {key:'cleaning', theme:'cleaning', img:'/assets/help-card-1.webp', title:'Hotel- & Housekeeping-Service', desc:'perfekte Sauberkeit für Gästezimmer, Lobby & Gastronomie', href:'/reinigung/hotelreinigung', badgeGradient:'linear-gradient(135deg, #38bdf8 0%, #0284c7 100%)', icon:icon('M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83')},
     {key:'shelf', theme:'shelf', img:'/assets/help-card-2.webp', title:'Büro- & Gebäudereinigung', desc:'hygienische Arbeitsumgebungen für mehr Produktivität', href:'/reinigung/buero-und-gebaeudereinigung', badgeGradient:'linear-gradient(135deg, #34d399 0%, #059669 100%)', icon:icon('M4 3v18M20 3v18M4 7h16M4 12h16M4 17h16')},
     {key:'household', theme:'household', img:'/assets/help-card-3.webp', title:'Baureinigung', desc:'schnelle und gründliche Übergabereinigung nach Bauprojekten', href:'/reinigung/bau-und-sonderreinigung', badgeGradient:'linear-gradient(135deg, #818cf8 0%, #4f46e5 100%)', icon:icon('m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10')},
@@ -38,7 +49,10 @@ export function CTA({lang='de', showBanner=false} = {}){
     {key:'quote', theme:'quote', img:'/assets/help-card-5.webp', title:'Teppich- & Polsterpflege', desc:'materialschonend & hygienisch sauber', href:'/reinigung', badgeGradient:'linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%)', icon:icon('M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8')},
     {key:'guidance', theme:'guidance', img:'/assets/help-card-6.webp', title:'Sonder- & Spezialreinigung', desc:'von Graffiti bis Notfalleinsätzen, wir sind flexibel', href:'/reinigung/bau-und-sonderreinigung', badgeGradient:'linear-gradient(135deg, #60a5fa 0%, #2563eb 100%)', icon:icon('M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 16v-4M12 8h.01')},
   ];
-  const features = ['Höchste Qualitätsstandards in allen Reinigungsprozessen','Geschulte, diskrete und mehrsprachige Fachkräfte','Flexibilität & 24/7-Verfügbarkeit bei Bedarf'];
+  const cards = cardsBase.map((c, i) => ({ ...c, title: core[i][0], desc: core[i][1] }));
+  const features = listAfter('Warum Kunden uns vertrauen:').slice(0, 3);
+  const location = listAfter('Fakten über uns:')[0];
+  const ctaWords = ctaHead.split(' '), ctaSplit = Math.max(1, Math.round(ctaWords.length / 3));
   const featureIcons = [
     <svg key="a" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>,
     <svg key="b" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="m9 12 2 2 4-4" /></svg>,
@@ -47,17 +61,17 @@ export function CTA({lang='de', showBanner=false} = {}){
 
   return (
     <section className="ws-help-section" id="hilfe" aria-label="Get in touch">
-      <div className="ws-wrap ws-help-wrap" lang="de">
+      <div className="ws-wrap ws-help-wrap" lang={lang}>
         <div className="ws-help-left-area">
           <div className="ws-help-eyebrow">
             <span className="ws-help-eyebrow-bar" aria-hidden="true" />
             <span className="ws-help-eyebrow-text">Get in touch</span>
           </div>
           <h2 className="ws-help-heading">
-            <span className="ws-help-heading-line1">Bereit für</span>{' '}
-            <em className="ws-help-heading-line2">makellose Ergebnisse?</em>
+            <span className="ws-help-heading-line1">{ctaWords.slice(0, ctaSplit).join(' ')}</span>{' '}
+            <em className="ws-help-heading-line2">{ctaWords.slice(ctaSplit).join(' ')}</em>
           </h2>
-          <p className="ws-help-desc">Fordern Sie jetzt Ihr persönliches Angebot an – kostenlos, unverbindlich und individuell.</p>
+          <p className="ws-help-desc">{ctaText}</p>
           <div className="ws-help-features-stack">
             {features.map((f, i) => (
               <div className="ws-help-feature" key={f}>
@@ -101,16 +115,16 @@ export function CTA({lang='de', showBanner=false} = {}){
       {showBanner && (
         <div className="ws-wrap ws-hand-wrap">
           <div className="ws-hand-container">
-            <div className="ws-hand-left" lang="de">
+            <div className="ws-hand-left" lang={lang}>
               <div className="ws-hand-eyebrow">
-                <span className="ws-hand-eyebrow-text">Regalservice</span>
+                <span className="ws-hand-eyebrow-text">{en ? 'Shelf services' : 'Regalservice'}</span>
                 <span className="ws-hand-eyebrow-bar" aria-hidden="true" />
               </div>
               <h3 className="ws-hand-heading">
-                <span className="ws-hand-heading-navy">Immer volle Regale –</span>{' '}
-                <em className="ws-hand-heading-teal">mit White Stone GmbH</em>
+                <span className="ws-hand-heading-navy">{bHead1} –</span>{' '}
+                <em className="ws-hand-heading-teal">{bHead2.join(' – ')}</em>
               </h3>
-              <p className="ws-hand-desc">Verlassen Sie sich auf einen Partner, der Warenservice, Sauberkeit und Organisation perfekt vereint. Fordern Sie Ihr individuelles Angebot an:</p>
+              <p className="ws-hand-desc">{bText}</p>
             </div>
             <div className="ws-hand-divider" aria-hidden="true" />
             <div className="ws-hand-middle">
@@ -123,9 +137,9 @@ export function CTA({lang='de', showBanner=false} = {}){
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </a>
               </div>
-              <div className="ws-hand-location" lang="de">
+              <div className="ws-hand-location" lang={lang}>
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-                <span>Sitz in München, Einsatz in ganz Deutschland</span>
+                <span>{location}</span>
               </div>
             </div>
             <div className="ws-hand-art" aria-hidden="true">
@@ -149,10 +163,9 @@ export function Footer({lang='de'} = {}){
           {/* Column 1: Brand */}
           <div className="ws-foot-col ws-foot-brand-col">
             <Brand lang={lang}/>
-            <p className="ws-foot-desc" lang="de">
-              <strong>Erfahren Sie mehr über uns</strong><br/>
-              White Stone GmbH – Ihr Premium-Dienstleister für Gebäudereinigung in München. Ob Büro, Hotel oder Spezialreinigung: Wir stehen für Sauberkeit, Qualität und Nachhaltigkeit.
-            </p>
+            {lang === 'en'
+              ? <p className="ws-foot-desc"><strong>Find out more about us</strong><br/>White Stone GmbH – your premium provider of building cleaning in Munich. Whether office, hotel or specialist cleaning: we stand for cleanliness, quality and sustainability.</p>
+              : <p className="ws-foot-desc"><strong>Erfahren Sie mehr über uns</strong><br/>White Stone GmbH – Ihr Premium-Dienstleister für Gebäudereinigung in München. Ob Büro, Hotel oder Spezialreinigung: Wir stehen für Sauberkeit, Qualität und Nachhaltigkeit.</p>}
           </div>
 
           {/* Column 2: Services */}
@@ -161,7 +174,7 @@ export function Footer({lang='de'} = {}){
               <svg className="ws-foot-pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
               </svg>
-              <span>Unsere Leistungen</span>
+              <span>{lang === 'en' ? 'Our services' : 'Unsere Leistungen'}</span>
             </div>
             <ul className="ws-foot-links">
               {areaCards.map(a => (
@@ -190,13 +203,13 @@ export function Footer({lang='de'} = {}){
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
-              <span>Wichtige Listen</span>
+              <span>{lang === 'en' ? 'Important links' : 'Wichtige Listen'}</span>
             </div>
             <ul className="ws-foot-links">
               <li><a href={url("/ueber-uns")} className="ws-foot-link"><span>{t("Über uns")}</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
               <li><a href={url("/team")} className="ws-foot-link"><span>{t("Unser Team")}</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
-              <li><a href={url("/ratgeber")} className="ws-foot-link"><span>Neueste Nachrichten</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
-              <li><a href={url("/kontakt")} className="ws-foot-link"><span>Kontaktieren Sie uns</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
+              <li><a href={url("/ratgeber")} className="ws-foot-link"><span>{lang === 'en' ? 'Latest news' : 'Neueste Nachrichten'}</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
+              <li><a href={url("/kontakt")} className="ws-foot-link"><span>{lang === 'en' ? 'Contact us' : 'Kontaktieren Sie uns'}</span><span className="ws-foot-chevron" aria-hidden="true">›</span></a></li>
             </ul>
           </div>
 
@@ -206,7 +219,7 @@ export function Footer({lang='de'} = {}){
               <svg className="ws-foot-pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
-              <span>Offizielle Informationen</span>
+              <span>{lang === 'en' ? 'Official information' : 'Offizielle Informationen'}</span>
             </div>
             <div className="ws-foot-contact-list">
               <div className="ws-foot-contact-item">
@@ -253,7 +266,7 @@ export function Footer({lang='de'} = {}){
         {/* Bottom Copyright Bar */}
         <div className="ws-foot-bar">
           <div className="ws-foot-bar-left">
-            <span>Copyright © White Stone 2026 | Alle Rechte vorbehalten.</span>
+            <span>{lang === 'en' ? 'Copyright © White Stone 2026 | All rights reserved.' : 'Copyright © White Stone 2026 | Alle Rechte vorbehalten.'}</span>
           </div>
           <div className="ws-foot-bar-right">
             <span className="ws-foot-bar-sep" aria-hidden="true"/>

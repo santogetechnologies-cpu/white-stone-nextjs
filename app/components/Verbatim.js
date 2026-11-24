@@ -1,5 +1,6 @@
 import { Faq, Mark, Pic, Go } from './Design';
 import { language } from '../lib/language';
+import { src } from '../lib/verbatim';
 
 const linkTargets = {
   'Mehr über unsere Dienstleistungen erfahren': '/leistungen',
@@ -125,7 +126,7 @@ function Node({ n, lang, id }) {
     case 'h4': case 'h5': case 'h6': return <h4 className="wv-label">{b.x}</h4>;
     case 'p': return /^➡️/.test(b.x) ? <p className="wv-arrow"><span aria-hidden="true">→</span>{b.x.replace(/^➡️\s*/, '')}</p> : <p className={n.cls}>{lines(b.x)}</p>;
     case 'table': return <Table rows={b.rows} />;
-    case 'a': return linkTargets[b.x] ? <div><Go lang={lang} href={linkTargets[b.x]}>{b.x}</Go></div> : <p>{b.x}</p>;
+    case 'a': return linkTargets[src(b)] ? <div><Go lang={lang} href={linkTargets[src(b)]}>{b.x}</Go></div> : <p>{b.x}</p>;
     case 'txt': return <p className={b.k === 'desc' ? 'wv-desc' : 'wv-note'}>{lines(b.x)}</p>;
     default: return null;
   }
@@ -135,11 +136,11 @@ function Node({ n, lang, id }) {
 export function splitSections(blocks) {
   const sections = [{ label: null, blocks: [] }];
   blocks.forEach(b => {
-    if (b.t === 'txt' && b.k === 'sub') sections.push({ label: b.x, blocks: [] });
+    if (b.t === 'txt' && b.k === 'sub') sections.push({ label: b.x, labelDe: src(b), blocks: [] });
     else sections[sections.length - 1].blocks.push(b);
   });
   // "Bereit für makellose Ergebnisse?" steht wortgleich im Anfrage-Abschnitt am Seitenende.
-  return sections.filter(s => (s.label || s.blocks.length) && !(s.label === 'Get in touch' && s.blocks[0]?.x === 'Bereit für makellose Ergebnisse?'));
+  return sections.filter(s => (s.label || s.blocks.length) && !(s.labelDe === 'Get in touch' && src(s.blocks[0]) === 'Bereit für makellose Ergebnisse?'));
 }
 
 export const headingsOf = blocks => blocks.filter(b => b.t === 'h2').map(b => b.x);
@@ -170,7 +171,7 @@ function withFigures(list, pool) {
 
 export function Flow({ blocks, lang = 'de', anchors = false, pool }) {
   let h = 0;
-  return <div className="wv-flow" lang="de">{withFigures(decorate(nodes(blocks)), pool).map((n, i) => {
+  return <div className="wv-flow" lang={lang}>{withFigures(decorate(nodes(blocks)), pool).map((n, i) => {
     const isH2 = n.type === 'block' && n.b.t === 'h2';
     return <Node key={i} n={n} lang={lang} id={anchors && isH2 ? 'absatz-' + (++h) : undefined} />;
   })}</div>;
@@ -188,7 +189,7 @@ export function PhotoGrid({ items, lang = 'de', label }) {
 export function NewsIndex({ articles, lang = 'de' }) {
   const { url } = language(lang);
   const fmt = d => new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(d));
-  return <section className="wv-section"><div className="ws-wrap"><div className="wv-news" lang="de">{articles.map(a => <a key={a.slug} href={url('/ratgeber/' + a.slug)}>
+  return <section className="wv-section"><div className="ws-wrap"><div className="wv-news" lang={lang}>{articles.map(a => <a key={a.slug} href={url('/ratgeber/' + a.slug)}>
     <span className="wv-news-img"><Pic lang={lang} name={a.photoKey} /></span>
     <div><small>{fmt(a.date)} · whitestonegmbh</small><h3>{a.title}</h3><span className="ws-more">Read more <b aria-hidden="true">↗</b></span></div>
   </a>)}</div></div></section>;

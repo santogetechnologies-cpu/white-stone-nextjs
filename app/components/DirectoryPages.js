@@ -8,13 +8,13 @@ import ContactForm from './ContactForm';
 import CleaningServicesGrid from './CleaningServicesGrid';
 import {shelfServicesData} from './ShelfServicesSection';
 import VerbatimBody, {Flow,PhotoGrid,NewsIndex,headingsOf,ServiceRows,Img} from './Verbatim';
-import {oldPage} from '../lib/verbatim';
+import {oldPage,src} from '../lib/verbatim';
 import {photos} from '../lib/photos';
 import HouseholdServicesSection from './HouseholdServicesSection';
 
 export function ServicesPage({lang='de'} = {}){
   const {t} = language(lang);
-  const page = oldPage('unsere-leistungen');
+  const page = oldPage('unsere-leistungen', lang);
   const blocks = page.blocks.filter(b => !(b.t === 'txt' && b.k === 'sub') && b.t !== 'h1');
   const h1 = page.blocks.find(b => b.t === 'h1');
   return <>
@@ -29,8 +29,8 @@ export function CleaningPage({lang='de'} = {}){
   const {cleaningServices} = getCatalog(lang);
   const isEn = lang === 'en';
   const services = cleaningServices.map(s => ({...s, href: url('/reinigung/' + s.slug)}));
-  const home = oldPage('home-5').blocks;
-  const i = home.findIndex(b => b.t === 'h3' && b.x === 'Professionelle Reinigung für jede Anforderung');
+  const home = oldPage('home-5', lang).blocks;
+  const i = home.findIndex(b => b.t === 'h3' && src(b) === 'Professionelle Reinigung für jede Anforderung');
   const intro = home.slice(i, i + 4);
   return (
     <>
@@ -159,7 +159,7 @@ export function HouseholdPage({lang='de'} = {}){
 }
 export function AboutPage({lang='de'} = {}){
   const {t} = language(lang);
-  const page = oldPage('uber-uns');
+  const page = oldPage('uber-uns', lang);
   const blocks = page.blocks.filter((b,i) => !(i === 0 && b.k === 'sub'));
   const h3 = blocks.findIndex(b => b.t === 'h3');
   const intro = blocks[h3], lead = blocks[h3 + 1];
@@ -168,16 +168,16 @@ export function AboutPage({lang='de'} = {}){
   <VerbatimBody lang={lang} blocks={rest} pool={['hotel','nachhaltigkeit','gallery_buero','reinigung_card','gallery_glas','fassade_hubsteiger']}/><Clients lang={lang}/></>}
 export function TeamPage({lang='de'} = {}){
   const {t} = language(lang);
-  const page = oldPage('unser-team');
+  const page = oldPage('unser-team', lang);
   const {aboutContent} = getCatalog(lang);
   const person = aboutContent.team;
   const closing = page.blocks.slice(page.blocks.findIndex(b => b.t === 'txt' && b.k === 'sub'));
-  const head = page.blocks.find(b => b.t === 'h3').x; // "Geschäftsführung"
+  const head = page.blocks.find(b => b.t === 'h3').x; // Geschäftsführung / Management
   return <><PageIntro lang={lang} tag={head} title={person.name} lead={person.role} photo="ali" crumb={[page.title,'/team']}><Go lang={lang} href="/kontakt">{t("Kontakt aufnehmen")}</Go></PageIntro>
   <VerbatimBody lang={lang} blocks={closing} pool={['buero']}/></>}
 export function AdvicePage({lang='de'} = {}){
   const {adviceArticles} = getCatalog(lang);
-  const page = oldPage('neueste-nachrichten');
+  const page = oldPage('neueste-nachrichten', lang);
   return <><PageIntro lang={lang} tag={page.title} title={page.title} photo="glas"/><NewsIndex lang={lang} articles={adviceArticles}/></>}
 export function ArticlePage({lang='de', article:a}){
   const {t, url} = language(lang);
@@ -187,19 +187,19 @@ export function ArticlePage({lang='de', article:a}){
   <section className="wv-section"><div className="ws-wrap"><Go lang={lang} href={a.relatedHref}>{t("Passende Leistung ansehen")}</Go></div></section></>}
 export function ContactPage({lang='de', topic=''}){
   const {t, url} = language(lang);
-  const page = oldPage('kontaktieren-sie-uns');
-  const [label, lead, , , , , formTitle] = [page.blocks[0].x, page.blocks[1].x, 0, 0, 0, 0, page.blocks.find(b => b.t === 'h3' && b.x.startsWith('Füllen Sie')).x];
-  return <section className="ws-contact-page"><div className="ws-wrap"><nav className="ws-crumb" aria-label={t("Brotkrumennavigation")}><a href={url("/")}>{t("Startseite")}</a>{t(" / Kontakt")}</nav><div className="ws-inquiry"><div><Mark>{label}</Mark><h1>{page.title}</h1><p lang="de">{lead}</p><dl className="ws-contact-info">{[[t("E-Mail"),company.email],[t("Telefon"),company.phone],[t("Adresse"),company.address]].map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl><figure className="wv-photo wv-photo-side"><Img k="reinigung_card" lang={lang}/></figure></div><div className="ws-contact-card"><h2 lang="de">{formTitle}</h2>{topic&&<p>{t("Bereich: ")}{topic}</p>}<ContactForm lang={lang} topic={topic}/></div></div></div></section>}
+  const page = oldPage('kontaktieren-sie-uns', lang);
+  const [label, lead, , , , , formTitle] = [page.blocks[0].x, page.blocks[1].x, 0, 0, 0, 0, page.blocks.find(b => b.t === 'h3' && src(b).startsWith('Füllen Sie')).x];
+  return <section className="ws-contact-page"><div className="ws-wrap"><nav className="ws-crumb" aria-label={t("Brotkrumennavigation")}><a href={url("/")}>{t("Startseite")}</a>{t(" / Kontakt")}</nav><div className="ws-inquiry"><div><Mark>{label}</Mark><h1>{page.title}</h1><p>{lead}</p><dl className="ws-contact-info">{[[t("E-Mail"),company.email],[t("Telefon"),company.phone],[t("Adresse"),company.address]].map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl><figure className="wv-photo wv-photo-side"><Img k="reinigung_card" lang={lang}/></figure></div><div className="ws-contact-card"><h2>{formTitle}</h2>{topic&&<p>{t("Bereich: ")}{topic}</p>}<ContactForm lang={lang} topic={topic}/></div></div></div></section>}
 export function LegalPage({lang='de', privacy=false}){
   const {t} = language(lang);
   const {aboutContent} = getCatalog(lang);
-  return <><PageIntro lang={lang} tag={t("Unternehmen")} title={privacy?t("Datenschutz."):"Impressum"}/><section className="ws-wrap ws-section ws-legal ws-prose">{privacy?<><h2>{t("Kontaktanfragen")}</h2><p>{t("Wenn Sie uns schreiben, verwenden wir Ihre Angaben zur Bearbeitung der Anfrage. Bei Haushaltsanfragen werden auch die gewählten Leistungen und die Kalkulation übermittelt. Die Telefonnummer ist freiwillig.")}</p><h2>{t("Technische Dienste")}</h2><p>{t("Beim Besuch werden technisch notwendige Verbindungsdaten verarbeitet. Die Schriftarten werden über Google Fonts angefordert. Bei aktiviertem Formularversand erfolgt die Übermittlung der E-Mail über Resend.")}</p><h2>{t("Ihre Daten")}</h2><p>{t("Für Fragen zu Ihren Daten wenden Sie sich an White Stone GmbH. Die vollständigen Angaben zur verantwortlichen Stelle und zum Datenschutz werden vor Inbetriebnahme ergänzt.")}</p></>:<Imprint/>}</section></>}
+  return <><PageIntro lang={lang} tag={t("Unternehmen")} title={privacy?t("Datenschutz."):(lang==='en'?'Legal notice':'Impressum')}/><section className="ws-wrap ws-section ws-legal ws-prose">{privacy?<><h2>{t("Kontaktanfragen")}</h2><p>{t("Wenn Sie uns schreiben, verwenden wir Ihre Angaben zur Bearbeitung der Anfrage. Bei Haushaltsanfragen werden auch die gewählten Leistungen und die Kalkulation übermittelt. Die Telefonnummer ist freiwillig.")}</p><h2>{t("Technische Dienste")}</h2><p>{t("Beim Besuch werden technisch notwendige Verbindungsdaten verarbeitet. Die Schriftarten werden über Google Fonts angefordert. Bei aktiviertem Formularversand erfolgt die Übermittlung der E-Mail über Resend.")}</p><h2>{t("Ihre Daten")}</h2><p>{t("Für Fragen zu Ihren Daten wenden Sie sich an White Stone GmbH. Die vollständigen Angaben zur verantwortlichen Stelle und zum Datenschutz werden vor Inbetriebnahme ergänzt.")}</p></>:<Imprint lang={lang}/>}</section></>}
 
 
 /** Impressum mit dem Wortlaut der bisherigen Website. Anschrift, Telefon und E-Mail kommen aus company.js (freigegebene Angaben). */
-function Imprint(){
-  const blocks = oldPage('impressum').blocks;
-  const contact = /Seebrucker|hostingersite|Telefonnummer|Handy Nummer/;
-  const value = b => /Telefonnummer|hostingersite/.test(b.x) ? 'E-Mail : '+company.email+' Telefonnummer: '+company.phone : /Handy Nummer/.test(b.x) ? 'Handy Nummer: '+company.phone : company.address;
-  return <div lang="de">{blocks.map((b,i)=>b.t==='h3'?<h2 key={i}>{b.x}</h2>:b.t==='h6'?<h3 key={i}>{b.x}</h3>:<p key={i}>{contact.test(b.x)?value(b):b.x}</p>)}</div>;
+function Imprint({lang='de'}){
+  const blocks = oldPage('impressum', lang).blocks;
+  const contact = /Seebrucker|hostingersite|Telefonnummer|Handy Nummer/; const en = lang === 'en';
+  const value = b => /Telefonnummer|hostingersite/.test(src(b)) ? (en ? 'E-mail: ' : 'E-Mail : ')+company.email+(en ? ' Phone: ' : ' Telefonnummer: ')+company.phone : /Handy Nummer/.test(src(b)) ? (en ? 'Mobile number: ' : 'Handy Nummer: ')+company.phone : company.address;
+  return <div lang={lang}>{blocks.map((b,i)=>b.t==='h3'?<h2 key={i}>{b.x}</h2>:b.t==='h6'?<h3 key={i}>{b.x}</h3>:<p key={i}>{contact.test(src(b))?value(b):b.x}</p>)}</div>;
 }

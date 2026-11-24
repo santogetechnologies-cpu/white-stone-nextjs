@@ -1,10 +1,15 @@
 import data from './verbatim.json';
+import dataEn from './verbatim.en.json';
 
 // Wortgetreue Texte der bisherigen Website (nur Text, ohne Bilder, ohne veraltete Kontaktdaten).
+// verbatim.en.json ist die englische Fassung mit derselben Struktur; jeder Block trägt dort zusätzlich `de` (Originaltext).
 export const verbatim = data;
-export const oldPage = slug => data[slug];
+export const oldPage = (slug, lang = 'de') => (lang === 'en' ? dataEn : data)[slug];
+/** Originaler (deutscher) Wortlaut eines Blocks – für Vergleiche, unabhängig von der Sprache. */
+export const src = b => b?.de ?? b?.x;
 
 const postList = Object.values(data).filter(p => p.kind === 'post').sort((a, b) => b.date.localeCompare(a.date));
+const CATEGORY_EN = { 'Fassadenreinigung': 'Façade cleaning', 'Glas- & Fensterreinigung': 'Glass & window cleaning', 'Regalservice': 'Shelf services', 'Hotelreinigung': 'Hotel cleaning', 'Kindergartenreinigung': 'Nursery cleaning', 'Schulreinigung': 'School cleaning', 'Bau- & Sonderreinigung': 'Construction & specialist cleaning', 'Büroreinigung': 'Office cleaning', 'Gebäudereinigung': 'Building cleaning' };
 
 // Je Thema ein Pool aktueller Fotos der White-Stone-Website, damit die Beiträge abwechslungsreich bebildert sind.
 const topics = [
@@ -25,7 +30,7 @@ export function firstParagraph(blocks) {
   return p ? p.x.replace(/\s*\n\s*/g, ' ') : '';
 }
 
-export const verbatimGuides = postList.map(p => {
+const guidesDe = postList.map(p => {
   const hit = topics.find(([re]) => re.test(p.slug)) || [null, ...fallback];
   const [, category, pool, relatedHref] = hit;
   const n = used[category] = (used[category] ?? -1) + 1;
@@ -36,6 +41,9 @@ export const verbatimGuides = postList.map(p => {
     summary: firstParagraph(p.blocks), verbatim: p.blocks, sections: [], takeaway: ''
   };
 });
+export const verbatimGuides = guidesDe;
+const guidesEn = guidesDe.map(g => { const e = dataEn[g.slug]; return { ...g, title: e.title, category: CATEGORY_EN[g.category] || g.category, summary: firstParagraph(e.blocks), verbatim: e.blocks }; });
+export const guidesFor = lang => (lang === 'en' ? guidesEn : guidesDe);
 
 export const serviceSources = {
   'glas-und-fensterreinigung': 'glas-und-fensterreinigung',
@@ -48,11 +56,17 @@ export const serviceSources = {
 };
 
 // Kurztexte der Leistungsübersicht ("Unsere Leistungen") der bisherigen Website.
-const overview = oldPage('unsere-leistungen').blocks;
-function overviewEntry(prefix) {
-  const i = overview.findIndex(b => b.t === 'h3' && b.x.startsWith(prefix));
+function overviewEntry(prefix, lang = 'de') {
+  const overview = oldPage('unsere-leistungen', lang).blocks;
+  const i = overview.findIndex(b => b.t === 'h3' && src(b).startsWith(prefix));
   return i < 0 ? null : { title: overview[i].x, text: overview[i + 1].x };
 }
+const PREFIX = {
+  'glas-und-fensterreinigung': 'Glas- & Fensterreinigung', 'buero-und-gebaeudereinigung': 'Büro- & Gebäudereinigung', 'hotelreinigung': 'Hotelreinigung',
+  'bau-und-sonderreinigung': 'Bau- & Sonderreinigung', 'fassadenreinigung': 'Fassadenreinigung', 'kita-reinigung': 'Kindergartenreinigung',
+  'schulreinigung': 'Schulreinigung', 'regalservice': 'Regalservice',
+};
+export const overviewFor = (key, lang = 'de') => overviewEntry(PREFIX[key], lang);
 export const overviewByService = {
   'glas-und-fensterreinigung': overviewEntry('Glas- & Fensterreinigung'),
   'buero-und-gebaeudereinigung': overviewEntry('Büro- & Gebäudereinigung'),
