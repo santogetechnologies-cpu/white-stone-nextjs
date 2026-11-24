@@ -2,7 +2,7 @@
 export const photos = {
   reinigung: {
     src: "/fotografie/reinigung.webp",
-    alt: "Eine Reinigungskraft im dunkelblauen White-Stone-Poloshirt hält einen roten Eimer mit Putzmitteln und ein Reinigungstuch.",
+    alt: "Eine Reinigungskraft im dunkelgrauen White-Stone-Poloshirt hält einen roten Eimer mit Putzmitteln und ein Reinigungstuch.",
     width: 1024,
     height: 756,
   },
@@ -37,10 +37,10 @@ export const photos = {
     height: 675,
   },
   haushalt_mann: {
-    src: "/fotografie/haushalt-mann.jpg",
-    alt: "Ein Mitarbeiter im blauen White-Stone-Poloshirt reinigt lächelnd einen Kühlschrank mit Sprühreiniger und Tuch.",
-    width: 676,
-    height: 1024,
+    src: "/fotografie/ws-home-sofa-table.webp",
+    alt: "Eine Reinigungskraft im dunkelgrauen White-Stone-Poloshirt wischt die Glasfläche eines Couchtischs im Wohnbereich.",
+    width: 1254,
+    height: 1254,
   },
   glas: {
     src: "/fotografie/glas.webp",
@@ -128,37 +128,37 @@ export const photos = {
   },
   buero: {
     src: "/fotografie/buero.webp",
-    alt: "Eine Reinigungskraft im blauen White-Stone-Poloshirt wischt konzentriert einen Bürotisch.",
+    alt: "Eine Reinigungskraft im dunkelgrauen White-Stone-Poloshirt wischt konzentriert einen Bürotisch.",
     width: 1447,
     height: 1087,
   },
   hotel: {
     src: "/fotografie/hotel.webp",
-    alt: "Eine Reinigungskraft im blauen White-Stone-Poloshirt bereitet sorgfältig ein Bett in einem Gästezimmer vor.",
+    alt: "Eine Reinigungskraft im dunkelgrauen White-Stone-Poloshirt bereitet sorgfältig ein Bett in einem Gästezimmer vor.",
     width: 1437,
     height: 1095,
   },
   bau: {
     src: "/fotografie/bau.webp",
-    alt: "Reinigungskräfte im blauen White-Stone-Poloshirt entfernen nach dem Ausbau Staub vom Boden und von den Fenstern.",
+    alt: "Reinigungskräfte im dunkelgrauen White-Stone-Poloshirt entfernen nach dem Ausbau Staub vom Boden und von den Fenstern.",
     width: 1254,
     height: 1254,
   },
   fassade: {
     src: "/fotografie/fassade.webp",
-    alt: "Fachkräfte im blauen White-Stone-Poloshirt reinigen eine Steinfassade mit langen wasserführenden Bürsten.",
+    alt: "Fachkräfte im dunkelgrauen White-Stone-Poloshirt reinigen eine Steinfassade mit langen wasserführenden Bürsten.",
     width: 1730,
     height: 1366,
   },
   kita: {
     src: "/fotografie/kita.webp",
-    alt: "Eine Reinigungskraft im blauen White-Stone-Poloshirt räumt Spielzeug im Gruppenraum einer Kindertagesstätte auf.",
+    alt: "Eine Reinigungskraft im dunkelgrauen White-Stone-Poloshirt räumt Spielzeug im Gruppenraum einer Kindertagesstätte auf.",
     width: 1674,
     height: 939,
   },
   schule: {
     src: "/fotografie/schule.webp",
-    alt: "Eine Reinigungskraft im blauen White-Stone-Poloshirt wischt den Boden in einem leeren Klassenzimmer.",
+    alt: "Eine Reinigungskraft im dunkelgrauen White-Stone-Poloshirt wischt den Boden in einem leeren Klassenzimmer.",
     width: 1459,
     height: 1078,
   },
