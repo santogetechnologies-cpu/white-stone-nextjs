@@ -83,7 +83,7 @@
   0%, 30%, 100% { transform: translateY(0) scale(1); background: rgba(255, 255, 255, .78); border-color: rgba(214, 228, 240, .95); box-shadow: 0 10px 28px #1a3f7012; color: #2b4a66; }
   8%, 22% { transform: translateY(-8px) scale(1.06); background: var(--bg); border-color: var(--c); box-shadow: 0 18px 38px color-mix(in srgb, var(--c) 35%, transparent); color: #0b2a4f; }
 }
-@keyframes heroIcon { 0%, 30%, 100% { color: #3a5875; transform: none; } 8%, 22% { color: var(--c); transform: rotate(-6deg) scale(1.08); } }
+@keyframes heroIcon { 0%, 30%, 100% { transform: none; } 8%, 22% { transform: translateY(-2px) scale(1.08); } }
 .ws-hero .hero-services a:hover { animation-play-state: paused; transform: translateY(-6px) scale(1.05); background: var(--bg); border-color: var(--c); }
 .ws-hero .hero-services a:hover svg { color: var(--c); }
 
@@ -116,57 +116,65 @@
 .ws-hero .hero-sparkle { stroke: none; }
 .ws-hero .hero-swoosh { fill: none; }
 
-/* ---------- animierte Leistungssymbole ---------- */
-.ws-hero .hero-services svg.ai { overflow: visible; }
-.ws-hero .ai * { transform-box: fill-box; }
-/* Sprühflasche: Abzug drücken, Sprühnebel */
-.ws-hero .ai-trigger { transform-origin: 0% 0%; animation: aiTrigger 2.4s ease-in-out infinite; }
-.ws-hero .ai-drop { fill: currentColor; stroke: none; opacity: 0; animation: aiMist 2.4s ease-out infinite; }
-.ws-hero .ai-drop.d2 { animation-delay: .1s; --dx: -9px; --dy: -5px; }
-.ws-hero .ai-drop.d3 { animation-delay: .2s; --dx: -10px; --dy: 4px; }
-.ws-hero .ai-drop.d4 { animation-delay: .32s; --dx: -6px; --dy: 1px; }
-@keyframes aiTrigger { 0%, 30%, 100% { transform: rotate(0); } 12%, 20% { transform: rotate(-22deg) translateX(-1px); } }
-@keyframes aiMist { 0%, 10% { opacity: 0; transform: translate(0, 0) scale(.6); } 18% { opacity: 1; } 45% { opacity: 0; transform: translate(var(--dx, -11px), var(--dy, -1px)) scale(1.5); } 100% { opacity: 0; } }
-/* Regal: Waren rutschen nacheinander an ihren Platz */
-.ws-hero .ai-box { fill: color-mix(in srgb, currentColor 16%, transparent); animation: aiStock 4.8s cubic-bezier(.2, .8, .2, 1) infinite; opacity: 0; }
-.ws-hero .ai-box.b2 { animation-delay: .25s; } .ws-hero .ai-box.b3 { animation-delay: .5s; }
-.ws-hero .ai-box.b4 { animation-delay: .75s; } .ws-hero .ai-box.b5 { animation-delay: 1s; } .ws-hero .ai-box.b6 { animation-delay: 1.25s; }
-@keyframes aiStock { 0% { opacity: 0; transform: translateX(16px); } 12%, 78% { opacity: 1; transform: translateX(0); } 90%, 100% { opacity: 0; transform: translateY(-3px); } }
-/* Haus: Tuch wischt über die Fassade, Flecken verschwinden, es glänzt */
-.ws-hero .ai-cloth { fill: color-mix(in srgb, currentColor 22%, white); animation: aiWipe 3.6s ease-in-out infinite; }
-.ws-hero .ai-cloth path { stroke-width: 1.2; }
-@keyframes aiWipe {
-  0% { transform: translate(13px, 26px) rotate(-12deg); } 18% { transform: translate(35px, 27px) rotate(10deg); }
-  36% { transform: translate(14px, 31px) rotate(-12deg); } 54% { transform: translate(35px, 36px) rotate(10deg); }
-  72%, 100% { transform: translate(15px, 37px) rotate(-8deg); opacity: 1; }
-}
-.ws-hero .ai-dirt { fill: currentColor; stroke: none; opacity: .55; animation: aiDirt 3.6s linear infinite; }
-.ws-hero .ai-dirt.t2 { animation-name: aiDirt2; } .ws-hero .ai-dirt.t3 { animation-name: aiDirt3; } .ws-hero .ai-dirt.t4 { animation-name: aiDirt4; }
-@keyframes aiDirt { 0%, 4% { opacity: .55; } 8%, 92% { opacity: 0; } 100% { opacity: .55; } }
-@keyframes aiDirt2 { 0%, 16% { opacity: .55; } 20%, 92% { opacity: 0; } 100% { opacity: .55; } }
-@keyframes aiDirt3 { 0%, 34% { opacity: .55; } 38%, 92% { opacity: 0; } 100% { opacity: .55; } }
-@keyframes aiDirt4 { 0%, 52% { opacity: .55; } 56%, 92% { opacity: 0; } 100% { opacity: .55; } }
-.ws-hero .ai-shine { fill: currentColor; stroke: none; transform-origin: 50% 50%; opacity: 0; animation: aiShine 3.6s ease-in-out infinite; }
-@keyframes aiShine { 0%, 60% { opacity: 0; transform: scale(.3) rotate(0); } 72% { opacity: 1; transform: scale(1.2) rotate(30deg); } 90%, 100% { opacity: 0; transform: scale(.5) rotate(60deg); } }
-@media (prefers-reduced-motion: reduce) {
-  .ws-hero .ai * { animation: none !important; }
-  .ws-hero .ai-box { opacity: 1; } .ws-hero .ai-dirt, .ws-hero .ai-shine { opacity: 0; }
-}
-
 /* ---------- Kopfzeile: keine Überlappung von Logo und Menü ---------- */
 .ws-nav-header .brand { flex: none; }
 .ws-nav-header .ws-nav-center { min-width: 0; }
 .ws-main-nav.ws-top-services a { font-size: clamp(13px, .95vw, 14.5px); padding-inline: clamp(6px, .8vw, 14px); }
-@media (max-width: 1400px) { .ws-main-nav.ws-top-services { display: none; } .ws-nav-header .ws-nav-tools { margin-left: auto; } }
+
 .ws-nav-header .ws-nav-center { justify-content: safe center; }
 
-/* Feinschliff: kräftigerer Sprühnebel, helles Putzschwamm-Tuch */
-.ws-hero .ai-spray .ai-drop { fill: #36a9e1; }
-.ws-hero .ai-drop.d1 { --dx: -12px; --dy: -2px; }
-.ws-hero .ai-drop.d5 { animation-delay: .4s; --dx: -12px; --dy: -7px; }
-.ws-hero .ai-drop.d6 { animation-delay: .48s; --dx: -11px; --dy: 6px; }
-@keyframes aiMist { 0%, 10% { opacity: 0; transform: translate(0, 0) scale(.5); } 16% { opacity: 1; } 50% { opacity: 0; transform: translate(var(--dx, -11px), var(--dy, -1px)) scale(1.9); } 100% { opacity: 0; } }
-.ws-hero .ai-cloth rect { fill: #8fd3f4; stroke: #2f8fd6; stroke-width: 1.4; }
-.ws-hero .ai-foam { fill: #fff; stroke: #8fd3f4; stroke-width: .8; animation: aiFoam .9s ease-in-out infinite alternate; transform-origin: 50% 50%; }
-.ws-hero .ai-foam.f2 { animation-delay: .45s; }
-@keyframes aiFoam { from { transform: scale(.6); opacity: .5; } to { transform: scale(1.2); opacity: 1; } }
+
+/* ---------- farbige, plastische Leistungssymbole ---------- */
+.ws-hero .hero-services svg.hx { width: clamp(58px, 5.6vw, 88px); height: auto; stroke: none; overflow: visible; filter: drop-shadow(0 6px 10px rgba(16, 52, 90, .12)); }
+.ws-hero .hx * { transform-box: fill-box; }
+/* Sprühflasche */
+.ws-hero .hx-trigger { transform-origin: 85% 5%; animation: hxTrigger 3s cubic-bezier(.45, 0, .2, 1) infinite; }
+@keyframes hxTrigger { 0%, 34%, 100% { transform: rotate(0); } 12%, 22% { transform: rotate(18deg); } }
+.ws-hero .hx-puff { opacity: 0; transform-origin: 50% 50%; animation: hxPuff 3s cubic-bezier(.2, .7, .2, 1) infinite; }
+.ws-hero .hx-puff.p1 { --tx: -9px; --ty: -3px; animation-delay: .32s; }
+.ws-hero .hx-puff.p2 { --tx: -12px; --ty: 3px; animation-delay: .38s; }
+.ws-hero .hx-puff.p3 { --tx: -14px; --ty: -7px; animation-delay: .44s; }
+.ws-hero .hx-puff.p4 { --tx: -6px; --ty: 5px; animation-delay: .5s; }
+.ws-hero .hx-puff.p5 { --tx: -16px; --ty: 0px; animation-delay: .56s; }
+@keyframes hxPuff { 0% { opacity: 0; transform: translate(0, 0) scale(.4); } 10% { opacity: 1; } 35% { opacity: .9; } 62% { opacity: 0; transform: translate(calc(var(--tx) * 1.3), calc(var(--ty) * 1.3)) scale(3.2); } 100% { opacity: 0; transform: translate(calc(var(--tx) * 1.3), calc(var(--ty) * 1.3)) scale(3.2); } }
+.ws-hero .hx-drop { opacity: 0; animation: hxDrop 3s ease-out infinite; }
+.ws-hero .hx-drop.d1 { --tx: -15px; --ty: -4px; animation-delay: .36s; } .ws-hero .hx-drop.d2 { --tx: -17px; --ty: 4px; animation-delay: .46s; } .ws-hero .hx-drop.d3 { --tx: -13px; --ty: 8px; animation-delay: .54s; }
+@keyframes hxDrop { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 45% { opacity: 0; transform: translate(var(--tx), var(--ty)); } 100% { opacity: 0; } }
+.ws-hero .hx-liquid { animation: hxSlosh 3s ease-in-out infinite; }
+@keyframes hxSlosh { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-6px, -1px); } 50% { transform: translate(-12px, 0); } 75% { transform: translate(-6px, 1px); } }
+.ws-hero .hx-bub { animation: hxBubble 3s ease-in infinite; } .ws-hero .hx-bub.b2 { animation-delay: 1s; } .ws-hero .hx-bub.b3 { animation-delay: 2s; }
+@keyframes hxBubble { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: .9; } 100% { transform: translateY(-12px); opacity: 0; } }
+/* Regal: Produkte gleiten nacheinander an ihren Platz */
+.ws-hero .hx-item { opacity: 0; animation: hxStock 6s cubic-bezier(.22, 1.2, .36, 1) infinite; }
+.ws-hero .hx-item.i2 { animation-delay: .25s; } .ws-hero .hx-item.i3 { animation-delay: .5s; } .ws-hero .hx-item.i4 { animation-delay: .75s; }
+.ws-hero .hx-item.i5 { animation-delay: 1s; } .ws-hero .hx-item.i6 { animation-delay: 1.25s; } .ws-hero .hx-item.i7 { animation-delay: 1.5s; } .ws-hero .hx-item.i8 { animation-delay: 1.75s; }
+@keyframes hxStock { 0% { opacity: 0; transform: translate(22px, -4px); } 9% { opacity: 1; transform: translate(-1px, 0); } 12%, 82% { opacity: 1; transform: translate(0, 0); } 92%, 100% { opacity: 0; transform: translate(0, 2px) scale(.96); } }
+.ws-hero .hx-shelf-glint { animation: hxGlint 6s ease-in-out infinite; }
+@keyframes hxGlint { 0%, 40% { opacity: 0; } 55% { opacity: .9; } 70%, 100% { opacity: 0; } }
+/* Haus: Schwamm wischt, Flecken verschwinden, Glas glänzt, Sterne funkeln */
+.ws-hero .hx-sponge { animation: hxWipe 4.8s cubic-bezier(.45, .05, .55, .95) infinite; }
+@keyframes hxWipe {
+  0% { transform: translate(18px, 37px) rotate(-14deg); } 14% { transform: translate(28px, 40px) rotate(12deg); }
+  28% { transform: translate(17px, 44px) rotate(-12deg); } 42% { transform: translate(27px, 49px) rotate(10deg); }
+  56% { transform: translate(16px, 52px) rotate(-10deg); } 70% { transform: translate(28px, 53px) rotate(8deg); }
+  84%, 100% { transform: translate(18px, 37px) rotate(-14deg); }
+}
+.ws-hero .hx-foam { transform-origin: 50% 50%; animation: hxFoam .8s ease-in-out infinite alternate; }
+@keyframes hxFoam { from { transform: scale(.75); } to { transform: scale(1.15); } }
+.ws-hero .hx-dirt { animation: hxDirt1 4.8s linear infinite; }
+.ws-hero .hx-dirt.s2 { animation-name: hxDirt2; } .ws-hero .hx-dirt.s3 { animation-name: hxDirt3; } .ws-hero .hx-dirt.s4 { animation-name: hxDirt4; }
+@keyframes hxDirt1 { 0%, 3% { opacity: 1; } 12%, 90% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes hxDirt2 { 0%, 14% { opacity: 1; } 26%, 90% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes hxDirt3 { 0%, 46% { opacity: 1; } 58%, 90% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes hxDirt4 { 0%, 60% { opacity: 1; } 72%, 90% { opacity: 0; } 100% { opacity: 1; } }
+.ws-hero .hx-tb { opacity: 0; animation: hxTrail 4.8s ease-out infinite; } .ws-hero .hx-tb.t2 { animation-delay: 1.6s; } .ws-hero .hx-tb.t3 { animation-delay: 2.6s; }
+@keyframes hxTrail { 0%, 8% { opacity: 0; transform: translateY(0) scale(.5); } 15% { opacity: 1; } 40% { opacity: 0; transform: translateY(-6px) scale(1.2); } 100% { opacity: 0; } }
+.ws-hero .hx-glass-shine { animation: hxGlass 4.8s ease-in-out infinite; }
+@keyframes hxGlass { 0%, 72% { transform: skewX(-20deg) translateX(0); opacity: 0; } 76% { opacity: 1; } 92%, 100% { transform: skewX(-20deg) translateX(24px); opacity: 0; } }
+.ws-hero .hx-star { transform-origin: 50% 50%; opacity: 0; animation: hxStar 4.8s ease-in-out infinite; } .ws-hero .hx-star.s2 { animation-delay: .25s; }
+@keyframes hxStar { 0%, 74% { opacity: 0; transform: scale(.2) rotate(0); } 84% { opacity: 1; transform: scale(1.15) rotate(25deg); } 96%, 100% { opacity: 0; transform: scale(.4) rotate(60deg); } }
+@media (max-width: 760px) { .ws-hero .hero-services svg.hx { width: 52px; } }
+@media (prefers-reduced-motion: reduce) { .ws-hero .hx * { animation: none !important; } .ws-hero .hx-item { opacity: 1; } .ws-hero .hx-puff, .ws-hero .hx-drop, .ws-hero .hx-star, .ws-hero .hx-tb, .ws-hero .hx-dirt { opacity: 0; } }
+
+.ws-hero .hx-cone { transform-origin: 100% 50%; opacity: 0; animation: hxCone 3s ease-out infinite; animation-delay: .3s; }
+@keyframes hxCone { 0% { opacity: 0; transform: scaleX(.2); } 10% { opacity: .85; transform: scaleX(1); } 40%, 100% { opacity: 0; transform: scaleX(1.15); } }

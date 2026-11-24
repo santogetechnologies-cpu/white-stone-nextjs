@@ -17,7 +17,7 @@ const shortcuts = [
 const pages = [
   { href: '/', de: 'Startseite', en: 'Home', match: p => p === '/' },
   { href: '/ueber-uns', de: 'Über uns', en: 'About us' },
-  { href: '/leistungen', de: 'Unsere Leistungen', en: 'Our services', match: p => ['/leistungen', '/reinigung', '/regalservice', '/haushalt'].some(k => p === k || p.startsWith(k + '/')) },
+  { href: '/leistungen', de: 'Leistungen', en: 'Services', match: p => ['/leistungen', '/reinigung', '/regalservice', '/haushalt'].some(k => p === k || p.startsWith(k + '/')) },
   { href: '/team', de: 'Unser Team', en: 'Our team' },
   { href: '/kontakt', de: 'Kontaktieren Sie uns', en: 'Contact us' },
 ];

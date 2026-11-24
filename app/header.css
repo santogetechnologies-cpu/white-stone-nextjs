@@ -44,7 +44,7 @@
 .ws-nav-header .ws-menu-button:hover { background: linear-gradient(135deg, #15507f, #0c7a8a); }
 
 /* Zwischengrößen: Hauptmenü wandert ins Menü */
-@media (max-width: 1180px) {
+@media (max-width: 1px) {
   .ws-main-nav.ws-top-services { display: none; }
   .ws-nav-header .ws-nav-tools { margin-left: auto; }
 }
@@ -56,3 +56,20 @@
   .ws-nav-header .ws-menu-button > span:not(.ws-menu-glyph) { display: none; }
   .ws-nav-header .ws-menu-button { width: 44px; min-height: 44px; padding: 0; justify-content: center; }
 }
+
+/* Platz schaffen, damit das Hauptmenü auch auf mittleren Bildschirmen sichtbar bleibt */
+.ws-nav-header.header { width: min(1320px, calc(100% - 40px)); }
+.ws-nav-header { gap: clamp(10px, 1.4vw, 28px); }
+@media (max-width: 1366px) {
+  .ws-nav-header .brand { font-size: 19px; gap: 8px; }
+  .ws-nav-header .brand-emblem { width: 38px; height: 38px; }
+  .ws-nav-header .brand-emblem span { font-size: 24px; }
+  .ws-nav-header .brand-emblem i { font-size: 22px; }
+  .ws-main-nav.ws-top-services a { font-size: 13px; padding-inline: 8px; }
+}
+@media (max-width: 1280px) {
+  .ws-nav-header .ws-locale { display: none; }
+  .ws-nav-header .ws-menu-button > span:not(.ws-menu-glyph) { display: none; }
+  .ws-nav-header .ws-menu-button { width: 46px; min-height: 46px; padding: 0; justify-content: center; }
+}
+@media (max-width: 990px) { .ws-main-nav.ws-top-services { display: none; } .ws-nav-header .ws-nav-tools { margin-left: auto; } }
