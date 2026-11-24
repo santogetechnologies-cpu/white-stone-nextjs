@@ -154,7 +154,7 @@ export default function HomeSections({lang='de'} = {}){
     </div>
   </section>
   <section className="ws-about" id="ueber-uns">
-    <div className="ws-wrap ws-section"><div className="ws-introduction"><Person lang={lang}/></div></div>
+    <div className="ws-wrap ws-section wv-person-wrap"><Person lang={lang}/></div>
     <Tide tone="deep" compact/>
   </section>
   <section className="ws-gallery-section">
