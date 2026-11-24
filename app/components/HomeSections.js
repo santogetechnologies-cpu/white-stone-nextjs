@@ -83,6 +83,26 @@ function FacadeShowcase({lang='de'}){
     <div className="wv-facade-go"><Go lang={lang} href="/reinigung/fassadenreinigung">{page.title}</Go></div>
   </div></section>;
 }
+/** Einleitung (Slider-Texte) als animierte Glaskarten und „Fakten über uns“ als Chips – Wortlaut unverändert. */
+const HL_ICONS = [
+  'M3 21h18M5 21V7l7-4 7 4v14M9 9h1M14 9h1M9 13h1M14 13h1M10 21v-4h4v4',
+  'M3 18V8M3 14h18v4M21 18v-4a3 3 0 0 0-3-3h-7v3M7 11.5a1.5 1.5 0 1 0 0 .01',
+  'M20 4C10 4 4 10 4 20c10 0 16-6 16-16zM4 20l9-9',
+];
+function Highlights({ layers }) {
+  const cards = [[layers[0], layers[1]], [layers[2], null], [layers[3], layers[4]]];
+  const facts = trustHighlights.map(f => { const m = f.title.match(/^(Mehr als \d+|\d+\+)(.*)$/); return { ...f, num: m && m[1], rest: m ? m[2] : f.title }; });
+  return <section className="wv-hl" aria-label={layers[0]}><div className="ws-wrap" lang="de">
+    <div className="wv-hl-cards">{cards.map(([h, p], i) => <article key={h} className="wv-hl-card" style={{ '--i': i }}>
+      <span className="wv-hl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d={HL_ICONS[i]} /></svg></span>
+      <h3>{h}</h3>{p ? <p>{p}</p> : <span className="wv-hl-photo"><Pic name="hotel" /></span>}
+    </article>)}</div>
+    <ul className="wv-hl-facts">{facts.map((f, i) => <li key={f.title} style={{ '--i': i }}>
+      <span className="wv-hl-ficon"><Icon name={f.icon} /></span>
+      <span>{f.num && <strong>{f.num}</strong>}{f.rest}</span>
+    </li>)}</ul>
+  </div></section>;
+}
 export default function HomeSections({lang='de'} = {}){
   const {t, url} = language(lang);
   const {adviceArticles, cleaningServices} = getCatalog(lang);
@@ -94,12 +114,7 @@ export default function HomeSections({lang='de'} = {}){
   const blogHead = rest.slice(blogAt + 1).filter(b => (b.t === 'h3' || b.t === 'p') && !adviceArticles.some(a => a.title === b.x)).slice(0, 2);
   const refs = rest.slice(blogAt + 1).find(b => b.t === 'h3' && b.x.startsWith('Unsere Kunden'));
   return <div className="ws-world">
-  <section className="wv-strip" aria-label={layers[0]}><div className="ws-wrap" lang="de">
-    <div><h3>{layers[0]}</h3><p>{layers[1]}</p></div>
-    <div><h3>{layers[2]}</h3></div>
-    <div><h3>{layers[3]}</h3><p>{layers[4]}</p></div>
-  </div></section>
-  <TrustHighlights lang={lang} />
+  <Highlights layers={layers}/>
   <section id="leistungen" className="ws-showcase"><div className="ws-waterstage"><Tide/></div><div className="ws-wrap ws-section"><div className="ws-showcase-head"><Heading tag={t("Unsere Leistungen")} first={t("Reinigung, Regalservice")} accent={t("und Haushalt.")}/></div><AreaCards lang={lang}/></div></section>
   <FacadeShowcase lang={lang}/>
   <section className="ws-benefits" aria-label="Unsere Werte">
