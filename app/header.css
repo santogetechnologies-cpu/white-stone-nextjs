@@ -1,0 +1,58 @@
+/* Kopfzeile: schwebende Glasleiste mit Hauptmenü, Sprachwahl und Menü-Knopf */
+.ws-nav-header.header {
+  position: relative;
+  z-index: 20;
+  height: 72px;
+  margin-top: 14px;
+  padding: 0 10px 0 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .74);
+  border: 1px solid rgba(208, 226, 236, .9);
+  box-shadow: 0 14px 36px #123d6a14;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+.ws-nav-header .ws-nav-center { flex: 1; justify-content: center; }
+.ws-main-nav.ws-top-services { margin: 0; padding: 0; background: none; border: 0; box-shadow: none; gap: clamp(2px, .6vw, 10px); }
+.ws-main-nav.ws-top-services a {
+  position: relative;
+  padding: 10px clamp(8px, 1vw, 16px);
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 650;
+  color: #1c3a57;
+  white-space: nowrap;
+  transition: color .2s ease, background .2s ease;
+}
+.ws-main-nav.ws-top-services a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 18px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #36b6d8, #04767f);
+  transform: translateX(-50%) scaleX(0);
+  transition: transform .25s ease;
+}
+.ws-main-nav.ws-top-services a:hover { background: rgba(219, 238, 244, .7); color: #0c6a78; }
+.ws-main-nav.ws-top-services a:hover::after,
+.ws-main-nav.ws-top-services a[aria-current=page]::after { transform: translateX(-50%) scaleX(1); }
+.ws-main-nav.ws-top-services a[aria-current=page] { background: none; color: #04767f; }
+.ws-nav-header .ws-menu-button { border-radius: 16px; background: linear-gradient(135deg, #123d6a, #0b5e6c); border: 0; box-shadow: 0 8px 20px #123d6a33; }
+.ws-nav-header .ws-menu-button:hover { background: linear-gradient(135deg, #15507f, #0c7a8a); }
+
+/* Zwischengrößen: Hauptmenü wandert ins Menü */
+@media (max-width: 1180px) {
+  .ws-main-nav.ws-top-services { display: none; }
+  .ws-nav-header .ws-nav-tools { margin-left: auto; }
+}
+
+/* Handy: nur Logo und Menü-Symbol, wie in der Vorlage */
+@media (max-width: 767px) {
+  .ws-nav-header.header { height: 62px; margin-top: 10px; padding: 0 8px 0 12px; border-radius: 20px; width: calc(100% - 24px); }
+  .ws-nav-header .ws-locale { display: none; }
+  .ws-nav-header .ws-menu-button > span:not(.ws-menu-glyph) { display: none; }
+  .ws-nav-header .ws-menu-button { width: 44px; min-height: 44px; padding: 0; justify-content: center; }
+}

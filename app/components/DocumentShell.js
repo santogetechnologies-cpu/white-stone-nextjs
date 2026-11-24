@@ -7,6 +7,7 @@ import '../pages.css';
 import '../navigation.css';
 import '../refinements.css';
 import '../hero.css';
+import '../header.css';
 import '../verbatim.css';
 import IconDefs from './IconDefs';
 import {Footer} from './Design';

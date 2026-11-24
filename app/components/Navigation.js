@@ -10,8 +10,16 @@ const entries = [
   { href: '/haushalt', image: 'haushalt', de: ['Haushalt', 'Für Ihr Zuhause', 'Haushaltshilfe und Preisrechner'], en: ['Household', 'Private homes', 'Home help and cost calculator'] }
 ];
 const shortcuts = [
-  ['/ueber-uns', 'Über uns', 'About us'], ['/team', 'Team', 'Our team'], ['/ratgeber', 'Ratgeber', 'Guides'],
-  ['/haushalt#preisrechner', 'Preisrechner', 'Price calculator'], ['/kontakt', 'Kontakt', 'Contact']
+  ['/ueber-uns', 'Über uns', 'About us'], ['/team', 'Unser Team', 'Our team'], ['/ratgeber', 'Neueste Nachrichten', 'Latest news'],
+  ['/haushalt#preisrechner', 'Preisrechner', 'Price calculator'], ['/kontakt', 'Kontaktieren Sie uns', 'Contact us']
+];
+// Hauptmenü (Bezeichnungen wie im Menü der bisherigen Website)
+const pages = [
+  { href: '/', de: 'Startseite', en: 'Home', match: p => p === '/' },
+  { href: '/ueber-uns', de: 'Über uns', en: 'About us' },
+  { href: '/leistungen', de: 'Unsere Leistungen', en: 'Our services', match: p => ['/leistungen', '/reinigung', '/regalservice', '/haushalt'].some(k => p === k || p.startsWith(k + '/')) },
+  { href: '/team', de: 'Unser Team', en: 'Our team' },
+  { href: '/kontakt', de: 'Kontaktieren Sie uns', en: 'Contact us' },
 ];
 
 export function Brand({ lang = 'de' }) {
@@ -56,21 +64,16 @@ export default function Navigation({ home = false, lang = 'de' }) {
   return <header className={'header container ws-nav-header' + (home ? ' over-window' : '')}>
     <Brand lang={lang} />
     <div className="ws-nav-center">
-      <nav className="ws-top-services" aria-label={en ? 'Main services' : 'Hauptleistungen'}>
-        {entries.map(e => <a key={e.href} href={url(e.href)} aria-current={path === url(e.href) ? 'page' : undefined}>{e[lang][0]}</a>)}
+      <nav className="ws-top-services ws-main-nav" aria-label={en ? 'Main navigation' : 'Hauptnavigation'}>
+        {pages.map(pg => {
+          const de = localizedPath(path, 'de').split(/[?#]/)[0];
+          const on = pg.match ? pg.match(de) : de === pg.href || de.startsWith(pg.href + '/');
+          return <a key={pg.href} href={url(pg.href)} aria-current={on ? 'page' : undefined}>{pg[lang]}</a>;
+        })}
       </nav>
-      <LocaleSwitch lang={lang} path={path} suffix={suffix} />
     </div>
     <div className="ws-nav-tools">
-
-      {/* Contact Button */}
-      <a
-        href={url('/kontakt')}
-        className="ws-contact-button"
-      >
-        {en ? 'Contact' : 'Kontakt'}
-
-      </a>
+      <LocaleSwitch lang={lang} path={path} suffix={suffix} />
 
       {/* Existing Menu Button */}
       <button
