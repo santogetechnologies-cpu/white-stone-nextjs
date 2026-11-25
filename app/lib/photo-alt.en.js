@@ -1,5 +1,5 @@
 export const photoAlt = {
-  reinigung: 'A cleaning specialist in a navy White Stone uniform holding a red bucket with cleaning supplies and a cloth.',
+  reinigung: 'A cleaning specialist in a grey White Stone uniform holding a red bucket with cleaning supplies and a cloth.',
   reinigung_card: 'A cleaning specialist in a White Stone polo uniform mopping a kitchen floor.',
   regalservice_card: 'A retail staff member in a White Stone polo uniform arranging products on a supermarket shelf.',
   regalservice: 'A retail staff member in a dark-grey White Stone polo uniform arranges products on supermarket shelves.',

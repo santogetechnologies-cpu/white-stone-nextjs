@@ -2,9 +2,9 @@
 export const photos = {
   reinigung: {
     src: "/fotografie/reinigung.webp",
-    alt: "Eine Reinigungskraft im dunkelblauen White-Stone-Poloshirt hält einen roten Eimer mit Putzmitteln und ein Reinigungstuch.",
-    width: 1024,
-    height: 756,
+    alt: "Eine Reinigungskraft im grauen White-Stone-Poloshirt hält einen roten Eimer mit Putzmitteln und ein Reinigungstuch.",
+    width: 1448,
+    height: 1086,
   },
   reinigung_card: {
     src: "/fotografie/reinigung-card.webp",
@@ -21,14 +21,14 @@ export const photos = {
   regalservice: {
     src: "/fotografie/regalservice.webp",
     alt: "Eine Mitarbeiterin im dunkelgrauen White-Stone-Poloshirt richtet Waren in einem gefüllten Marktregal aus.",
-    width: 718,
-    height: 722,
+    width: 1448,
+    height: 1086,
   },
   haushalt: {
     src: "/fotografie/haushalt.webp",
     alt: "Eine Haushaltshilfe wischt eine helle Arbeitsfläche mit einem blauen Tuch.",
-    width: 1400,
-    height: 764,
+    width: 1448,
+    height: 1086,
   },
   haushalt_kueche: {
     src: "/fotografie/haushalt-kueche.webp",
