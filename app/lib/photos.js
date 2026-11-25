@@ -1,5 +1,15 @@
 // Aktuelle Bilder der White Stone Website.
 export const photos = {
+  glastueren: { src: "/fotografie/ratgeber/glastueren.webp", alt: "Glastüren bis zum Rand streifenfrei reinigen", width: 1100, height: 825 },
+  eingangsmatten: { src: "/fotografie/ratgeber/eingangsmatten.webp", alt: "Eingangsmatten nach einem Regentag pflegen", width: 1100, height: 825 },
+  besprechungsraum: { src: "/fotografie/ratgeber/besprechungsraum.webp", alt: "Besprechungsräume zwischen zwei Terminen reinigen", width: 1100, height: 825 },
+  kopfteil: { src: "/fotografie/ratgeber/kopfteil.webp", alt: "Das Kopfteil beim Zimmerwechsel prüfen", width: 1100, height: 825 },
+  regalfront: { src: "/fotografie/ratgeber/regalfront.webp", alt: "Regalfronten nach dem Auffüllen ausrichten", width: 1100, height: 825 },
+  regalboden: { src: "/fotografie/ratgeber/regalboden.webp", alt: "Einen Regalboden vor dem Nachfüllen säubern", width: 1100, height: 825 },
+  verpackung: { src: "/fotografie/ratgeber/verpackung.webp", alt: "Beschädigte Verpackungen beim Verräumen erkennen", width: 1100, height: 825 },
+  kuechengriffe: { src: "/fotografie/ratgeber/kuechengriffe.webp", alt: "Küchengriffe und Griffmulden schonend reinigen", width: 1100, height: 825 },
+  duschglas: { src: "/fotografie/ratgeber/duschglas.webp", alt: "Duschglas nach der Reinigung richtig abziehen", width: 1100, height: 825 },
+  sockelleisten: { src: "/fotografie/ratgeber/sockelleisten.webp", alt: "Sockelleisten reinigen, bevor der Boden gewischt wird", width: 1100, height: 825 },
   reinigung: {
     src: "/fotografie/reinigung.webp",
     alt: "Eine Reinigungskraft im grauen White-Stone-Poloshirt hält einen roten Eimer mit Putzmitteln und ein Reinigungstuch.",

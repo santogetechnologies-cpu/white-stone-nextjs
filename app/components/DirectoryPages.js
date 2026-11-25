@@ -178,7 +178,7 @@ export function TeamPage({lang='de'} = {}){
 export function AdvicePage({lang='de'} = {}){
   const {adviceArticles} = getCatalog(lang);
   const page = oldPage('neueste-nachrichten', lang);
-  return <><PageIntro lang={lang} tag={page.title} title={page.title} photo="glas"/><NewsIndex lang={lang} articles={adviceArticles}/></>}
+  return <><PageIntro lang={lang} tag={page.title} title={page.title} photo="glas"/><NewsIndex lang={lang} articles={adviceArticles.toSorted((a, b) => b.date.localeCompare(a.date))}/></>}
 export function ArticlePage({lang='de', article:a}){
   const {t, url} = language(lang);
   const heads = headingsOf(a.verbatim);

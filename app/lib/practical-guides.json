@@ -1,0 +1,332 @@
+[
+  {
+    "slug": "glastueren",
+    "relatedHref": "/reinigung/glas-und-fensterreinigung",
+    "secondaryPhoto": "guides_glas",
+    "de": {
+      "title": "Glastüren bis zum Rand streifenfrei reinigen",
+      "summary": "Auf einer Glastür fallen Fingerabdrücke in Griffhöhe sofort auf. Häufig entsteht der letzte Streifen aber erst, wenn Wasser vom Rahmen zurück auf die trockene Scheibe läuft.",
+      "sections": [
+        {
+          "heading": "Am Rahmen beginnen",
+          "text": "Entfernen Sie losen Staub an der oberen Kante mit einem weichen Tuch. Nehmen Sie für den Griff ein eigenes Tuch, damit Fett von der Handfläche später nicht auf das Glas gelangt. Bei Folien oder Beschichtungen gelten die Hinweise des Herstellers."
+        },
+        {
+          "heading": "Die letzte Bahn kontrollieren",
+          "text": "Ziehen Sie die leicht benetzte Scheibe in überlappenden Bahnen ab. Trocknen Sie die Gummilippe zwischen den Zügen und nehmen Sie Tropfen am unteren Rand mit einer sauberen Tuchecke auf. Ein Blick von der Seite zeigt, ob noch ein schmaler Wasserfilm steht."
+        }
+      ]
+    },
+    "en": {
+      "title": "Cleaning glass doors right to the edges",
+      "summary": "Fingerprints stand out at handle height on a glass door. The last streak often forms when water from the frame runs back onto a pane that has already dried.",
+      "sections": [
+        {
+          "heading": "Start with the frame",
+          "text": "Lift loose dust from the upper frame with a soft cloth. Use a separate cloth for the handle so oils from hands stay off the glass. Follow the manufacturer's care instructions for film or coated panes."
+        },
+        {
+          "heading": "Check the final pass",
+          "text": "Squeegee the lightly dampened pane in overlapping passes. Wipe the blade between strokes and catch drops along the bottom with a clean corner of cloth. Look across the pane from the side to spot any remaining film."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "eingangsmatten",
+    "relatedHref": "/reinigung/buero-und-gebaeudereinigung",
+    "secondaryPhoto": "buero",
+    "de": {
+      "title": "Eingangsmatten nach einem Regentag pflegen",
+      "summary": "Bei nassem Wetter zeigt die erste Fußspur hinter der Matte, wie gut der Eingang Schmutz und Wasser zurückhält. Ein kurzer Rundgang hilft bei der Entscheidung, ob Absaugen reicht.",
+      "sections": [
+        {
+          "heading": "Laufspur und Ränder prüfen",
+          "text": "Prüfen Sie die Mitte ebenso wie die Ecken. Liegt eine Kante hoch oder rutscht die Matte, sichern Sie die Stelle und informieren Sie die zuständige Person. Saugen Sie trockenen Sand langsam in zwei Richtungen aus den Fasern."
+        },
+        {
+          "heading": "Bei Nässe wechseln",
+          "text": "Drückt beim Auftreten Wasser aus dem Flor, setzen Sie eine trockene Ersatzmatte ein. Verwenden Sie auf nassen Flächen nur dafür zugelassene Geräte. Trocknen Sie den Untergrund und prüfen Sie nach dem Einlegen, dass Türen frei öffnen und alle Kanten flach liegen."
+        }
+      ]
+    },
+    "en": {
+      "title": "Caring for entrance mats after rain",
+      "summary": "On a wet day, the first footprint beyond the mat tells you how well the entrance is catching water and grit. A quick inspection helps you decide whether vacuuming will be enough.",
+      "sections": [
+        {
+          "heading": "Inspect the traffic lane and edges",
+          "text": "Check the centre as well as the corners. If an edge curls or the mat slides, secure the area and tell the person responsible. Vacuum dry grit slowly in two directions to lift it from the pile."
+        },
+        {
+          "heading": "Change a saturated mat",
+          "text": "If water rises from the pile underfoot, put down a dry spare. Use only equipment rated for wet surfaces. Dry the floor underneath, then check that the door clears the mat and every edge sits flat."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "besprechungsraum",
+    "relatedHref": "/reinigung/buero-und-gebaeudereinigung",
+    "secondaryPhoto": "gallery_buero",
+    "de": {
+      "title": "Besprechungsräume zwischen zwei Terminen reinigen",
+      "summary": "Zwischen zwei Sitzungen bleiben oft nur wenige Minuten. Eine feste Reihenfolge hilft, Krümel, Tassenränder und Griffspuren zu beseitigen, bevor die nächste Gruppe eintrifft.",
+      "sections": [
+        {
+          "heading": "Die Tischfläche freigeben",
+          "text": "Räumen Sie benutztes Geschirr nach der Hausregel ab. Lassen Sie persönliche Unterlagen liegen und stimmen Sie deren Entfernung mit dem Raumverantwortlichen ab. Nehmen Sie lose Krümel auf, bevor Sie feucht wischen."
+        },
+        {
+          "heading": "Vom Tisch zur Tür gehen",
+          "text": "Wischen Sie die Tischplatte mit einem materialgeeigneten, gut ausgewrungenen Tuch bis zur Kante. Halten Sie Anschlussfelder trocken. Kontrollieren Sie Stuhllehnen und Türklinke mit einer frischen Tuchseite und geben Sie den Raum mit trockenem Tisch frei."
+        }
+      ]
+    },
+    "en": {
+      "title": "Resetting a meeting room between bookings",
+      "summary": "There may be only minutes between meetings. A consistent sequence helps clear crumbs, cup rings and fingerprints before the next group arrives.",
+      "sections": [
+        {
+          "heading": "Clear the table",
+          "text": "Clear used cups according to the site's routine. Leave personal papers where they are and ask the room owner before moving them. Pick up loose crumbs before damp wiping."
+        },
+        {
+          "heading": "Work from the table to the door",
+          "text": "Wipe to the table edge with a well-wrung cloth suitable for the finish. Keep connection ports dry. Use a fresh face of the cloth for chair backs and the door handle, then check the table is dry before handover."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kopfteil",
+    "relatedHref": "/reinigung/hotelreinigung",
+    "secondaryPhoto": "hotel",
+    "de": {
+      "title": "Das Kopfteil beim Zimmerwechsel prüfen",
+      "summary": "Die schmale Oberkante hinter dem Kopfkissen sammelt Staub, der beim Bettenmachen leicht auf die frische Bettfläche fällt. Planen Sie diese Stelle früh im Zimmerwechsel ein.",
+      "sections": [
+        {
+          "heading": "Zuerst die Oberfläche bestimmen",
+          "text": "Prüfen Sie, ob das Kopfteil aus Stoff, beschichtetem Holz oder einem abwischbaren Bezug besteht. Für Stoff eignet sich je nach Pflegevorgabe eine saubere Polsterdüse; bei glatten Flächen genügt oft ein weiches, knapp feuchtes Tuch."
+        },
+        {
+          "heading": "Naht und Oberkante kontrollieren",
+          "text": "Arbeiten Sie von oben nach unten und halten Sie Feuchtigkeit aus Nähten und benachbarten Schaltern heraus. Melden Sie offene Nähte oder lose Befestigungen bei der Übergabe. Legen Sie die Kissen erst an, wenn die Fläche trocken ist."
+        }
+      ]
+    },
+    "en": {
+      "title": "Checking a headboard during room turnover",
+      "summary": "Dust gathers on the narrow ledge behind the pillows and can fall onto fresh bedding. Include the headboard early in the room turnover.",
+      "sections": [
+        {
+          "heading": "Identify the finish first",
+          "text": "Check whether the headboard is fabric, coated wood or a wipe-clean covering. A clean upholstery attachment may suit fabric if the care instructions allow it. Smooth surfaces often need only a soft, barely damp cloth."
+        },
+        {
+          "heading": "Check the seam and top edge",
+          "text": "Work downwards, keeping moisture out of seams and adjacent switches. Report split seams or loose fittings at handover. Set the pillows in place once the surface is dry."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "regalfront",
+    "relatedHref": "/regalservice",
+    "secondaryPhoto": "regalservice",
+    "de": {
+      "title": "Regalfronten nach dem Auffüllen ausrichten",
+      "summary": "Ein Fach kann gut gefüllt sein und trotzdem unübersichtlich aussehen. Beim Ausrichten zählt, dass Kunden die richtige Variante direkt über ihrem Regalschild finden.",
+      "sections": [
+        {
+          "heading": "Platz und Variante abgleichen",
+          "text": "Vergleichen Sie Sorte und Packungsgröße mit der vorgesehenen Position. Ziehen Sie die vordere Packung gerade vor, ohne sie über die Kante ragen zu lassen. Halten Sie die vorgegebene Warenrotation ein."
+        },
+        {
+          "heading": "Lücken sichtbar lassen",
+          "text": "Ziehen Sie keinen Nachbarartikel in ein leeres Fach. Prüfen Sie den vorgesehenen Nachschub oder melden Sie die Lücke nach Marktregel. Gehen Sie einen Schritt zurück und kontrollieren Sie die Zuordnung von Produkt und Schild aus Kundensicht."
+        }
+      ]
+    },
+    "en": {
+      "title": "Facing shelves after replenishment",
+      "summary": "A full shelf can still be hard to shop. When facing products, the important detail is that shoppers find the right variant directly above its shelf label.",
+      "sections": [
+        {
+          "heading": "Match each variant to its space",
+          "text": "Match the variety and pack size to the assigned position. Bring the front pack forward squarely, keeping it within the shelf edge. Preserve the store's stock rotation as you work."
+        },
+        {
+          "heading": "Leave genuine gaps visible",
+          "text": "Keep neighbouring lines out of an empty slot. Check the designated stock or report the gap using the store's routine. Step back and check product-to-label alignment from the shopper's side."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "regalboden",
+    "relatedHref": "/regalservice",
+    "secondaryPhoto": "gallery_regalservice",
+    "de": {
+      "title": "Einen Regalboden vor dem Nachfüllen säubern",
+      "summary": "Ein fast leeres Fach bietet Gelegenheit, Krümel und Staub zu entfernen. Mit einem kleinen Arbeitsbereich bleibt die Zuordnung der Ware zum Fach erhalten.",
+      "sections": [
+        {
+          "heading": "Ware geordnet herausnehmen",
+          "text": "Stellen Sie die restlichen Packungen auf eine saubere, vom Markt vorgesehene Ablage. Halten Sie Varianten und Datumsreihenfolge getrennt. Bei ausgelaufener oder beschädigter Ware stimmen Sie das Vorgehen zuerst mit der Marktleitung ab."
+        },
+        {
+          "heading": "Das Fach trocken übergeben",
+          "text": "Nehmen Sie lose Rückstände auf und reinigen Sie den Boden nach der örtlichen Vorgabe. Prüfen Sie besonders die hinteren Ecken. Setzen Sie die Ware erst zurück, wenn der Boden trocken ist, und gleichen Sie die erste Packung mit dem Regalschild ab."
+        }
+      ]
+    },
+    "en": {
+      "title": "Cleaning a shelf bay before restocking",
+      "summary": "A nearly empty bay is a good opportunity to remove crumbs and dust. Working a small section at a time keeps every product associated with its place.",
+      "sections": [
+        {
+          "heading": "Keep stock in order",
+          "text": "Place the remaining packs on a clean surface approved by the store. Keep variants and date order separate. If a pack has leaked or is damaged, agree the next step with the store lead first."
+        },
+        {
+          "heading": "Restock a dry shelf",
+          "text": "Lift loose debris and clean the shelf according to the site's procedure. Check the back corners in particular. Return packs once the shelf is dry and compare the front pack with its label."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "verpackung",
+    "relatedHref": "/regalservice",
+    "secondaryPhoto": "guides_regalservice",
+    "de": {
+      "title": "Beschädigte Verpackungen beim Verräumen erkennen",
+      "summary": "Eine eingedrückte Schachtel fällt oft erst auf, wenn die nächste Packung nach vorne rückt. Eine kurze Sichtprüfung beim Verräumen verhindert, dass auffällige Ware im Fach verschwindet.",
+      "sections": [
+        {
+          "heading": "Auf Spuren am Fach achten",
+          "text": "Kontrollieren Sie offene Laschen, feuchte Stellen und lose Teile. Schauen Sie auch auf den Regalboden und die angrenzenden Packungen. Öffnen Sie die Verpackung für diese Prüfung nicht."
+        },
+        {
+          "heading": "Den Fund zuordnen",
+          "text": "Behandeln Sie auffällige Ware nach der Marktregel und melden Sie Artikel, Standort und Art des Schadens. Die zuständige Person entscheidet über den weiteren Umgang. Ordnen Sie die übrigen einwandfreien Packungen wieder dem richtigen Fach zu."
+        }
+      ]
+    },
+    "en": {
+      "title": "Spotting damaged packs while stocking shelves",
+      "summary": "A crushed box may only become visible when the next pack comes forward. A brief visual check during replenishment keeps questionable stock from disappearing into the row.",
+      "sections": [
+        {
+          "heading": "Look for signs on the shelf",
+          "text": "Look for open flaps, damp patches and loose parts. Inspect the shelf surface and the packs next to the item. Keep the packaging closed during this check."
+        },
+        {
+          "heading": "Record where the pack came from",
+          "text": "Follow the store's procedure for suspect stock and report the item, location and visible damage. The designated person decides what happens to it. Return sound packs to their assigned slots."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kuechengriffe",
+    "relatedHref": "/haushalt",
+    "secondaryPhoto": "haushalt_kueche",
+    "de": {
+      "title": "Küchengriffe und Griffmulden schonend reinigen",
+      "summary": "An Küchengriffen bleibt Fett oft in der Mulde hinter dem Griff sitzen. Die Front wirkt sauber, während der nächste Handgriff noch klebt. Eine gefaltete Tuchecke erreicht diese Stelle.",
+      "sections": [
+        {
+          "heading": "Das Finish berücksichtigen",
+          "text": "Prüfen Sie die Pflegehinweise für Front und Griff. Geben Sie den geeigneten Reiniger auf das Tuch, damit keine Flüssigkeit in Bohrlöcher oder Fugen läuft. Testen Sie unbekannte Oberflächen an einer verdeckten Stelle."
+        },
+        {
+          "heading": "Auch die Rückseite abwischen",
+          "text": "Führen Sie das Tuch hinter dem Griff entlang und wechseln Sie bei sichtbarem Fett auf eine frische Seite. Nehmen Sie Rückstände nach Produktvorgabe ab und trocknen Sie die Kanten. Prüfen Sie die Mulde bei schrägem Lichteinfall."
+        }
+      ]
+    },
+    "en": {
+      "title": "Cleaning kitchen handles and recessed pulls",
+      "summary": "Grease often collects in the recess behind a kitchen handle. The cabinet front can look clean while the grip still feels sticky. A folded corner of cloth can reach the hidden surface.",
+      "sections": [
+        {
+          "heading": "Check the finish",
+          "text": "Check care instructions for both the front and the handle. Apply suitable cleaner to the cloth so liquid cannot run into screw holes or joints. Test an unfamiliar finish in a concealed spot."
+        },
+        {
+          "heading": "Reach behind the handle",
+          "text": "Run the cloth behind the handle, turning to a fresh face when grease appears. Remove residue as directed and dry the edges. Look across the recess in side light to check the result."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "duschglas",
+    "relatedHref": "/haushalt",
+    "secondaryPhoto": "guides_glas",
+    "de": {
+      "title": "Duschglas nach der Reinigung richtig abziehen",
+      "summary": "Tropfen sammeln sich besonders am unteren Rand einer Duschwand. Wer Glas und Kante in der richtigen Reihenfolge trocknet, erspart sich eine zweite Runde gegen Wasserstreifen.",
+      "sections": [
+        {
+          "heading": "Die Abziehlippe prüfen",
+          "text": "Spülen Sie lose Partikel von der Scheibe und prüfen Sie die weiche Lippe auf Schmutz oder Kerben. Beachten Sie die Pflegehinweise für beschichtetes Glas. Ziehen Sie von oben nach unten mit leicht überlappenden Bahnen."
+        },
+        {
+          "heading": "Die untere Kante zuletzt trocknen",
+          "text": "Wischen Sie die Lippe zwischen den Bahnen ab. Nehmen Sie das letzte Wasser an Dichtung und Unterkante mit einem sauberen Tuch auf, ohne die Dichtung herauszuziehen. Wiederkehrende schmale Streifen an gleicher Stelle können auf eine beschädigte Lippe hinweisen."
+        }
+      ]
+    },
+    "en": {
+      "title": "Drying shower glass after cleaning",
+      "summary": "Drops collect along the bottom of a shower panel. Drying the pane and edge in sequence saves a second pass to remove water trails.",
+      "sections": [
+        {
+          "heading": "Check the squeegee blade",
+          "text": "Rinse loose particles from the pane and inspect the soft blade for grit or nicks. Check care instructions for coated glass. Work from top to bottom in slightly overlapping passes."
+        },
+        {
+          "heading": "Finish along the lower edge",
+          "text": "Wipe the blade between passes. Pick up the last drops along the seal and lower edge with a clean cloth, leaving the seal in place. A narrow streak that appears at the same point each time can indicate a nick in the blade."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sockelleisten",
+    "relatedHref": "/haushalt",
+    "secondaryPhoto": "haushalt",
+    "de": {
+      "title": "Sockelleisten reinigen, bevor der Boden gewischt wird",
+      "summary": "Staub auf der Oberkante einer Sockelleiste fällt beim Wischen leicht auf den frisch gereinigten Boden. Beginnen Sie am Rand des Raums und verschieben Sie die Bodenpflege ans Ende.",
+      "sections": [
+        {
+          "heading": "Lose Partikel zuerst aufnehmen",
+          "text": "Führen Sie eine weiche Bürste oder eine geeignete Saugdüse ohne Druck entlang der Oberkante. Prüfen Sie Ecken und Türanschlüsse. Halten Sie harte Düsenkanten von empfindlicher Farbe und Tapete fern."
+        },
+        {
+          "heading": "Feuchtigkeit sparsam einsetzen",
+          "text": "Wischen Sie abwaschbare Leisten mit einem gut ausgewrungenen Tuch nach. Vermeiden Sie stehendes Wasser an Holz-, Laminat- und Wandanschlüssen. Trocknen Sie die Kante und nehmen Sie zuletzt den gelösten Staub vom Boden auf."
+        }
+      ]
+    },
+    "en": {
+      "title": "Dusting skirting boards before mopping",
+      "summary": "Dust on the upper lip of a skirting board easily falls onto a freshly mopped floor. Start around the room perimeter and leave the floor until last.",
+      "sections": [
+        {
+          "heading": "Lift loose dust first",
+          "text": "Guide a soft brush or suitable vacuum attachment lightly along the upper edge. Check corners and door frames. Keep hard nozzle edges away from delicate paint and wallpaper."
+        },
+        {
+          "heading": "Keep moisture to a minimum",
+          "text": "Wipe washable boards with a well-wrung cloth. Keep water from pooling where wood, laminate and wall meet. Dry the edge and finish by picking up dust that fell to the floor."
+        }
+      ]
+    }
+  }
+]

@@ -1,3 +1,4 @@
+import practicalGuides from './practical-guides.json';
 import data from './verbatim.json';
 import dataEn from './verbatim.en.json';
 
@@ -43,7 +44,24 @@ const guidesDe = postList.map(p => {
 });
 export const verbatimGuides = guidesDe;
 const guidesEn = guidesDe.map(g => { const e = dataEn[g.slug]; return { ...g, title: e.title, category: CATEGORY_EN[g.category] || g.category, summary: firstParagraph(e.blocks), verbatim: e.blocks }; });
-export const guidesFor = lang => (lang === 'en' ? guidesEn : guidesDe);
+function practicalGuide(entry, lang) {
+  const {title, summary, sections} = entry[lang];
+  const area = entry.relatedHref.split('/')[1];
+  const categories = lang === 'en'
+    ? {reinigung: 'Cleaning', regalservice: 'Shelf services', haushalt: 'Household cleaning'}
+    : {reinigung: 'Reinigung', regalservice: 'Regalservice', haushalt: 'Haushalt'};
+  return {
+    slug: entry.slug, title, summary, category: categories[area], date: '2026-11-25',
+    relatedHref: entry.relatedHref, photoKey: entry.slug, pool: [entry.secondaryPhoto],
+    verbatim: [{t: 'p', x: summary}, ...sections.flatMap(({heading, text}) => [
+      {t: 'h2', x: heading}, {t: 'p', x: text}
+    ])]
+  };
+}
+export const guidesFor = lang => [
+  ...(lang === 'en' ? guidesEn : guidesDe),
+  ...practicalGuides.map(entry => practicalGuide(entry, lang))
+];
 
 export const serviceSources = {
   'glas-und-fensterreinigung': 'glas-und-fensterreinigung',
