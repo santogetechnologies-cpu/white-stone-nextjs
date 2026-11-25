@@ -84,7 +84,7 @@ export const householdServicesData = {
       id: 16,
       title: "Regular Housekeeping Services",
       summary: "Dependable scheduled home visits on weekly or bi-weekly intervals with a dedicated, trusted cleaning aide.",
-      image: "/fotografie/household-services/household-16-regular.webp"
+      image: "/fotografie/household-services/household-12-laundry.webp"
     }
   ],
   de: [
@@ -170,7 +170,7 @@ export const householdServicesData = {
       id: 16,
       title: "Regelmäßige Haushaltshilfe",
       summary: "Zuverlässige, turnusmäßige Haushaltsbetreuung im Wunschrhythmus mit fester, vertrauter Haushaltshilfe.",
-      image: "/fotografie/household-services/household-16-regular.webp"
+      image: "/fotografie/household-services/household-12-laundry.webp"
     }
   ]
 };
