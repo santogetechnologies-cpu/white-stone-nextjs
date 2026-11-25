@@ -60,7 +60,7 @@ export const shelfServicesData = {
       id: 10,
       title: "Retail Inventory Management",
       summary: "Meticulous stock counting, article scanning and discrepancy logging during interim or year-end stock audits.",
-      image: "/fotografie/shelf-services/shelf-10-inventory.webp"
+      image: "/fotografie/regalservice.webp"
     },
     {
       id: 11,
@@ -158,7 +158,7 @@ export const shelfServicesData = {
       id: 10,
       title: "Filial-Inventur und Zählung",
       summary: "Gewissenhafte Zählung, Barcode-Erfassung und Dokumentation von Bestandsdifferenzen bei Stichtagsinventuren.",
-      image: "/fotografie/shelf-services/shelf-10-inventory.webp"
+      image: "/fotografie/regalservice.webp"
     },
     {
       id: 11,
