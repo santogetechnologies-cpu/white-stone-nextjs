@@ -45,7 +45,7 @@
 .ws-hero .hero-line-accent {
   position: relative;
   display: inline-block;
-  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, 'Times New Roman', serif;
   font-style: italic;
   font-weight: 700;
   letter-spacing: -.02em;

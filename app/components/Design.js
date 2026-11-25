@@ -258,6 +258,7 @@ export function Footer({lang='de'} = {}){
           <div className="ws-foot-bar-right">
             <span className="ws-foot-bar-sep" aria-hidden="true"/>
             <a href={url("/datenschutz")}>{t("Datenschutz")}</a>
+            <a href={url("/agb")}>{lang === 'en' ? 'Terms & Conditions' : 'AGB'}</a>
             <a href={url("/impressum")}>{t("Impressum")}</a>
           </div>
         </div>

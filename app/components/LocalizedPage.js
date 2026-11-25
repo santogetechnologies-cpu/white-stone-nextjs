@@ -8,7 +8,7 @@ import {getCatalog} from '../lib/content';
 import {localizedPath} from '../lib/paths';
 import {pageMetadata,routeRecords,schemaGraph} from '../lib/search';
 
-const templates={'/leistungen':ServicesPage,'/reinigung':CleaningPage,'/regalservice':RetailPage,'/haushalt':HouseholdPage,'/ueber-uns':AboutPage,'/team':TeamPage,'/ratgeber':AdvicePage,'/kontakt':ContactPage,'/impressum':LegalPage,'/datenschutz':LegalPage};
+const templates={'/leistungen':ServicesPage,'/reinigung':CleaningPage,'/regalservice':RetailPage,'/haushalt':HouseholdPage,'/ueber-uns':AboutPage,'/team':TeamPage,'/ratgeber':AdvicePage,'/kontakt':ContactPage,'/impressum':LegalPage,'/datenschutz':LegalPage,'/agb':LegalPage};
 export function pathsFor(lang) {
  return routeRecords(lang).filter(p=>p.key!=='/').map(p=>({pfad:localizedPath(p.key,lang).split('/').filter(Boolean).slice(lang==='en'?1:0)}));
 }
@@ -36,7 +36,7 @@ export default async function LocalizedPage({lang,params,searchParams}) {
     else if(index>=0)topic=(lang==='en'?enServices:deServices)[index].shortTitle;
   }
   const theme=record.article||record.key==='/ratgeber'?'guides':({'/haushalt':'household','/regalservice':'retail'})[record.key]||'building';
-  content=<><Navigation lang={lang}/><main className={'ws-world ws-page-refined '+theme}><View lang={lang} article={record.article} service={record.service} privacy={record.key==='/datenschutz'} topic={topic}/><RelatedGuides page={record} lang={lang}/>{!['/haushalt','/kontakt','/impressum','/datenschutz'].includes(record.key)&&<CTA lang={lang}/>}</main></>;
+  content=<><Navigation lang={lang}/><main className={'ws-world ws-page-refined '+theme}><View lang={lang} article={record.article} service={record.service} privacy={record.key==='/datenschutz'} mode={record.key==='/datenschutz'?'privacy':record.key==='/agb'?'terms':'imprint'} topic={topic}/><RelatedGuides page={record} lang={lang}/>{!['/haushalt','/kontakt','/impressum','/datenschutz','/agb'].includes(record.key)&&<CTA lang={lang}/>}</main></>;
  }
  return <><script type="application/ld+json" dangerouslySetInnerHTML={{__html:json}}/>{content}</>;
 }

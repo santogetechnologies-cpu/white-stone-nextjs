@@ -1,3 +1,4 @@
+import { Inter, Playfair_Display } from 'next/font/google';
 import '../globals.css';
 import '../motion.css';
 import '../reveal.css';
@@ -12,14 +13,26 @@ import '../verbatim.css';
 import IconDefs from './IconDefs';
 import {Footer} from './Design';
 import ScrollRevealManager from './ScrollRevealManager';
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-inter',
+  display: 'swap'
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  style: ['italic'],
+  weight: ['600', '700'],
+  variable: '--font-playfair',
+  display: 'swap'
+});
+
 export default function DocumentShell({lang,children}) {
   return (
-    <html lang={lang}>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600;1,700&family=Inter:wght@400;450;500;550;600;650;700;750;800;850;900&display=swap" rel="stylesheet" />
-      </head>
+    <html lang={lang} className={`${inter.variable} ${playfair.variable}`}>
+      <head />
       <body><IconDefs/><ScrollRevealManager/>{children}<Footer lang={lang}/></body>
     </html>
   );

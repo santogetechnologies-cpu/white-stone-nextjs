@@ -11,6 +11,7 @@ import VerbatimBody, {Flow,PhotoGrid,NewsIndex,headingsOf,ServiceRows,Img} from 
 import {oldPage,src} from '../lib/verbatim';
 import {photos} from '../lib/photos';
 import HouseholdServicesSection from './HouseholdServicesSection';
+import LegalContent from './LegalContent';
 
 export function ServicesPage({lang='de'} = {}){
   const {t} = language(lang);
@@ -190,16 +191,12 @@ export function ContactPage({lang='de', topic=''}){
   const page = oldPage('kontaktieren-sie-uns', lang);
   const [label, lead, , , , , formTitle] = [page.blocks[0].x, page.blocks[1].x, 0, 0, 0, 0, page.blocks.find(b => b.t === 'h3' && src(b).startsWith('Füllen Sie')).x];
   return <section className="ws-contact-page"><div className="ws-wrap"><nav className="ws-crumb" aria-label={t("Brotkrumennavigation")}><a href={url("/")}>{t("Startseite")}</a>{t(" / Kontakt")}</nav><div className="ws-inquiry"><div><Mark>{label}</Mark><h1>{page.title}</h1><p>{lead}</p><dl className="ws-contact-info">{[[t("E-Mail"),company.email],[t("Telefon"),company.phone],[t("Adresse"),company.address]].map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl><figure className="wv-photo wv-photo-side"><Img k="reinigung_card" lang={lang}/></figure></div><div className="ws-contact-card"><h2>{formTitle}</h2>{topic&&<p>{t("Bereich: ")}{topic}</p>}<ContactForm lang={lang} topic={topic}/></div></div></div></section>}
-export function LegalPage({lang='de', privacy=false}){
+export function LegalPage({lang='de', privacy=false, mode}){
   const {t} = language(lang);
-  const {aboutContent} = getCatalog(lang);
-  return <><PageIntro lang={lang} tag={t("Unternehmen")} title={privacy?t("Datenschutz."):(lang==='en'?'Legal notice':'Impressum')}/><section className="ws-wrap ws-section ws-legal ws-prose">{privacy?<><h2>{t("Kontaktanfragen")}</h2><p>{t("Wenn Sie uns schreiben, verwenden wir Ihre Angaben zur Bearbeitung der Anfrage. Bei Haushaltsanfragen werden auch die gewählten Leistungen und die Kalkulation übermittelt. Die Telefonnummer ist freiwillig.")}</p><h2>{t("Technische Dienste")}</h2><p>{t("Beim Besuch werden technisch notwendige Verbindungsdaten verarbeitet. Die Schriftarten werden über Google Fonts angefordert. Bei aktiviertem Formularversand erfolgt die Übermittlung der E-Mail über Resend.")}</p><h2>{t("Ihre Daten")}</h2><p>{t("Für Fragen zu Ihren Daten wenden Sie sich an White Stone GmbH. Die vollständigen Angaben zur verantwortlichen Stelle und zum Datenschutz werden vor Inbetriebnahme ergänzt.")}</p></>:<Imprint lang={lang}/>}</section></>}
-
-
-/** Impressum mit dem Wortlaut der bisherigen Website. Anschrift, Telefon und E-Mail kommen aus company.js (freigegebene Angaben). */
-function Imprint({lang='de'}){
-  const blocks = oldPage('impressum', lang).blocks;
-  const contact = /Seebrucker|hostingersite|Telefonnummer|Handy Nummer/; const en = lang === 'en';
-  const value = b => /Telefonnummer|hostingersite/.test(src(b)) ? (en ? 'E-mail: ' : 'E-Mail : ')+company.email+(en ? ' Phone: ' : ' Telefonnummer: ')+company.phone : /Handy Nummer/.test(src(b)) ? (en ? 'Mobile number: ' : 'Handy Nummer: ')+company.phone : company.address;
-  return <div lang={lang}>{blocks.map((b,i)=>b.t==='h3'?<h2 key={i}>{b.x}</h2>:b.t==='h6'?<h3 key={i}>{b.x}</h3>:<p key={i}>{contact.test(src(b))?value(b):b.x}</p>)}</div>;
-}
+  const resolved = mode || (privacy ? 'privacy' : 'imprint');
+  const titles = {
+    imprint: lang === 'en' ? 'Legal notice' : 'Impressum',
+    privacy: t("Datenschutz."),
+    terms: lang === 'en' ? 'Terms & Conditions' : 'Allgemeine Geschäftsbedingungen'
+  };
+  return <><PageIntro lang={lang} tag={t("Unternehmen")} title={titles[resolved]}/><section className="ws-wrap ws-section ws-legal ws-prose"><LegalContent lang={lang} mode={resolved}/></section></>}

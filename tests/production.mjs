@@ -16,7 +16,7 @@ try {
    server.once('exit',c=>reject(Error('Serverstart fehlgeschlagen: '+c)));server.once('error',reject);
  }),wait(40000,null,{ref:false}).then(()=>{throw Error('Zeitlimit beim Start');})]);
  const domain=new URL(process.env.SITE_URL||'https://whitestonegmbh.de').origin;
- const sourcePaths=['/','/leistungen','/reinigung','/regalservice','/haushalt','/ueber-uns','/team','/ratgeber','/kontakt','/impressum','/datenschutz',...cleaningServices.map(s=>'/reinigung/'+s.slug),...[...adviceArticles,...additionalGuidesDE].map(s=>'/ratgeber/'+s.slug)];
+ const sourcePaths=['/','/leistungen','/reinigung','/regalservice','/haushalt','/ueber-uns','/team','/ratgeber','/kontakt','/impressum','/datenschutz','/agb',...cleaningServices.map(s=>'/reinigung/'+s.slug),...[...adviceArticles,...additionalGuidesDE].map(s=>'/ratgeber/'+s.slug)];
  const paths=sourcePaths.flatMap(key=>['de','en'].map(lang=>localizedPath(key,lang)));
  const siteMap=await (await fetch(origin+'/sitemap.xml')).text();
  const robots=await (await fetch(origin+'/robots.txt')).text();
