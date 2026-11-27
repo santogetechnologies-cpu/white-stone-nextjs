@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display } from 'next/font/google';
+import localFont from 'next/font/local';
 import '../globals.css';
 import '../motion.css';
 import '../reveal.css';
@@ -14,17 +14,17 @@ import IconDefs from './IconDefs';
 import {Footer} from './Design';
 import ScrollRevealManager from './ScrollRevealManager';
 
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
+const inter = localFont({
+  src: '../fonts/inter-latin-wght-normal.woff2',
+  weight: '400 900',
   variable: '--font-inter',
   display: 'swap'
 });
 
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  style: ['italic'],
-  weight: ['600', '700'],
+const playfair = localFont({
+  src: '../fonts/playfair-display-latin-wght-italic.woff2',
+  style: 'italic',
+  weight: '600 700',
   variable: '--font-playfair',
   display: 'swap'
 });

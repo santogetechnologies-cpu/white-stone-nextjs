@@ -1,5 +1,6 @@
 import {getCatalog} from './content';
 import {localizedPath} from './paths';
+import {company} from './company';
 import {photos} from './photos';
 
 export const siteOrigin = new URL(process.env.SITE_URL || 'https://whitestonegmbh.de').origin;
@@ -28,19 +29,23 @@ export function routeRecords(lang='de'){
 }
 export function absolute(key,lang){return siteOrigin+localizedPath(key,lang);}
 export function pageMetadata(page,lang){
- const title=page.title+' | White Stone GmbH', url=absolute(page.key,lang),image=siteOrigin+photos[page.photo].src;
- return {title,description:page.description,alternates:{canonical:url,languages:{de:absolute(page.key,'de'),en:absolute(page.key,'en'),'x-default':absolute(page.key,'de')}},
+ const localTitle = page.service && !/münchen|munich/i.test(page.title)
+   ? page.title + (lang === 'en' ? ' in Munich' : ' in München') : page.title;
+ const title=localTitle+' | White Stone GmbH', url=absolute(page.key,lang),image=siteOrigin+photos[page.photo].src;
+ return {title,description:page.description,robots:process.env.VERCEL_ENV==='preview'?{index:false,follow:false}:{index:true,follow:true,googleBot:{'max-image-preview':'large'}},alternates:{canonical:url,languages:{de:absolute(page.key,'de'),en:absolute(page.key,'en'),'x-default':absolute(page.key,'de')}},
  openGraph:{type:page.article?'article':'website',siteName:'White Stone GmbH',locale:lang==='en'?'en_GB':'de_DE',alternateLocale:lang==='en'?'de_DE':'en_GB',title,description:page.description,url,images:[{url:image,width:photos[page.photo].width,height:photos[page.photo].height}]},
  twitter:{card:'summary_large_image',title,description:page.description,images:[image]}};
 }
 export function schemaGraph(page,lang){
  const url=absolute(page.key,lang),org=siteOrigin+'/#company',home=absolute('/',lang);
- const records=[{'@type':'Organization','@id':org,name:'White Stone GmbH',url:siteOrigin,areaServed:{'@type':'City',name:'München'}}];
+ const records=[{'@type':'Organization','@id':org,name:company.name,url:siteOrigin,logo:siteOrigin+'/assets/white-stone-logo.png',
+ ...(company.email && {email:company.email}), ...(company.phone && {telephone:company.phone}),
+ ...(company.address && {'@type':'LocalBusiness',address:company.address}),areaServed:{'@type':'City',name:'München'}}];
  const isService=page.service||['/reinigung','/regalservice','/haushalt'].includes(page.key);
  const type=page.article?'Article':isService?'Service':page.key==='/kontakt'?'ContactPage':page.key==='/ueber-uns'?'AboutPage':'WebPage';
  const item={'@type':type,'@id':url+'#content',url,name:page.title,description:page.description,image:siteOrigin+photos[page.photo].src};
  if(isService){item.provider={'@id':org};item.areaServed={'@type':'City',name:'München'};}else item.inLanguage=lang;
- if(page.article){item.headline=page.title;item.author={'@id':org};item.publisher={'@id':org};item.mainEntityOfPage=url;}
+ if(page.article){item.datePublished=page.article.date;item.headline=page.title;item.author={'@id':org};item.publisher={'@id':org};item.mainEntityOfPage=url;}
  records.push(item);
  if(page.key!=='/'){
   const crumbs=[{name:lang==='en'?'Home':'Startseite',item:home}];

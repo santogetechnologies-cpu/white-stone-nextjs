@@ -8,7 +8,7 @@ Node.js 22 verwenden. Im Projektverzeichnis `npm ci` und `npm run dev` ausführe
 
 ## Preise und Kontakte pflegen
 
-- `app/lib/company.js`: xxx (E-Mail), yyy (Telefon) und zzz (Adresse) durch die geprüften Visitenkartendaten ersetzen. Danach auch die rechtlichen Unternehmensangaben und Datenschutzhinweise prüfen und vervollständigen.
+- Vor dem Build die bestätigten öffentlichen Kontaktdaten über `NEXT_PUBLIC_BUSINESS_EMAIL`, `NEXT_PUBLIC_BUSINESS_PHONE` und `NEXT_PUBLIC_BUSINESS_ADDRESS` setzen. Danach auch die rechtlichen Unternehmensangaben und Datenschutzhinweise prüfen und vervollständigen.
 - `.env.example` lokal nach `.env.local` kopieren. Keine Zugangsdaten in Git oder das Quellenarchiv aufnehmen.
 - `HOUSEHOLD_HOURLY_RATE`: optionaler bestätigter Bruttostundensatz in Euro, Dezimaltrennzeichen Punkt. Nach Änderungen neu bauen. Ohne bestätigten Satz startet der Rechner bei einem **frei editierbaren Beispielwert** von 30 €/Std.; der Betrag ist kein White-Stone-Tarif.
 - Grundzeit und geschätzte Zusatzminuten werden addiert. Die Besuchsdauer mal Stundensatz ergibt den auf Cent gerundeten Besuchspreis. Die Periodenansicht berechnet vier Wochen, keinen durchschnittlichen Kalendermonat. Zusatzaufgaben und Richtzeiten stehen in `app/lib/estimate.js`.
@@ -41,3 +41,5 @@ Für Canonicals, Sprachalternativen, Sitemap, robots.txt und Vorschaudaten wird 
 legacy-redirects.json enthält die dauerhaften Umleitungen der bisherigen Seiten und Artikel. docs/legacy-coverage.md dokumentiert die Zuordnung und die Grenzen beim Abruf älterer Artikel. Verwandte Inhalte wurden teilweise zusammengeführt.
 
 node tests/production.mjs prüft nach dem Build alle 112 Sprachseiten, interne Links, Metadaten, Sitemap und 46 Weiterleitungen über einen lokalen Testserver.
+
+Nach bestätigter Annahme durch den Mailanbieter löst das Formular das Browserereignis `whitestone:enquiry-sent` aus. Es enthält nur Formularart und Sprache. Eine angebundene Analyse kann damit Anfragen zählen. Gebuchte Aufträge separat im Vertrieb erfassen.

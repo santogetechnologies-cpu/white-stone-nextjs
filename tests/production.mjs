@@ -25,7 +25,7 @@ try {
  for(let i=0;i<paths.length;i+=5)await Promise.all(paths.slice(i,i+5).map(async p=>{
    const response=await fetch(origin+p,{headers:{'User-Agent':'Googlebot'}});
    assert.equal(response.status,200,p);const html=await response.text(),lang=p.startsWith('/en')?'en':'de';
-   assert.ok(html.includes('<html lang="'+lang+'">'),p);
+   assert.ok(new RegExp('<html\\b[^>]*\\blang="'+lang+'"').test(html),p);
    assert.equal((html.match(/<h1(?: |>)/g)||[]).length,1,p);
    assert.ok(html.includes('<link rel="canonical" href="'+domain+p+'"'),p);
    assert.ok(html.includes('name="description"')&&html.includes('application/ld+json'),p);

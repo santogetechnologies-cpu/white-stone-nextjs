@@ -14,6 +14,9 @@ export default function ContactForm({lang='de', household=false,estimate='',topi
    try{const res=await fetch('/api/anfrage',{method:'POST',headers:{'Content-Type':'application/json','Idempotency-Key':key.current.id},body});
      const data=await res.json();if(!res.ok||data.ok!==true)throw Error(t(data.message)||t("Der Versand ist fehlgeschlagen. Bitte versuchen Sie es erneut."));
      set('sent');form.reset();key.current=null;
+     window.dispatchEvent(new CustomEvent('whitestone:enquiry-sent', {
+       detail: {form: household ? 'household' : 'contact', language: lang}
+     }));
    }catch(err){setError(err.message==='Failed to fetch'?t("Die Verbindung ist unterbrochen. Ihre Eingaben bleiben erhalten."):err.message);set('idle');}
    finally{lock.current=false;}
  }

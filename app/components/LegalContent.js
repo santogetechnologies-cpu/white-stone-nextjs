@@ -28,8 +28,8 @@ function ImprintDe({ company, url }) {
 
       <h3>Kontakt</h3>
       <p>
-        Telefon: <a href={'tel:' + company.phone}>{company.phone}</a><br />
-        E-Mail: <a href={'mailto:' + company.email}>{company.email}</a>
+        Telefon: {company.phone && <a href={'tel:' + company.phone}>{company.phone}</a>}<br />
+        E-Mail: {company.email && <a href={'mailto:' + company.email}>{company.email}</a>}
       </p>
 
       <h3>Registereintrag</h3>
@@ -98,8 +98,8 @@ function ImprintEn({ company, url }) {
 
       <h3>Contact</h3>
       <p>
-        Telephone: <a href={'tel:' + company.phone}>{company.phone}</a><br />
-        Email: <a href={'mailto:' + company.email}>{company.email}</a>
+        Telephone: {company.phone && <a href={'tel:' + company.phone}>{company.phone}</a>}<br />
+        Email: {company.email && <a href={'mailto:' + company.email}>{company.email}</a>}
       </p>
 
       <h3>Commercial Register</h3>
@@ -160,8 +160,8 @@ function PrivacyDe({ company, url }) {
         <strong>{company.name}</strong><br />
         Vertreten durch den Geschäftsführer: {company.director}<br />
         {company.address}<br />
-        Telefon: <a href={'tel:' + company.phone}>{company.phone}</a><br />
-        E-Mail: <a href={'mailto:' + company.email}>{company.email}</a>
+        Telefon: {company.phone && <a href={'tel:' + company.phone}>{company.phone}</a>}<br />
+        E-Mail: {company.email && <a href={'mailto:' + company.email}>{company.email}</a>}
       </p>
 
       <h2>2. Allgemeine Hinweise zur Datenverarbeitung und Rechtsgrundlagen</h2>
@@ -268,8 +268,8 @@ function PrivacyEn({ company, url }) {
         <strong>{company.name}</strong><br />
         Represented by Managing Director: {company.director}<br />
         {company.address}<br />
-        Telephone: <a href={'tel:' + company.phone}>{company.phone}</a><br />
-        Email: <a href={'mailto:' + company.email}>{company.email}</a>
+        Telephone: {company.phone && <a href={'tel:' + company.phone}>{company.phone}</a>}<br />
+        Email: {company.email && <a href={'mailto:' + company.email}>{company.email}</a>}
       </p>
 
       <h2>2. General Information and Legal Bases</h2>

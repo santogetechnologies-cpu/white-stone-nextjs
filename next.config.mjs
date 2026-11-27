@@ -2,7 +2,6 @@ import legacyRedirects from './legacy-redirects.json' with {type:'json'};
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {unoptimized:true},
   poweredByHeader:false,
   devIndicators:false,
   experimental:{globalNotFound:true},
