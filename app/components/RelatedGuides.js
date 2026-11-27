@@ -23,7 +23,7 @@ export default function RelatedGuides({page, lang}) {
           </a>
         </div>
         <div className="ws-related-grid">
-          {matches.slice(0, 3).map((article) => (
+          {matches.toSorted((a, b) => b.date.localeCompare(a.date)).slice(0, 3).map((article) => (
             <a key={article.slug} href={link('/ratgeber/' + article.slug)}>
               <Pic name={article.photoKey} lang={lang} />
               <span>{article.title}</span>

@@ -20,7 +20,7 @@ const descriptions = {
 };
 export function routeRecords(lang='de'){
  const {cleaningServices,adviceArticles}=getCatalog(lang);
- const commonPhotos={'/':'glas','/reinigung':'reinigung','/leistungen':'buero','/regalservice':'regalservice','/haushalt':'haushalt','/ueber-uns':'buero','/team':'ali','/ratgeber':'hotel'};
+ const commonPhotos={'/':'glas','/reinigung':'reinigung','/leistungen':'buero','/regalservice':'regalservice_mitarbeiter','/haushalt':'haushalt','/ueber-uns':'buero','/team':'ali','/ratgeber':'glas','/kontakt':'reinigung_card'};
  return [
    ...Object.entries(descriptions).map(([key,pair])=>{const [title,description]=pair[lang==='en'?1:0];return {key,title,description,photo:commonPhotos[key]||'reinigung'};}),
    ...cleaningServices.map(service=>({key:'/reinigung/'+service.slug,title:service.title,description:service.summary,photo:service.photoKey,service})),
@@ -32,7 +32,9 @@ export function pageMetadata(page,lang){
  const localTitle = page.service && !/münchen|munich/i.test(page.title)
    ? page.title + (lang === 'en' ? ' in Munich' : ' in München') : page.title;
  const title=localTitle+' | White Stone GmbH', url=absolute(page.key,lang),image=siteOrigin+photos[page.photo].src;
- return {title,description:page.description,robots:process.env.VERCEL_ENV==='preview'?{index:false,follow:false}:{index:true,follow:true,googleBot:{'max-image-preview':'large'}},alternates:{canonical:url,languages:{de:absolute(page.key,'de'),en:absolute(page.key,'en'),'x-default':absolute(page.key,'de')}},
+ const verification = page.key === '/' && process.env.GOOGLE_SITE_VERIFICATION
+   ? {google: process.env.GOOGLE_SITE_VERIFICATION} : undefined;
+ return {title,verification,description:page.description,robots:process.env.VERCEL_ENV==='preview'?{index:false,follow:false}:{index:true,follow:true,googleBot:{'max-image-preview':'large'}},alternates:{canonical:url,languages:{de:absolute(page.key,'de'),en:absolute(page.key,'en'),'x-default':absolute(page.key,'de')}},
  openGraph:{type:page.article?'article':'website',siteName:'White Stone GmbH',locale:lang==='en'?'en_GB':'de_DE',alternateLocale:lang==='en'?'de_DE':'en_GB',title,description:page.description,url,images:[{url:image,width:photos[page.photo].width,height:photos[page.photo].height}]},
  twitter:{card:'summary_large_image',title,description:page.description,images:[image]}};
 }

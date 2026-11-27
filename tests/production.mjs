@@ -21,6 +21,9 @@ try {
  const siteMap=await (await fetch(origin+'/sitemap.xml')).text();
  const robots=await (await fetch(origin+'/robots.txt')).text();
  assert.ok(robots.includes(domain+'/sitemap.xml'));assert.equal((siteMap.match(/<loc>/g)||[]).length,paths.length);
+ const entries = new Map([...siteMap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(([,entry]) =>
+   [entry.match(/<loc>([^<]+)<\/loc>/)[1],entry]));
+ const imageUrls = new Set();
  const known=new Set(paths);
  for(let i=0;i<paths.length;i+=5)await Promise.all(paths.slice(i,i+5).map(async p=>{
    const response=await fetch(origin+p,{headers:{'User-Agent':'Googlebot'}});
@@ -30,11 +33,29 @@ try {
    assert.ok(html.includes('<link rel="canonical" href="'+domain+p+'"'),p);
    assert.ok(html.includes('name="description"')&&html.includes('application/ld+json'),p);
    assert.ok(html.includes('hrefLang="en"')&&html.includes('hrefLang="de"'),p);
-   assert.ok(siteMap.includes('<loc>'+domain+p+'</loc>'),p);
+   const entry = entries.get(domain+p);
+   assert.ok(entry,p);
+   for (const locale of ['de','en','x-default']) {
+     const target = domain+localizedPath(p,locale==='en'?'en':'de');
+     assert.ok(entry.includes('hreflang="'+locale+'" href="'+target+'"'),p+' '+locale);
+   }
+   const images = [...entry.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map(match => new URL(match[1]));
+   if (p.includes('/ratgeber/') || p.includes('/guides/')) assert.ok(images.length,p);
+   for (const image of images) {
+     assert.equal(image.origin, domain);
+     assert.ok(html.includes('src="'+image.pathname+'"') || html.includes('url='+encodeURIComponent(image.pathname)),p+' '+image.pathname);
+     imageUrls.add(image.pathname);
+   }
    const linked=[...html.matchAll(/<a\b[^>]*?href="([^"]+)"/g)].map(m=>m[1]).filter(h=>h.startsWith('/')).map(h=>h.split(/[?#]/)[0]);
    assert.ok(linked.every(h=>known.has(h)),p+' broken link '+linked.filter(h=>!known.has(h)));
    if(p==='/ratgeber'||p==='/en/guides')assert.ok([...adviceArticles,...additionalGuidesDE].every(a=>linked.includes(localizedPath('/ratgeber/'+a.slug,lang))),p);
  }));
+ for (const path of imageUrls) {
+   const image = await fetch(origin+path,{method:'HEAD'});
+   assert.equal(image.status,200,path);
+   assert.match(image.headers.get('content-type'),/^image\//,path);
+ }
+ console.log(imageUrls.size+' distinct sitemap images verified');
  const redirects=JSON.parse(await readFile(new URL('../legacy-redirects.json',import.meta.url),'utf8'));
  for(const [old,current] of Object.entries(redirects)){
    const response=await fetch(origin+old,{redirect:'manual'});

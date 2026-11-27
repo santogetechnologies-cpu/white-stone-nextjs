@@ -43,3 +43,7 @@ legacy-redirects.json enthält die dauerhaften Umleitungen der bisherigen Seiten
 node tests/production.mjs prüft nach dem Build alle 112 Sprachseiten, interne Links, Metadaten, Sitemap und 46 Weiterleitungen über einen lokalen Testserver.
 
 Nach bestätigter Annahme durch den Mailanbieter löst das Formular das Browserereignis `whitestone:enquiry-sent` aus. Es enthält nur Formularart und Sprache. Eine angebundene Analyse kann damit Anfragen zählen. Gebuchte Aufträge separat im Vertrieb erfassen.
+
+## Sitemap und Search Console
+
+`SITE_URL` vor dem Produktionsbuild auf die endgültige HTTPS-Domain setzen. In der Google Search Console die Domain per DNS oder die URL-Präfix-Property per HTML-Tag bestätigen. Bei HTML-Bestätigung den Inhalt des Attributs `content` als `GOOGLE_SITE_VERIFICATION` setzen und neu bauen. Anschließend `/sitemap.xml` unter „Sitemaps“ einreichen. Die Datei enthält die deutschen und englischen Originalseiten, ihre Sprachalternativen und zugehörige Bild-URLs. Dieselbe Sitemap kann in Bing Webmaster Tools eingereicht werden.
